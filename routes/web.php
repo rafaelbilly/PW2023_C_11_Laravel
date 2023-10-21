@@ -81,7 +81,7 @@ Route::get('/indexService', function () {
     return view('Gyms/indexService', [
         'acara' => [
             [
-                'nama' => 'Birthday Party',
+                'nama' => 'Birthday Party 1',
                 'gambar' => 'https://i.pinimg.com/564x/85/20/9c/85209c9c129f191e8c7f519331115a9b.jpg',
                 'deskripsi' => 'Belum tahu mau isi apa disini 1',
             ],
