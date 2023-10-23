@@ -89,6 +89,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('dashboard2') }}">Dashboard Admin</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('myBooking') }}">My Booking</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav fs-5 ms-auto">
                         <li class="nav-item dropdown">

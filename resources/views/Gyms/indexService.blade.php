@@ -23,7 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* Adjust the margin to your preference */
+    margin-top: 20px; 
   }
 </style>
 
@@ -33,8 +33,14 @@
       <img src="{{ $isi['gambar'] }}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{ $isi['nama'] }}</h5>
-        <p class="card-text">{{ $isi['deskripsi'] }}</p>
-        <a href="#" class="btn btn-link">More Info <i class="fas fa-arrow-right"></i></a>
+        <p>{{ $isi['deskripsi'] }}<span class="dots">...</span></p>
+        <h6>What will you get?</h6>
+        <ul class="more"> 
+          @foreach (explode("\n", $isi['deskripsi2']) as $point)
+            <li>{{ $point }}</li>
+          @endforeach
+        </ul>
+        <button onclick="myFunction(this)" class="btn btn-link">Read more</button>
       </div>
     </div>
   @endforeach
@@ -43,5 +49,24 @@
 <div class="center-button">
   <a href="{{ url('indexBooking') }}" class="btn btn-primary">Booking Now</a>
 </div>
+
+<script>
+function myFunction(btn) {
+  var card = btn.closest('.card');
+  var dots = card.querySelector('.dots');
+  var moreList = card.querySelector('.more');
+  var btnText = btn;
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreList.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreList.style.display = "block";
+  }
+}
+</script>
 
 @endsection
