@@ -2,52 +2,6 @@
 @section('content')
 
 <style>
-    .containerGambar {
-        position: relative;
-        width: 1200px; 
-        height: 200px;
-        background-color: black;
-        border-radius: 5px;
-    }
-
-    .comingsoon {
-        width: 1200px;
-        height: 200px;
-        object-fit: cover;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 5px;
-    }
-
-    .black-opacity {
-        opacity: 0.5; 
-        transition: opacity 0.3s;
-    }
-    
-    .comingsoon-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white; 
-        font-size: 30px;
-        z-index: 2; 
-    }
-
-    .card {
-        
-        display: flex;
-        flex-direction: column;
-        border-radius: 5px;
-        margin: 10px;
-        overflow: hidden;
-    
-    }
-
-    .card-description {
-        flex-grow: 1;
-        white-space: normal;
-    }
-
     .button-group {
         display: flex;
         align-items: center;
@@ -69,23 +23,30 @@
         height: 100px; 
     }
 
+    .scroll-card {
+        overflow-x: initial; 
+        white-space: normal; 
+    }
+
     .scroll-horizontal {
-        overflow-x: scroll;
-        white-space: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
     }
 
     .scroll-horizontal::-webkit-scrollbar {
-        height: 0;
-        display: none;
+        width: 0; 
+    }
+ 
+    .scroll-horizontal::-webkit-scrollbar-thumb {
+        background: transparent; 
     }
 
-    .row {
-        display: inline-block;
+    .card-event {
+        transition: transform 0.3s; 
     }
 
-    .col-md-4 {
-        display: inline-block;
-        margin-right: 5px; 
+    .card-event:hover {
+        transform: scale(1.1); 
     }
 
 </style>
@@ -93,17 +54,20 @@
 <div class="content">
     <div class="container-fluid">
         <h1 class="mt-3 mb-3">Management Events</h1>
-        <div class="containerGambar">
-            <img class="comingsoon black-opacity" src="{{ asset('img/comingsoonPic.jpg') }}" alt="">
-            <h1 class="comingsoon-text">Coming Soon</h1>
-    </div>
+        <div class="card text-bg-dark" style="height: 200px;">
+            <img src="{{ asset('img/comingsoonPic.jpg') }}" class="card-img" alt="Coming Soon" style="object-fit: cover; width: 100%; height: 200px; opacity: 0.6;">
+            <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
+                <h1 class="card-title text-center">Coming Soon</h1>
+                <p class="card-text text-center">There will be something special in the near future</p>
+            </div>
+        </div>
 
         <h1 class="mt-5 mb-3">Events</h1>
-        <div class="scroll-horizontal">
-            <div class="row">
+        <div class="scroll-horizontal" style="overflow-x: auto; white-space: nowrap;">
+            <div class="d-flex flex-row flex-nowrap">
                 @foreach($event as $eventData)
-                <div class="col-md-4">
-                    <div class="card h-100" style="width: 18rem;">
+                <div class="col-md-3">
+                    <div class="card-event card h-100 scroll-card" style="width: 18rem;">
                         <img src="{{ $eventData['gambarEvent'] }}" class="card-img-top" alt="{{ $eventData['judul'] }}">
                         <div class="card-body">
                             <h5 class="card-title"><strong>{{ $eventData['judul'] }}</strong></h5>
@@ -124,7 +88,6 @@
                 @endforeach
             </div>
         </div>
-
 
         <div class="button-add">
             <a href="{{ url('admin3') }}" class="btn btn-primary">Add New Events</a>

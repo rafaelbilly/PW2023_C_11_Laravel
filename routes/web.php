@@ -26,6 +26,7 @@ Route::get('/admin', function () {
     $engagement = URL::asset('img/engagement.jpeg');
     $wedding = URL::asset('img/wedding.jpeg');
     $exhibition = URL::asset('img/exhibition.jpeg');
+    $promotion = URL::asset('img/promotion.jpeg');
 
     return view('Admin/managementEventAdmin', [
         'event' => [
@@ -48,6 +49,11 @@ Route::get('/admin', function () {
                 'gambarEvent' => $exhibition,
                 'judul' => 'Exhibition',
                 'deskripsi' => 'Art is an expression of the soul and creativity that arises to create your exhibition event like other artists'
+            ],
+            [
+                'gambarEvent' => $promotion,
+                'judul' => 'Promotion',
+                'deskripsi' => 'Helps you in creating the best promotional events and can make an impression on your clients'
             ]
         ]
     ]);

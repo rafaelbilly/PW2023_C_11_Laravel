@@ -23,7 +23,7 @@
 <div class="content">
     <div class="container-fluid">
         <h1 class="mb-5">Management User</h1>
-        <table class="table">
+        <table class="table mb-5 ">
             <tr class="table-secondary">
                 <th>
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> 
@@ -75,6 +75,21 @@
             </tr>
             @endforeach
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 </div>
 
