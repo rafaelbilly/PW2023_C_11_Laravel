@@ -79,7 +79,6 @@
                 <img src="{{ $isi2['gambar'] }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $isi2['nama'] }}</h5>
-                    <p class="card-text">{{ $isi2['deskripsi'] }}</p>
                     <a href="#" class="btn btn-link">User Order<i class="fas fa-arrow-right"></i></a>
                 </div>
                 </div>

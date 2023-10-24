@@ -30,17 +30,14 @@ Route::get('/indexDashboardAdmin', function () {
             [
                 'nama' => 'Birthday Party',
                 'gambar' => $birthday,
-                'deskripsi' => 'Belum tahu mau isi apa disini 1',
             ],
             [
                 'nama' => 'Engagement',
                 'gambar' => $engagement,
-                'deskripsi' => 'Belum tahu mau isi apa disini 2',
             ],
             [
                 'nama' => 'Wedding Ceremony',
                 'gambar' => $wedding,
-                'deskripsi' => 'Belum tahu mau isi apa disini 3',
             ]
             ],
             'admin' => [
