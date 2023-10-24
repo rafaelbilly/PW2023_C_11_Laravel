@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <style>
         html {
@@ -23,6 +24,7 @@
             font-style: normal;
             overflow-x: hidden;
             font-size: 15px;
+            color: f4f4f4;
         }
 
         p {
@@ -34,30 +36,24 @@
 
         .navbar {
             background-color: transparent;
-            /* Set the background color of the navbar to transparent */
             transition: background-color 0.5s ease-in-out;
-            /* Add a transition effect to smoothly change the background color */
             position: fixed;
-            /* Set the navbar to fixed position so that it stays at the top */
             width: 100%;
-            /* Set the width of the navbar to 100% */
             z-index: 1000;
-            /* Set a high z-index to ensure the navbar is displayed on top of other elements */
         }
 
         .navbar.scroll {
             background-color: rgba(0, 0, 0, 0.5);
-            /* Set the background color of the navbar to a semi-transparent color when scrolling */
         }
 
         .hero-area {
             position: relative;
-            padding: 180px 0 120px 0;
+            padding: 150px 0 120px 0;
             background: #303030;
         }
 
-        .hero-area .hero-image img {
-            width: 100%;
+        .hero-area .carousel-inner img {
+            height: 500px;
         }
 
         .hero-area .hero-content {
@@ -138,43 +134,10 @@
             gap: 20px;
         }
 
-        .card {
-            background-color: #E2E6ED;
-        }
-
         .card:hover {
             transform: scale(1.1);
             transition: transform 0.5s;
-        }
-
-        footer.footer-no-gap {
-            margin-top: 0px;
-        }
-
-        footer {
-            margin-top: 50px;
-            background-color: #303030;
-            min-height: 100px;
-        }
-
-        footer p {
-            text-align: left;
-            line-height: 100px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 400;
-        }
-
-        footer p a {
-            color: #fff;
-            transition: all .3s;
-            position: relative;
-            z-index: 3;
-        }
-
-        footer p a:hover {
-            opacity: 0.75;
-        }
+        }  
 
         .social-media {
             margin-top: 20px;
@@ -211,8 +174,37 @@
         }
 
         .clients {
-            margin-top: 200px;
-            height: 400px;
+            margin-top: 150px;
+            height: 600px;
+        }
+
+        footer.footer-no-gap {
+            margin-top: 0px;
+        }
+
+        footer {
+            margin-top: 50px;
+            background-color: #303030;
+            min-height: 100px;
+        }
+
+        footer p {
+            text-align: left;
+            line-height: 100px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        footer p a {
+            color: #fff;
+            transition: all .3s;
+            position: relative;
+            z-index: 3;
+        }
+
+        footer p a:hover {
+            opacity: 0.75;
         }
     </style>
 </head>
@@ -262,8 +254,26 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-12 col-12">
-                    <div class="hero-image">
-                        <img src="{{ asset('images/carousel-3.jpg') }}" alt="#">
+                    <div class="carousel slide" id="hero-carousel" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{ asset('images/carousel-1.jpg') }}" class="d-block w-100" alt="Slide 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/carousel-2.jpg') }}" class="d-block w-100" alt="Slide 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/carousel-3.jpg') }}" class="d-block w-100" alt="Slide 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -297,9 +307,7 @@
                     <div class="what-we-do-item">
                         <i class="fa fa-calendar-alt"></i>
                         <h3>Event Organizing</h3>
-                        <p>Concept & Creative Development</p>
-                        <p>Production Plan</p>
-                        <p>Event Management</p>
+                        <p>Concept & Creative Development is the initial stage that leads to the creation of a Production Plan, which is then executed through Event Management</p>
                     </div>
                     <div class="what-we-do-item">
                         <i class="fa fa-microphone"></i>
@@ -412,6 +420,7 @@
     <section class="clients">
         <div class="container">
             <h1 style="text-align: center;"><strong>OUR HAPPY CLIENTS</strong></h1>
+            
         </div>
     </section>
     <!-- /Client -->

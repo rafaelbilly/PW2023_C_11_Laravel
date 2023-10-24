@@ -147,20 +147,18 @@
                 <div class="col-md-6 side-image">
                 </div>
                 <div class="col-md-6 right">
-                    <form class="form" action="{{ url('landing') }}">
-                        @csrf
+                    <form class="form">
                         <div>
                             <h4 class="mb-3 text-center"><strong>LOGIN</strong></h4>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Email" required />
-                            <label for="floatingInput">Email</label>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Username" required />
+                            <label for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required />
                             <label for="floatingPassword">Password</label>
-                            <i class="bi bi-eye-slash toggle-password" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
                         </div>
 
                         <button type="submit" style="width: 100%;" class="btn btn-primary btn-block mb-2 mt-3">
@@ -176,6 +174,28 @@
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector(".form");
+            const usernameInput = document.querySelector("#floatingInput");
+            const passwordInput = document.querySelector("#floatingPassword");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+
+                if (username === "user" && password === "user") {
+                    window.location.href = "{{ url('dashboard') }}";
+                } else if (username === "admin" && password === "admin"){
+                    window.location.href = "{{ url('dashboard2') }}";
+                } else {
+                    alert("Invalid username or password. Please try again.");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
