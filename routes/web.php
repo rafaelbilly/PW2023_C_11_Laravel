@@ -187,3 +187,7 @@ Route::get('/myBooking', function () {
         'tanggal' => '31 October 2023',
     ]);
 });
+
+Route::get('/indexCheckout', function () {
+    return view('Gyms/indexCheckout');
+});
