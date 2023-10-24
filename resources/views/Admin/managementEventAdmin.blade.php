@@ -2,6 +2,16 @@
 @section('content')
 
 <style>
+    body {
+        font-family: "Inter", sans-serif;
+        background-color: #F0F0F0;
+    }
+
+    .section-title {
+        font-weight: bold;
+        margin: 0;
+    }
+
     .button-group {
         display: flex;
         align-items: center;
@@ -51,9 +61,10 @@
 
 </style>
 
+<body style="background-color: #f0f0f0;">
 <div class="content">
     <div class="container-fluid">
-        <h1 class="mt-3 mb-3">Management Events</h1>
+        <h1 class="mt-3 mb-3 section-title">Management Events</h1>
         <div class="card text-bg-dark" style="height: 200px;">
             <img src="{{ asset('img/comingsoonPic.jpg') }}" class="card-img" alt="Coming Soon" style="object-fit: cover; width: 100%; height: 200px; opacity: 0.6;">
             <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
@@ -62,7 +73,7 @@
             </div>
         </div>
 
-        <h1 class="mt-5 mb-3">Events</h1>
+        <h1 class="mt-5 mb-3 section-title">Events</h1>
         <div class="scroll-horizontal" style="overflow-x: auto; white-space: nowrap;">
             <div class="d-flex flex-row flex-nowrap">
                 @foreach($event as $eventData)
@@ -94,5 +105,6 @@
         </div>
     </div>
 </div>
+</body>
 
 @endsection
