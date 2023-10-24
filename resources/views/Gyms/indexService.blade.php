@@ -17,6 +17,8 @@
     flex: 1;
     width: 18rem; 
     margin: 10px;
+    transition: transform 0.3s; 
+    
   }
 
   .center-button {
@@ -25,7 +27,17 @@
     align-items: center;
     margin-top: 20px; 
   }
+
+  .card:hover {
+      transform: scale(1.1); 
+   }
+
+.more {
+    display: none; /* Tambahkan ini */
+  }
 </style>
+
+<body style="background-color: #F0F0F0">
 
 <div class="card-container">
   @foreach ($acara as $isi)
@@ -60,13 +72,16 @@ function myFunction(btn) {
   if (dots.style.display === "none") {
     dots.style.display = "inline";
     btnText.innerHTML = "Read more"; 
-    moreList.style.display = "none";
+    moreList.style.display = "none"; // Ubah menjadi none
   } else {
     dots.style.display = "none";
     btnText.innerHTML = "Read less"; 
-    moreList.style.display = "block";
+    moreList.style.display = "block"; // Ubah menjadi block
   }
 }
 </script>
+
+
+</body>
 
 @endsection

@@ -13,21 +13,26 @@
       flex: 1;
       width: 18rem; 
       margin: 10px;
+      transition: transform 0.3s; 
     }
 
+    .card:hover {
+        transform: scale(1.1); 
+    }
+
     .checklist {
-      list-style: none; /* Menghilangkan bullet point standar */
+      list-style: none; 
     }
 
     .checklist li {
-      display: flex; /* Membuat poin-poin tampil dalam satu baris */
-      align-items: center; /* Pusatkan tanda centang vertikal */
+      display: flex; 
+      align-items: center; 
     }
 
     .checklist li::before {
-      content: '\2713'; /* Menampilkan tanda centang Unicode */
-      color: green; /* Warna tanda centang */
-      margin-right: 5px; /* Jarak antara tanda centang dan teks */
+      content: '\2713'; 
+      color: green; 
+      margin-right: 5px; 
     }
 
     .card-body {
@@ -45,24 +50,25 @@
     }
 </style>
 
-</style>
+<body style="background-color: #F0F0F0">
 
-<div class="card-container">
-  @foreach ($booking as $isi)
-    <div class="card">
-      <div class="card-body text-center">
-        <h5 class="card-title"><strong>{{ $isi['nama'] }}</strong></h5>
-        <h1 class="card-title"><strong>{{ $isi['harga'] }}</strong></h1>
-        <a href="#" class="btn btn-primary">Booking</a>
-        <h6 class="card-title" style="margin-top: 30px;">Includes:</h6>
-        <ul class="checklist">
-          @foreach (explode("\n", $isi['deskripsi']) as $point)
-            <li>{{ $point }}</li>
-          @endforeach
-        </ul>
+  <div class="card-container">
+    @foreach ($booking as $isi)
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title"><strong>{{ $isi['nama'] }}</strong></h5>
+          <h1 class="card-title"><strong>{{ $isi['harga'] }}</strong></h1>
+          <a href="#" class="btn btn-primary">Booking</a>
+          <h6 class="card-title" style="margin-top: 30px;">Includes:</h6>
+          <ul class="checklist">
+            @foreach (explode("\n", $isi['deskripsi']) as $point)
+              <li>{{ $point }}</li>
+            @endforeach
+          </ul>
+        </div>
       </div>
-    </div>
-  @endforeach
-</div>
+    @endforeach
+  </div>
 
+</body>
 @endsection

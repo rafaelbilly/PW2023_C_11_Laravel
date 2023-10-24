@@ -22,21 +22,24 @@ Route::get('/dashboard2', function () {
 });
 
 Route::get('/indexDashboardAdmin', function () {
+    $birthday = URL::asset('images/birthday.jpg');
+    $engagement = URL::asset('images/engagement.jpg');
+    $wedding = URL::asset('images/wedding.jpg');
     return view('Gyms/indexDashboardAdmin', [
         'acara2' => [
             [
-                'nama' => 'Birthday Party 1',
-                'gambar' => 'https://i.pinimg.com/564x/85/20/9c/85209c9c129f191e8c7f519331115a9b.jpg',
+                'nama' => 'Birthday Party',
+                'gambar' => $birthday,
                 'deskripsi' => 'Belum tahu mau isi apa disini 1',
             ],
             [
                 'nama' => 'Engagement',
-                'gambar' => 'https://i.pinimg.com/564x/11/c7/ac/11c7ac1394a015ed33b58e0a61de689c.jpg',
+                'gambar' => $engagement,
                 'deskripsi' => 'Belum tahu mau isi apa disini 2',
             ],
             [
                 'nama' => 'Wedding Ceremony',
-                'gambar' => 'https://i.pinimg.com/564x/2a/cb/88/2acb882e7646978972e1871c8ef9f64f.jpg',
+                'gambar' => $wedding,
                 'deskripsi' => 'Belum tahu mau isi apa disini 3',
             ]
             ],
@@ -78,11 +81,14 @@ Route::get('/indexDashboardAdmin', function () {
 });
 
 Route::get('/indexService', function () {
+    $birthday = URL::asset('images/birthday.jpg');
+    $engagement = URL::asset('images/engagement.jpg');
+    $wedding = URL::asset('images/wedding.jpg');
     return view('Gyms/indexService', [
         'acara' => [
             [
                 'nama' => 'Birthday Party',
-                'gambar' => 'https://i.pinimg.com/564x/85/20/9c/85209c9c129f191e8c7f519331115a9b.jpg',
+                'gambar' => $birthday,
                 'deskripsi' => '"Rayakan momen berharga dengan pesta ulang tahun yang tak terlupakan! Kami, sebagai penyelenggara pesta ulang tahun profesional, siap membantu Anda mengatur acara yang penuh keceriaan dan kejutan."',
                 'deskripsi2' => 'Memilih Tema Apapun
                                 Profesionalisme dalam Perencanaan
@@ -92,7 +98,7 @@ Route::get('/indexService', function () {
             ],
             [
                 'nama' => 'Engagement',
-                'gambar' => 'https://i.pinimg.com/564x/11/c7/ac/11c7ac1394a015ed33b58e0a61de689c.jpg',
+                'gambar' => $engagement,
                 'deskripsi' => '"Menghadirkan Momen Tak Terlupakan: Biarkan kami merencanakan pertunangan Anda dengan detail sempurna. Kami menghadirkan keajaiban dalam setiap momen."',
                 'deskripsi2' => 'Memilih Tema Apapun
                                 Profesionalisme dalam Perencanaan
@@ -102,7 +108,7 @@ Route::get('/indexService', function () {
             ],
             [
                 'nama' => 'Wedding Ceremony',
-                'gambar' => 'https://i.pinimg.com/564x/2a/cb/88/2acb882e7646978972e1871c8ef9f64f.jpg',
+                'gambar' => $wedding,
                 'deskripsi' => '"Momen Keajaiban dalam Pernikahan: Setiap momen pernikahan Anda akan dirancang dengan indah dan memiliki sentuhan keajaiban. Kami hadirkan momen berkesan',
                 'deskripsi2' => 'Memilih Tema Apapun
                                 Profesionalisme dalam Perencanaan
