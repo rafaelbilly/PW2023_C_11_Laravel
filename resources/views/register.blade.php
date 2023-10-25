@@ -130,8 +130,8 @@
                         <h4 class="mb-3 text-center"><strong>REGISTER</strong></h4>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Name" required />
-                        <label for="floatingInput">Name</label>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" required />
+                        <label for="floatingInput">Username</label>
                     </div>
                     
                     <div class="form-floating">
@@ -150,7 +150,7 @@
                     </div>
 
                     <button type="submit" style="width: 100%;" class="btn btn-primary btn-block mb-2 mt-3">
-                        Login
+                        Register
                     </button>
                     <div class="signin">
                         <span><a href="{{ url('login') }}">Already have an account?</a></span>

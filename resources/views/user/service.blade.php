@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Service</title>
+
   <!-- Google Font: Inter -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
 
@@ -27,11 +28,15 @@
 
     body {
       font-family: "Inter", sans-serif;
+      background-color: #F0F0F0;
     }
+
+
 
     .navbar {
       position: fixed;
       width: 100%;
+      height: 80px;
     }
 
     .btn-link {
@@ -47,8 +52,9 @@
 
     .card {
       flex: 1;
-      width: 18rem;
+      width: 10rem;
       margin: 10px;
+      transition: transform 0.3s;
     }
 
     .center-button {
@@ -56,6 +62,14 @@
       justify-content: center;
       align-items: center;
       margin-top: 20px;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .more {
+      display: none;
     }
 
     footer {
@@ -82,6 +96,32 @@
     footer p a:hover {
       opacity: 0.75;
     }
+
+    @media (max-width: 480px) {
+      .navbar {
+        background-color: black;
+      }
+
+      .navbar .nav-link,
+      .navbar .dropdown-menu {
+        color: #fff;
+      }
+
+      .navbar .dropdown-menu a {
+        transition: all .3s;
+        position: relative;
+        z-index: 3;
+      }
+
+      .navbar .dropdown-menu a:hover {
+        opacity: 0.75;
+      }
+
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 
@@ -89,7 +129,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#"><strong>SemestaGroup</strong></a>
+      <a class="navbar-brand" href="{{ url('dashboard') }}"><strong>SemestaGroup</strong></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -117,9 +157,8 @@
               <i class="fas fa-user"></i> User
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Sign Out</a></li>
+              <li><a class="dropdown-item" href="{{ url('userProfile') }}">Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url('landing') }}">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -128,27 +167,31 @@
   </nav>
 
   <!-- content -->
-  <div class="card-container">
-    @foreach ($acara as $isi)
-    <div class="card">
-      <img src="{{ $isi['gambar'] }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{ $isi['nama'] }}</h5>
-        <p>{{ $isi['deskripsi'] }}<span class="dots">...</span></p>
-        <h6>What will you get?</h6>
-        <ul class="more">
-          @foreach (explode("\n", $isi['deskripsi2']) as $point)
-          <li>{{ $point }}</li>
-          @endforeach
-        </ul>
-        <button onclick="myFunction(this)" class="btn btn-link">Read more</button>
+  <div class="container">
+    <div class="card-container">
+      @foreach ($acara as $isi)
+      <div class="card h-100">
+        <img src="{{ $isi['gambar'] }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ $isi['nama'] }}</h5>
+          <p>{{ $isi['deskripsi'] }}<span class="dots">...</span></p>
+          <h6>What will you get?</h6>
+          <ul class="more">
+            @foreach (explode("\n", $isi['deskripsi2']) as $point)
+            <li>{{ $point }}</li>
+            @endforeach
+          </ul>
+          <button onclick="myFunction(this)" class="btn btn-link">Read more</button>
+        </div>
       </div>
+      @endforeach
     </div>
-    @endforeach
+
+    <div class="center-button">
+      <a href="{{ url('booking') }}" class="btn btn-primary">Booking Now</a>
+    </div>
   </div>
-  <div class="center-button">
-    <a href="{{ url('booking') }}" class="btn btn-primary">Booking Now</a>
-  </div>
+
 
   <!-- footer -->
   <footer>

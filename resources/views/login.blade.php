@@ -189,7 +189,7 @@
                 if (username === "user" && password === "user") {
                     window.location.href = "{{ url('dashboard') }}";
                 } else if (username === "admin" && password === "admin"){
-                    window.location.href = "{{ url('dashboard2') }}";
+                    window.location.href = "{{ url('DashboardAdmin') }}";
                 } else {
                     alert("Invalid username or password. Please try again.");
                 }

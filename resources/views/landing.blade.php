@@ -24,7 +24,8 @@
             font-style: normal;
             overflow-x: hidden;
             font-size: 15px;
-            color: f4f4f4;
+            background-color: #F0F0F0;
+            scroll-behavior: smooth;
         }
 
         p {
@@ -32,6 +33,15 @@
             padding: 0;
             font-size: 15px;
             line-height: 24px;
+        }
+
+        .midline {
+            width: 150px;
+            border-top: 3px solid #ae9326;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .navbar {
@@ -134,10 +144,14 @@
             gap: 20px;
         }
 
+        .card-img-top {
+            height: 300px;
+        }
+
         .card:hover {
             transform: scale(1.1);
             transition: transform 0.5s;
-        }  
+        }
 
         .social-media {
             margin-top: 20px;
@@ -174,8 +188,74 @@
         }
 
         .clients {
-            margin-top: 150px;
+            margin-top: 120px;
             height: 600px;
+        }
+
+        .clients .card-img-top {
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .card .profile-details {
+            display: flex;
+            align-items: center;
+            column-gap: 12px;
+            padding: 15px;
+        }
+
+        .card .profile-details img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        .profile-details .name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .profile-details .name-event {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4d4d4d;
+        }
+
+        .clients .card:hover {
+            transform: scale(1.1);
+            transition: transform 0.5s;
+        }
+
+        .scroll-top {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            background: #303030;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: #fff !important;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9;
+            cursor: pointer;
+            -webkit-transition: all .3s ease-out 0s;
+            transition: all .3s ease-out 0s;
+            border-radius: 5px;
+        }
+
+        .scroll-top:hover {
+            -webkit-box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
+            box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
+            -webkit-transform: translate3d(0, -5px, 0);
+            transform: translate3d(0, -5px, 0);
+            background-color: #081828;
         }
 
         footer.footer-no-gap {
@@ -225,13 +305,13 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="{{ url('service') }}">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Booking</a>
+                        <a class="nav-link" href="{{ url('booking') }}">Booking</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{{ url('contact') }}">Contact</a>
                     </li>
                 </ul>
 
@@ -265,6 +345,15 @@
                             <div class="carousel-item">
                                 <img src="{{ asset('images/carousel-3.jpg') }}" class="d-block w-100" alt="Slide 3">
                             </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/carousel-4.jpg') }}" class="d-block w-100" alt="Slide 4">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/carousel-5.jpg') }}" class="d-block w-100" alt="Slide 5">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/carousel-6.jpg') }}" class="d-block w-100" alt="Slide 6">
+                            </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
@@ -286,10 +375,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <img src="{{ asset('images/carousel-1.jpg') }}" alt="about">
+                    <img src="{{ asset('images/team.jpg') }}" alt="about">
                 </div>
                 <div class="col-md-6">
-                    <h1><strong>ABOUT US</strong></h1>
+                    <h1 style="text-align: center;"><strong>ABOUT US</strong></h1>
+                    <hr class="midline">
+                    <br>
                     <p>Semesta Group is an event organizer and technical event production. Our services includes event planning and production, design and decoration, lighting and sound system, stage, rigging, entertainment and talent, on-site management, and many more.</p>
                 </div>
             </div>
@@ -301,6 +392,7 @@
     <section class="what-we-do">
         <div class="container">
             <h1 style="text-align: center;"><strong>WHAT WE DO</strong></h1>
+            <hr class="midline">
             <br>
             <div class="row">
                 <div class="col-md-6">
@@ -336,6 +428,7 @@
     <section class="partnership">
         <div class="container">
             <h1 style="text-align: center;"><strong>OUR PARTNERSHIP</strong></h1>
+            <hr class="midline">
             <br>
             <div class="row" data-aos="zoom-in">
                 <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
@@ -370,6 +463,7 @@
     <section class="team">
         <div class="container">
             <h1 style="text-align: center;"><strong>MEET OUR TEAM</strong></h1>
+            <hr class="midline">
             <br>
             <div class="card-group">
                 <div class="card">
@@ -386,7 +480,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="{{ asset('images/') }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('images/juneta.jpg') }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">Juneta Julia</h5>
                         <p class="card-text text-center">UI UX Designer & Developer</p>
@@ -399,7 +493,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="{{ asset('images/') }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('images/nikken.jpg') }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">Nikken Carmelia</h5>
                         <p class="card-text text-center">UI UX Designer & Developer</p>
@@ -420,7 +514,70 @@
     <section class="clients">
         <div class="container">
             <h1 style="text-align: center;"><strong>OUR HAPPY CLIENTS</strong></h1>
-            
+            <hr class="midline">
+            <br>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://i.pinimg.com/564x/85/20/9c/85209c9c129f191e8c7f519331115a9b.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
+                            <div class="profile-details">
+                                <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=1780&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                                <div class="name-job">
+                                    <h3 class="name">Dustin John</h3>
+                                    <h4 class="name-event">Birthday Party</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://i.pinimg.com/564x/11/c7/ac/11c7ac1394a015ed33b58e0a61de689c.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
+                            <div class="profile-details">
+                                <img src="https://i.pinimg.com/564x/17/02/cc/1702cc73b2c0bb271ed473f5783233e9.jpg" alt="" />
+                                <div class="name-job">
+                                    <h3 class="name">Franklin</h3>
+                                    <h4 class="name-event">Engagement</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://i.pinimg.com/564x/2a/cb/88/2acb882e7646978972e1871c8ef9f64f.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
+                            <div class="profile-details">
+                                <img src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?auto=format&fit=crop&q=80&w=1780&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                                <div class="name-job">
+                                    <h3 class="name">Razor</h3>
+                                    <h4 class="name-event">Wedding Ceremony</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://i.pinimg.com/564x/11/c7/ac/11c7ac1394a015ed33b58e0a61de689c.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
+                            <div class="profile-details">
+                                <img src="https://i.pinimg.com/564x/17/02/cc/1702cc73b2c0bb271ed473f5783233e9.jpg" alt="" />
+                                <div class="name-job">
+                                    <h3 class="name">Franklin</h3>
+                                    <h4 class="name-event">Engagement</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- /Client -->
@@ -435,6 +592,11 @@
     </footer>
     <!-- /footer -->
 
+    <!-- scroll Up -->
+    <a href="#" class="scroll-top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
         var nav = document.querySelector('nav');
@@ -446,7 +608,21 @@
                 nav.classList.remove('bg-dark', 'shadow');
             }
         });
+
+        var cu = new counterUp({
+            start: 0,
+            duration: 2000,
+            intvalues: true,
+            interval: 100,
+            append: " ",
+        });
+        cu.start();
     </script>
+    <script src="{{ asset('css/swiper-bundle.min.css') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
