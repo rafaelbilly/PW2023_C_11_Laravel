@@ -8,13 +8,13 @@
 </p>
 
 ## TUBES PEMROGRAMAN WEB
-# Kelompok 11
-# Kelas C
+ Kelompok 11
+ Kelas C
 
 ## Tema
-# Event Organizer
+ Event Organizer
 
 ## Anggota
-# Rafael Billy - 210711297
-# Juneta Julia - 210711382
-# Nikken Carmelia - 210711318
+ Rafael Billy - 210711297
+ Juneta Julia - 210711382
+ Nikken Carmelia - 210711318
