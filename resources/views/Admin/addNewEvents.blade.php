@@ -5,6 +5,7 @@
     body {
         font-family: "Inter", sans-serif;
         background-color: #F0F0F0;
+        height:650px;
     }
 
     .section-title {
@@ -20,7 +21,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -35%);
+        transform: translate(-50%, -20%);
         padding: 20px;
         background-color: white;
     }
@@ -37,7 +38,13 @@
 <body style="background-color: #f0f0f0;">
     <div class="content">
         <div class="container-fluid mt-6">
-            <h1 class="mb-4 section-title">Add New Events</h1>
+            <h1 class="mb-3 section-title">Add New Events</h1>
+            <div class="mb-5">
+                <div class="col-2 d-flex">
+                    <i class="fas fa-search"  style="font-size: 20px;"></i>
+                    <input type="text" class="form-control" id="search" placeholder="Search" style="margin-left: 10px;">
+                </div>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">

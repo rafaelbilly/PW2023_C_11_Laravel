@@ -43,6 +43,12 @@
         .nav-item{
             color: white;
         }
+
+        .white-button {
+            color: white;
+            background-color: white;
+        }
+
         
     </style>
 
@@ -65,25 +71,10 @@
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">Semesta Group</h5>
                     <p class="subtitle">Event Organizer</p>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="btn-close white-button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
 
             <div class="offcanvas-body">
-                <center>
-                    <div>
-                        <img src="{{ asset('img/Fotokosong.jpeg') }}" class="img-fluid rounded-circle"
-                            style="width: 30px; height: 30px; margin-right: 10px;" alt="Profile Picture">
-                        <button class="icon-button" style="color: white;"><i class="fas fa-cog"></i></button>
-                        <button class="icon-button" style="color: white;"><i class="fas fa-bell"></i></button>
-                    </div>
-                </center>
-
-                <form class="d-flex mt-3" role="search">
-                    <button type="submit" class="btn">
-                        <i class="fas fa-search" style="margin-right: 5px; color: white;"></i>
-                    </button>
-                    <input class="form-control me-2" type="search" placeholder="Search for ..." aria-label="Search">
-                </form>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">

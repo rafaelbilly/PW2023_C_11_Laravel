@@ -35,7 +35,14 @@
 <body style="background-color: #f0f0f0;">
     <div class="content">
         <div class="container-fluid">
-            <h1 class="mb-5 section-title">Management User</h1>
+            <h1 class="mb-3 section-title">Management User</h1>
+            <div class="mb-5">
+                <div class="col-2 d-flex">
+                    <i class="fas fa-search"  style="font-size: 20px;"></i>
+                    <input type="text" class="form-control" id="search" placeholder="Search" style="margin-left: 10px;">
+                </div>
+            </div>
+
             <div class="table-container">
                 <table class="table mb-5">
                     <tr class="table-secondary">

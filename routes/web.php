@@ -33,27 +33,53 @@ Route::get('/admin', function () {
             [
                 'gambarEvent' => $birthday,
                 'judul' => 'Birthday Party',
-                'deskripsi' => 'Create unforgettable birthday moments for you or your loved ones'
+                'deskripsi' => 'Rayakan momen berharga dengan pesta ulang tahun yang tak terlupakan! Kami, sebagai penyelenggara pesta ulang tahun profesional, siap membantu Anda mengatur acara yang penuh keceriaan dan kejutan.',
+                'deskripsi2' => 'Memilih Tema Apapun
+                Profesionalisme dalam Perencanaan
+                Dokumentasi dan Pemotretan
+                Melayani Layanan Tambahan
+                Budget yang Sesuai'
+
             ],
             [
                 'gambarEvent' => $engagement,
                 'judul' => 'Engagement',
-                'deskripsi' => 'This moment is the most important moment in your life, make your engagement event a beautiful memory'
+                'deskripsi' => 'Menghadirkan Momen Tak Terlupakan: Biarkan kami merencanakan pertunangan Anda dengan detail sempurna. Kami menghadirkan keajaiban dalam setiap momen.',
+                'deskripsi2' => 'Memilih Tema Apapun
+                                Profesionalisme dalam Perencanaan
+                                Dokumentasi dan Pemotretan
+                                Melayani Layanan Tambahan
+                                Budget yang Sesuai'
             ],
             [
                 'gambarEvent' => $wedding,
                 'judul' => 'Wedding Ceremony',
-                'deskripsi' => 'A wedding is a sacred moment that will be remembered for a lifetime. Make your wedding experience special and unforgettable'
+                'deskripsi' => 'Momen Keajaiban dalam Pernikahan: Setiap momen pernikahan Anda akan dirancang dengan indah dan memiliki sentuhan keajaiban. Kami hadirkan momen berkesan',
+                'deskripsi2' => 'Memilih Tema Apapun
+                                Profesionalisme dalam Perencanaan
+                                Dokumentasi dan Pemotretan
+                                Melayani Layanan Tambahan
+                                Budget yang Sesuai'
             ],
             [
                 'gambarEvent' => $exhibition,
                 'judul' => 'Exhibition',
-                'deskripsi' => 'Art is an expression of the soul and creativity that arises to create your exhibition event like other artists'
+                'deskripsi' => 'Seni merupakan ekspresi jiwa dan kreativitas yang muncul untuk mewujudkan acara pameran Anda seperti seniman lainnya',
+                'deskripsi2' => 'Memilih Tema Apapun
+                                Profesionalisme dalam Perencanaan
+                                Dokumentasi dan Pemotretan
+                                Melayani Layanan Tambahan
+                                Budget yang Sesuai'
             ],
             [
                 'gambarEvent' => $promotion,
                 'judul' => 'Promotion',
-                'deskripsi' => 'Helps you in creating the best promotional events and can make an impression on your clients'
+                'deskripsi' => 'Membantu Anda dalam menciptakan acara promosi terbaik dan dapat memberikan kesan kepada klien Anda',
+                'deskripsi2' => 'Memilih Tema Apapun
+                                Profesionalisme dalam Perencanaan
+                                Dokumentasi dan Pemotretan
+                                Melayani Layanan Tambahan
+                                Budget yang Sesuai'
             ]
         ]
     ]);
