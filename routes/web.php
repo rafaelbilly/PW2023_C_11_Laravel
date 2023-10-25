@@ -90,7 +90,7 @@ Route::get('/admin2', function () {
     for ($i = 0; $i < 10; $i++) {
         $users[] = [
             'name' => 'Jane Doe',
-            'work' => 'Senior Designer',
+            'work' => 'User',
             'invoiceNumber' => 'Cell Text',
             'phoneNumber' => 'Cell Text',
             'email' => 'Cell Text',

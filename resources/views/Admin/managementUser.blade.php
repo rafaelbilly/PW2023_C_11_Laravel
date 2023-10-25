@@ -79,9 +79,55 @@
                         <td>
                             <div class="button-group">
                                 <span class="badge rounded-pill text-bg-light">
-                                    <a href="#" class="btn">
+                                    <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal{{ $key }}">
                                         <i class="fas fa-pencil-alt pencil-icon"></i>
                                     </a>
+                                    <div class="modal fade" id="modal{{ $key }}" tabindex="-1" aria-labelledby="modalTitle{{ $key }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="modalTitle{{ $key }}">Details User</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body" style="text-align: left;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4">
+                                                            <img src="{{ asset('img/Fotokosong.jpeg') }}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Profile Picture">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <form>
+                                                                <div class="mb-3">
+                                                                    <label for="nameInput" class="form-label">Name</label>
+                                                                    <input type="text" class="form-control" id="nameInput" placeholder="{{ $user['name'] }}">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="invoiceInput" class="form-label">Invoice Number</label>
+                                                                    <input type="text" class="form-control" id="invoiceInput" placeholder="{{ $user['invoiceNumber'] }}">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="phoneInput" class="form-label">Phone Number</label>
+                                                                    <input type="text" class="form-control" id="phoneInput" placeholder="{{ $user['phoneNumber'] }}">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="emailInput" class="form-label">Email</label>
+                                                                    <input type="email" class="form-control" id="emailInput" placeholder="{{ $user['email'] }}">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="statusInput" class="form-label">Status</label>
+                                                                    <input type="text" class="form-control" id="statusInput" placeholder="{{ $user['status'] }}">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <a href="{{ url('admin2') }}" class="btn btn-primary">Save Changes</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <a href="#" class="btn">
                                         <i class="fas fa-trash-alt trash-can"></i>
                                     </a>
@@ -101,6 +147,10 @@
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">11</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#">Next</a>
                     </li>
