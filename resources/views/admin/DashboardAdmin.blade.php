@@ -58,14 +58,9 @@
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+            margin-top: 50px;
             background-color: #303030;
             min-height: 100px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 400;
         }
 
         footer p {
