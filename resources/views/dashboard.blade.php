@@ -467,7 +467,7 @@
                 <ul class="navbar-nav fs-5 ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user"></i> {{ Auth::user()->username }}
+                            <i class="fas fa-user">{{ Auth::user()->username }}</i>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ url('userProfile') }}">Profile</a></li>
@@ -674,23 +674,14 @@
             <hr class="midline">
             <br>
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                @foreach ($clients as $client)
+
                 <div class="col">
                     <div class="card h-100">
-                        <img src="{{ $client['event'] }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">{{ $client['review'] }}</p>
-                            <div class="profile-details">
-                                <img src="{{ $client['profile'] }}" alt="" />
-                                <div class="name-job">
-                                    <h3 class="name">{{ $client['name'] }}</h3>
-                                    <h4 class="name-event">{{ $client['name-event'] }}</h4>
-                                </div>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
-                @endforeach
+
             </div>
         </div>
     </section>

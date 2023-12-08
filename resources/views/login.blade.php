@@ -74,11 +74,6 @@
             position: relative;
         }
 
-        .input-box {
-            width: 330px;
-            box-sizing: border-box;
-        }
-
         img {
             width: 35px;
             position: absolute;
@@ -90,8 +85,7 @@
             width: 330px;
             margin: 0 auto;
         }
-
-
+        
         .signup {
             text-align: center;
             font-size: small;

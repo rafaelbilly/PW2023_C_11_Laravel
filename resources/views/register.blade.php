@@ -71,11 +71,6 @@
             position: relative;
         }
 
-        .input-box {
-            width: 330px;
-            box-sizing: border-box;
-        }
-
         img {
             width: 35px;
             position: absolute;

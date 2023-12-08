@@ -29,7 +29,7 @@ class RegisterController extends Controller
 
         $details = [
             'username' => $request->username,
-            'datetime' => date('Y-m-d H:i:s'),
+            'datetime' => now(),
             'url' => request()->getHttpHost() . '/register/verify/' . $str
         ];
 
@@ -39,8 +39,7 @@ class RegisterController extends Controller
         return redirect('register');
     }
 
-    public function verify($verify_key)
-    {
+    public function verify($verify_key){
         $keyCheck = User::select('verify_key')
             ->where('verify_key', $verify_key)
             ->exists();
@@ -49,7 +48,7 @@ class RegisterController extends Controller
             $user = User::where('verify_key', $verify_key)
                 ->update([
                     'active' => 1,
-                    'email_verified_at' => date('Y-m-d H:i:s'),
+                    'email_verified_at' => now(),
                 ]);
 
             return "Verifikasi berhasil. Akun anda sudah aktif.";
