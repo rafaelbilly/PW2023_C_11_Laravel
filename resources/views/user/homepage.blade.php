@@ -372,7 +372,7 @@
                             </div>
                             <div class="dropdown-divider"></div>
                             <div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
                                 <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
                             </div>
                         </div>

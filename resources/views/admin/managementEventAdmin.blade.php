@@ -89,9 +89,13 @@
         }
 
         footer {
-            margin-top: 50px;
+            margin-top: 100px;
             background-color: #303030;
             min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
         }
 
         footer p {
@@ -123,7 +127,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a href="{{ url('landing') }}" class="btn btn-danger me-3">Logout</a>
+                <a href="{{ route('actionLogout') }}" class="btn btn-danger me-3">Logout</a>
             </div>
         </nav>
 

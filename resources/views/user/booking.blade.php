@@ -147,7 +147,7 @@
         <div class="mx-auto"></div>
         <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('dashboard') }}">Home</a>
+            <a class="nav-link" href="{{ url('homepage') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('service') }}">Services</a>
@@ -160,15 +160,24 @@
           </li>
         </ul>
         <ul class="navbar-nav fs-5 ms-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-user"></i> User
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="{{ url('userProfile') }}">Profile</a></li>
-              <li><a class="dropdown-item" href="{{ url('landing') }}">Logout</a></li>
-            </ul>
-          </li>
+          <ul class="navbar-nav fs-5 ms-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i> {{ Auth::user()->username }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
+                <div class="text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                  <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div>
+                  <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                  <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </ul>
       </div>
     </div>

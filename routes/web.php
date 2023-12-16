@@ -29,7 +29,7 @@ Route::post('register/action', [RegisterController::class, 'actionRegister'])->n
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
 
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
-Route::get('homepage', [HomeController::class, 'index'])->name('homepage');
+Route::get('homepage', [HomeController::class, 'index'])->name('homepage')->middleware('auth');
 
 // Route::get('/dashboard', function () {
 //     return view('user/dashboard', [

@@ -152,7 +152,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('dashboard') }}"><strong>SemestaGroup</strong></a>
+            <a class="navbar-brand" href="{{ url('homepage') }}"><strong>SemestaGroup</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -161,7 +161,7 @@
                 <div class="mx-auto"></div>
                 <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url('dashboard') }}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ url('homepage') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('service') }}">Services</a>
@@ -177,12 +177,19 @@
                 <ul class="navbar-nav fs-5 ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user"></i> User
+                            <i class="fas fa-user"></i> {{ Auth::user()->username }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ url('landing') }}">Logout</a></li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
+                            <div class="text-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                                <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div>
+                                <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
