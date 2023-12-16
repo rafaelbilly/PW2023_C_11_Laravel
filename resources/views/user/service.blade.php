@@ -143,7 +143,7 @@
         <div class="mx-auto"></div>
         <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{{ url('dashboard') }}">Home</a>
+            <a class="nav-link" aria-current="page" href="{{ url('homepage') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{ url('service') }}">Services</a>

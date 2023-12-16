@@ -61,6 +61,7 @@
             position: relative;
             padding: 150px 0 120px 0;
             background: #303030;
+            height: 100vh;
         }
 
         .hero-area .carousel-inner img {

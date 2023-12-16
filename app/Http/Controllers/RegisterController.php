@@ -29,6 +29,7 @@ class RegisterController extends Controller
 
         $details = [
             'username' => $request->username,
+            'website' => 'Semesta Group',
             'datetime' => now(),
             'url' => request()->getHttpHost() . '/register/verify/' . $str
         ];

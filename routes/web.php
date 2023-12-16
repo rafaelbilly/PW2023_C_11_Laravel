@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +29,7 @@ Route::post('register/action', [RegisterController::class, 'actionRegister'])->n
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
 
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
-
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('homepage', [HomeController::class, 'index'])->name('homepage');
 
 // Route::get('/dashboard', function () {
 //     return view('user/dashboard', [
