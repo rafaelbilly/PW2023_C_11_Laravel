@@ -11,17 +11,16 @@ class LoginController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect('homepage');
         } else {
             return view('login');
         }
-
     }
 
     public function actionLogin(Request $request)
     {
         $data = [
-            'email' => strtolower($request->input('email')),
+            'email' => $request->input('email'),
             'password' => $request->input('password'),
         ];
 
@@ -29,7 +28,7 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->active) {
-                return redirect('dashboard');
+                return redirect('homepage');
             } else {
                 Auth::logout();
                 Session::flash('error', 'Akun Anda Belum Diverifikasi. Silahkan cek email anda.');
@@ -40,7 +39,6 @@ class LoginController extends Controller
             return redirect('login');
         }
     }
-
 
     public function actionLogout()
     {

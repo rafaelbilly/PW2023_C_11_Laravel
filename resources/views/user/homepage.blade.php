@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" type="x-ixon" href="{{ asset('images/logo-1.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo-1.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Semesta Group</title>
 
@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <style>
         html {
@@ -61,6 +59,7 @@
             position: relative;
             padding: 150px 0 120px 0;
             background: #303030;
+            height: 100vh;
         }
 
         .hero-area .carousel-inner img {
@@ -292,147 +291,44 @@
             background-color: #081828;
         }
 
-        @media (max-width: 480px) {
-            .navbar .navbar-toggler {
-                display: block;
+        @media (max-width: 991px) {
+            .navbar {
+                padding: 10px;
             }
 
-            .navbar .collapse.navbar-collapse {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: white;
-                z-index: 1;
+            .hero-area {
+                padding: 100px 0;
             }
 
-            .navbar .navbar-nav {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .navbar .dropdown-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: white;
-                z-index: 1;
-            }
-
-            .navbar .nav-item:last-child {
-                margin-bottom: 10px;
-            }
-
-            .hero-content {
-                /* Atur gaya konten hero untuk ponsel */
-                text-align: center;
-                /* Pusatkan teks */
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-                /* Ubah ukuran teks h1 */
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-                /* Ubah ukuran teks paragraf */
-            }
-
-            .about img {
-                /* Atur ukuran gambar di bagian "About" untuk ponsel */
-                width: 100%;
+            .hero-area .carousel-inner img {
                 height: auto;
             }
+        }
 
-            .about h1 {
-                font-size: 1.5rem;
-                /* Ubah ukuran judul "About" */
-                text-align: center;
-                /* Pusatkan teks */
+        @media (max-width: 767px) {
+            .navbar {
+                padding: 10px;
             }
 
-            .about p {
-                font-size: 1rem;
-                /* Ubah ukuran teks paragraf pada "About" */
+            .hero-area {
+                padding: 80px 0;
             }
 
-            /* Atur gaya elemen-elemen What We Do */
+            .hero-area .hero-content h1 {
+                font-size: 30px;
+                line-height: 35px;
+            }
+
             .what-we-do-item {
-                text-align: center;
-                /* Pusatkan teks dan ikon */
+                text-align: left;
             }
 
-            .what-we-do-item i {
-                font-size: 2rem;
-                /* Ubah ukuran ikon */
+            .team .card-group {
+                flex-direction: column;
             }
 
-            .what-we-do-item h3 {
-                font-size: 1.5rem;
-                /* Ubah ukuran judul What We Do */
-            }
-
-            .what-we-do-item p {
-                font-size: 1rem;
-                /* Ubah ukuran teks paragraf What We Do */
-            }
-
-            .team {
-                margin-top: 20px;
-                /* Atur sesuai kebutuhan */
-            }
-
-            .partnership img {
-                max-width: 50%;
-                /* Dua gambar dalam satu baris pada mode responsif */
-                width: auto;
+            .team .card-img-top {
                 height: auto;
-            }
-
-            .partnership .row {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .card-group {
-                flex-direction: column;
-            }
-
-            .card {
-                margin-bottom: 20px;
-            }
-
-            .partnership {
-                margin-top: 200px;
-            }
-
-            .profile-details img {
-                height: 30px;
-                width: 30px;
-            }
-
-            .profile-details .name {
-                font-size: 14px;
-                /* Ubah ukuran nama tim */
-            }
-
-            .profile-details .name-event {
-                font-size: 12px;
-                /* Ubah ukuran detail tim */
-            }
-
-            .clients .card-img-top {
-                max-height: 200px;
-                /* Batasi tinggi gambar klien */
-            }
-
-            .footer p {
-                text-align: center;
-                /* Pusatkan teks footer */
             }
         }
     </style>
@@ -467,12 +363,19 @@
                 <ul class="navbar-nav fs-5 ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user">{{ Auth::user()->username }}</i>
+                            <i class="fas fa-user"></i> {{ Auth::user()->username }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ url('userProfile') }}">Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ route('actionLogout') }}">Logout</a></li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
+                            <div class="text-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                                <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -494,7 +397,7 @@
                     <div class="carousel slide" id="hero-carousel" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{ asset('images/carousel-1.jpg') }}" class="d-block w-100" alt="Slide 1">
+                                <img src="{{ asset('/images/carousel-1.jpg') }}" class="d-block w-100" alt="Slide 1">
                             </div>
                             <div class="carousel-item">
                                 <img src="{{ asset('images/carousel-2.jpg') }}" class="d-block w-100" alt="Slide 2">
@@ -735,7 +638,13 @@
         });
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 
