@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+// use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -17,12 +18,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $timezone = 'Asia/Jakarta';
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $fillable = [
         'username',
         'password',
         'email',
+        'phone_number',
         'verify_key',
         'active',
     ];
@@ -44,5 +47,15 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * The storage format of the model's date columns.
+     *
+     * @var string
+     */
+    protected $dateFormat = 'Y-m-d H:i:s';
 }

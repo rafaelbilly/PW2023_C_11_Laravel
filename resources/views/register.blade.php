@@ -165,6 +165,11 @@
                             <label for="floatingPassword">Password</label>
                         </div>
 
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInput" name="phone_number" placeholder="Phone Number" required />
+                            <label for="floatingInput">Phone Number</label>
+                        </div>
+
                         <button type="submit" style="width: 100%;" class="btn btn-primary btn-block mb-2 mt-3">
                             Register
                         </button>

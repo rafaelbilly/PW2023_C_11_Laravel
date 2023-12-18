@@ -509,7 +509,7 @@
             <h1 style="text-align: center;"><strong>OUR HAPPY CLIENTS</strong></h1>
             <hr class="midline">
             <br>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
+            <!-- <div class="row row-cols-1 row-cols-md-4 g-4">
                 <div class="col">
                     <div class="card h-100">
                         <img src="https://i.pinimg.com/564x/85/20/9c/85209c9c129f191e8c7f519331115a9b.jpg" class="card-img-top" alt="...">
@@ -570,7 +570,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- /Client -->
