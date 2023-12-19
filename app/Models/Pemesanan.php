@@ -14,6 +14,12 @@ class Pemesanan extends Model
     protected $fillable = [
         'id_user',
         'id_event',
+        'invoice',
+        'payment_type',
+        'cardholder_name',
+        'card_number',
+        'card_exp',
+        'card_cvc',
         'jmlOrder',
         'tanggalPemesanan',
         'total_biaya',

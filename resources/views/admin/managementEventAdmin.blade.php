@@ -173,7 +173,13 @@
                     <div class="mb-3">
                         <div class="col-2 d-flex">
                             <i class="fas fa-search" style="font-size: 20px;"></i>
-                            <input type="text" class="form-control" id="search" placeholder="Search" style="margin-left: 10px;">
+                            <form action="" method="get">
+                                @csrf
+                                <input type="text" class="form-control" id="search" placeholder="Search" style="margin-left: 10px;" name="keyword" value="{{request()->filled('keyword') ? request()->keyword : ''}}">
+                            </form>
+                            @if (request()->filled('keyword'))
+                            <a href="{{url('/managementEventAdmin')}}" class="btn btn-sm btn-danger">reset</a>
+                            @endif
                         </div>
                     </div>
 
@@ -206,7 +212,7 @@
                                                 </p>
                                                 <ul class="list-group deskripsi2-item" style="display: none;">
                                                     @php
-                                                    $deskripsi2Items = explode("\n", $eventData['deskripsi2']);
+                                                    $deskripsi2Items = explode("\r\n", $eventData['deskripsi2']);
                                                     @endphp
                                                     @foreach($deskripsi2Items as $item)
                                                     <small>
@@ -218,12 +224,17 @@
                                             </div>
                                         </div>
                                         <div class="card-footer button-group">
-                                            <a href="{{ url('managementEventAdmin') }}" class="btn">
+                                            <a href="{{ route('managementEventAdmin.edit', $eventData['id']) }}" class="btn">
                                                 <i class="fas fa-pencil-alt pencil-icon"></i>
                                             </a>
-                                            <a href="#" class="btn">
-                                                <i class="fas fa-trash-alt trash-can"></i>
-                                            </a>
+                                            <form action="{{ route('managementEventAdmin.destroy', $eventData['id']) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+
+                                                <button type="submit" class="btn">
+                                                    <i class="fas fa-trash-alt trash-can"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -263,6 +274,15 @@
                 btn.innerHTML = "Read more";
             }
         }
+    </script>
+    <script>
+        @if (Session::has('success'))
+            alert("{{ session('success') }}");
+        @elseif (Session::has('error'))
+            alert("{{ session('error') }}");
+        @elseif (Session::has('info'))
+            alert("{{ session('info') }}");
+        @endif;
     </script>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

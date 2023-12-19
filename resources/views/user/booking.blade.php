@@ -192,10 +192,10 @@
         <div class="card-body text-center">
           <h5 class="card-title"><strong>{{ $isi['nama'] }}</strong></h5>
           <h1 class="card-title"><strong>{{ $isi['harga'] }}</strong></h1>
-          <a href="{{ url('Checkout') }}" class="btn btn-primary">Booking</a>
+          <a href="{{ route('checkout', ['event_id' => $isi['id']]) }}" class="btn btn-primary">Booking</a>
           <h6 class="card-title" style="margin-top: 30px;">Includes:</h6>
           <ul class="checklist">
-            @foreach (explode("\n", $isi['deskripsi']) as $point)
+            @foreach (explode("\r\n", $isi['deskripsi']) as $point)
             <li>{{ $point }}</li>
             @endforeach
           </ul>

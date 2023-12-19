@@ -210,14 +210,17 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="tab-content">
+                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+
                             <div class="tab-pane fade active show" id="account-general">
                                 <div class="card-body media align-items-center">
                                     <img src="https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg" alt class="d-block photo-profile">
                                     <div class="media-body ml-4">
                                         <label class="btn btn-outline-primary" id="uploadPhoto">
                                             Upload new photo
-                                            <input type="file" class="account-settings-fileinput">
+                                            <input type="file" class="account-settings-fileinput" name="image">
                                         </label> &nbsp;
                                         <button type="button" class="btn btn-default md-btn-flat">Reset</button>
                                         <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
@@ -225,35 +228,34 @@
                                 </div>
                                 <hr class="border-light m-0">
                                 <div class="card-body">
-                                    @foreach ($userProfile as $user)
                                     <div class="form-group">
                                         <label class="form-label">Username</label>
-                                        <input type="text" class="form-control mb-1" value="{{ $user['username'] }}">
+                                        <input type="text" class="form-control mb-1" value="{{ $userProfile['username'] }}" name="username">
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Email</label>
-                                        <input type="text" class="form-control" value="{{ $user['email'] }}">
+                                        <input type="text" class="form-control" value="{{ $userProfile['email'] }}" name="email">
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" value="{{ $user['password'] }}">
+                                        <input type="password" class="form-control" id="password" value="" name="password">
+                                        <div class="text-small text-danger">dont fill password if wont change password</div>
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Phone Number</label>
-                                        <input type="number" class="form-control" value="{{ $user['phone'] }}">
+                                        <input type="number" class="form-control" value="{{ $userProfile['phone'] }}" name="phoneNumber">
                                     </div>
                                     <br>
                                     <div class="d-grid gap-2 mt-3 d-md-flex justify-content-md-end">
                                         <button type="button" class="btn btn-default">Cancel</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -268,6 +270,16 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        @if (Session::has('success'))
+            alert("{{ session('success') }}");
+        @elseif (Session::has('error'))
+            alert("{{ session('error') }}");
+        @elseif (Session::has('info'))
+            alert("{{ session('info') }}");
+        @endif;
+    </script>
     <!-- /footer -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

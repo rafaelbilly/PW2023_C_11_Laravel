@@ -1,10 +1,16 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\ReviewController;
+use App\Models\Event;
+use App\Models\Review;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +24,11 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('landing');
+    $review = Review::latest()->get(); // mengambil semua data dari tabel reviews
+
+    return view('landing', [
+        'review' => $review
+    ]);
 });
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
@@ -66,281 +76,42 @@ Route::get('homepage', [HomeController::class, 'index'])->name('homepage')->midd
 //     ]);
 // });
 
-Route::get('/service', function () {
-    $birthday = URL::asset('images/birthday.jpeg');
-    $engagement = URL::asset('images/engagement.jpeg');
-    $wedding = URL::asset('images/wedding.jpeg');
+Route::middleware('auth')->group(function(){
+    Route::get('/service', [PemesananController::class, 'index'])->name('service.index');
 
-    return view('user/service', [
-        'acara' => [
-            [
-                'nama' => 'Birthday Party',
-                'gambar' => $birthday,
-                'deskripsi' => '"Rayakan momen berharga dengan pesta ulang tahun yang tak terlupakan! Kami, sebagai penyelenggara pesta ulang tahun profesional, siap membantu Anda mengatur acara yang penuh keceriaan dan kejutan."',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai',
-            ],
-            [
-                'nama' => 'Engagement',
-                'gambar' => $engagement,
-                'deskripsi' => '"Menghadirkan Momen Tak Terlupakan: Biarkan kami merencanakan pertunangan Anda dengan detail sempurna. Kami menghadirkan keajaiban dalam setiap momen."',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai',
-            ],
-            [
-                'nama' => 'Wedding Ceremony',
-                'gambar' => $wedding,
-                'deskripsi' => '"Momen Keajaiban dalam Pernikahan: Setiap momen pernikahan Anda akan dirancang dengan indah dan memiliki sentuhan keajaiban. Kami hadirkan momen berkesan',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai',
-            ]
-        ]
-    ]);
-});
+    Route::get('/booking', [PemesananController::class, 'booking'])->name('booking');
 
-Route::get('/booking', function () {
-    return view('user/booking', [
-        'booking' => [
-            [
-                'nama' => 'Birthday Party',
-                'harga' => '10JT',
-                'deskripsi' => 'Master of Ceremony
-                                Tempat acara
-                                Hiburan
-                                Dekorasi
-                                Catering
-                                Birthday Cake
-                                Photobooth
-                                Meja dan Kursi
-                                Sound System
-                                Pendaftaran dan Undangan
-                                Koordinator Acara',
-                
-            ],
-            [
-                'nama' => 'Engagement',
-                'harga' => '20JT',
-                'deskripsi' => 'Master of Ceremony
-                                Tempat acara
-                                Hiburan
-                                Dekorasi
-                                Catering
-                                Engagement Cake
-                                Photobooth
-                                Meja dan Kursi
-                                Sound System
-                                Pendaftaran dan Undangan
-                                Koordinator Acara',
-            ],
-            [
-                'nama' => 'Wedding Ceremony',
-                'harga' => '40JT',
-                'deskripsi' => 'Master of Ceremony
-                                Tempat acara
-                                Dekorasi
-                                Hiburan
-                                Dekorasi
-                                Catering
-                                Wedding Cake
-                                Meja dan Kursi untuk tamu VIP
-                                Transportasi Pengantin
-                                Fotografi dan Videografi
-                                Kamar Ganti
-                                Sound System
-                                Pendaftaran dan Undangan
-                                Koordinator Acara',
-            ],
-        ]
-    ]);
-});
+    Route::get('/contact', function () {
+        return view('user/contact');
+    });
 
-Route::get('/contact', function () {
-    return view('user/contact');
-});
+    Route::get('/myBooking', [PemesananController::class, 'myBooking'])->name('myBooking');
+    Route::delete('/myBooking/{id}', [PemesananController::class, 'destroyBooking'])->name('myBooking.destroy');
 
-Route::get('/myBooking', function () {
-    return view('user/myBooking', [
-        'myBooking' => [
-            [
-                'gambar' => 'https://i.pinimg.com/564x/95/45/f2/9545f20c9a6e0bf66eda9455370a70e7.jpg',
-                'namaAcara' => 'Wedding Ceremony',
-                'tanggal' => '31 October 2023',
-            ],
-        ]  
-    ]);
-});
+    Route::get('/userProfile', [HomeController::class, 'userProfile'])->name('userProfile');
+    Route::put('/userProfile', [HomeController::class, 'updateProfile'])->name('userProfile.update');
+    });
 
-Route::get('/userProfile', function () {
-    return view('user/userProfile', [
-        'userProfile' => [
-            [
-                'username' => 'Johnson',
-                'email' => 'johnson@gmail.com',
-                'password' => 'johnson1234',
-                'phone' => '08112233344455',
-            ],
-        ]
-    ]);
-});
+    Route::get('/DashboardAdmin', [EventController::class, 'dashboardAdmin'])->name('dashboardAdmin');
 
-Route::get('/DashboardAdmin', function () {
-    $birthday = URL::asset('images/birthday.jpeg');
-    $engagement = URL::asset('images/engagement.jpeg');
-    $wedding = URL::asset('images/wedding.jpeg');
+    Route::get('/managementEventAdmin', [EventController::class, 'index'])->name('managementEventAdmin.index');
 
-    return view('admin/DashboardAdmin', [
-        'acara2' => [
-            [
-                'nama' => 'Birthday Party',
-                'gambar' => $birthday,
-            ],
-            [
-                'nama' => 'Engagement',
-                'gambar' => $engagement,
-            ],
-            [
-                'nama' => 'Wedding Ceremony',
-                'gambar' => $wedding,
-            ]
-        ],
-        'admin' => [
-            [
-                'no' => '1',
-                'invoice' => 'SG12345',
-                'nama' => 'Sisca Kohl',
-                'price' => '40.000.000',
-                'status' => 'Lunas',
-                'keterangan' => 'lunas'
-            ],
-            [
-                'no' => '2',
-                'invoice' => 'SG67890',
-                'nama' => 'Jenni Kim',
-                'price' => '20.000.000',
-                'status' => 'Belum Lunas',
-                'keterangan' => 'belum lunas',
-            ],
-            [
-                'no' => '3',
-                'invoice' => 'SG45678',
-                'nama' => 'Kim Jisoo',
-                'price' => '30.000.000',
-                'status' => 'Lunas',
-                'keterangan' => 'lunas',
-            ],
-            [
-                'no' => '4',
-                'invoice' => 'SG34875',
-                'nama' => 'Jessica',
-                'price' => '40.000.000',
-                'status' => 'Belum Lunas',
-                'keterangan' => 'belum lunas'
-            ]
-        ]
-    ]);
-});
+    Route::get('/addNewEvents', function () {
+        return view('admin/addNewEvents');
+    });
+    Route::post('/addNewEvents', [EventController::class, 'store'])->name('addNewEvents.store');
+    Route::get('/managementEventAdmin/{id}/edit', [EventController::class, 'edit'])->name('managementEventAdmin.edit');
+    Route::put('/managementEventAdmin/{id}', [EventController::class, 'update'])->name('managementEventAdmin.update');
+    Route::delete('/managementEventAdmin/{id}', [EventController::class, 'destroy'])->name('managementEventAdmin.destroy');
 
-Route::get('/managementEventAdmin', function () {
-    $birthday = URL::asset('images/birthday.jpeg');
-    $engagement = URL::asset('images/engagement.jpeg');
-    $wedding = URL::asset('images/wedding.jpeg');
-    $exhibition = URL::asset('images/exhibition.jpeg');
-    $promotion = URL::asset('images/promotion.jpeg');
+    Route::get('/Checkout', [PemesananController::class, 'checkout'])->name('checkout');
+    Route::post('/Checkout', [PemesananController::class, 'checkoutStore'])->name('checkout.store');
 
-    return view('admin/managementEventAdmin', [
-        'event' => [
-            [
-                'gambarEvent' => $birthday,
-                'judul' => 'Birthday Party',
-                'deskripsi' => 'Rayakan momen berharga dengan pesta ulang tahun yang tak terlupakan! Kami, sebagai penyelenggara pesta ulang tahun profesional, siap membantu Anda mengatur acara yang penuh keceriaan dan kejutan.',
-                'deskripsi2' => 'Memilih Tema Apapun
-                Profesionalisme dalam Perencanaan
-                Dokumentasi dan Pemotretan
-                Melayani Layanan Tambahan
-                Budget yang Sesuai'
 
-            ],
-            [
-                'gambarEvent' => $engagement,
-                'judul' => 'Engagement',
-                'deskripsi' => 'Menghadirkan Momen Tak Terlupakan: Biarkan kami merencanakan pertunangan Anda dengan detail sempurna. Kami menghadirkan keajaiban dalam setiap momen.',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai'
-            ],
-            [
-                'gambarEvent' => $wedding,
-                'judul' => 'Wedding Ceremony',
-                'deskripsi' => 'Momen Keajaiban dalam Pernikahan: Setiap momen pernikahan Anda akan dirancang dengan indah dan memiliki sentuhan keajaiban. Kami hadirkan momen berkesan',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai'
-            ],
-            [
-                'gambarEvent' => $exhibition,
-                'judul' => 'Exhibition',
-                'deskripsi' => 'Seni merupakan ekspresi jiwa dan kreativitas yang muncul untuk mewujudkan acara pameran Anda seperti seniman lainnya',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai'
-            ],
-            [
-                'gambarEvent' => $promotion,
-                'judul' => 'Promotion',
-                'deskripsi' => 'Membantu Anda dalam menciptakan acara promosi terbaik dan dapat memberikan kesan kepada klien Anda',
-                'deskripsi2' => 'Memilih Tema Apapun
-                                Profesionalisme dalam Perencanaan
-                                Dokumentasi dan Pemotretan
-                                Melayani Layanan Tambahan
-                                Budget yang Sesuai'
-            ]
-        ]
-    ]);
-});
+    Route::get('/addReview', [ReviewController::class, 'addReview'])->name('addReview');
+    Route::post('/addReview', [ReviewController::class, 'addReviewStore'])->name('addReview.store');
 
-Route::get('/managementUser', function () {
-    $users = [];
-    for ($i = 0; $i < 10; $i++) {
-        $users[] = [
-            'name' => 'Jane Doe',
-            'work' => 'User',
-            'invoiceNumber' => 'Cell Text',
-            'phoneNumber' => 'Cell Text',
-            'email' => 'Cell Text',
-            'status' => 'Cell Text'
-        ];
-    }
+    Route::get('/myReview', [ReviewController::class, 'myReview'])->name('myReview');
 
-    return view('admin/managementUser', ['users' => $users]);
-});
-
-Route::get('/addNewEvents', function () {
-    return view('admin/addNewEvents');
-});
-
-Route::get('/Checkout', function () {
-    return view('user/Checkout');
-});
-
-Route::get('/addReview', function () {
-    return view('user/addReview');
-});
-
-Route::get('/myReview', function () {
-    return view('user/myReview');
-});
+    Route::delete('/myReview/{id}', [ReviewController::class, 'destroyReview'])->name('reviews.destroy');
+    Route::put('/myReview/{id}', [ReviewController::class, 'updateReview'])->name('review.update');

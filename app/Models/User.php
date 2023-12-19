@@ -28,6 +28,9 @@ class User extends Authenticatable
         'phone_number',
         'verify_key',
         'active',
+        'role',
+        'phoneNumber',
+        'invoiceNumber',
     ];
 
     /**

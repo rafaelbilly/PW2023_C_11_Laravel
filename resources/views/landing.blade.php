@@ -512,59 +512,14 @@
             <!-- <div class="row row-cols-1 row-cols-md-4 g-4">
                 <div class="col">
                     <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/85/20/9c/85209c9c129f191e8c7f519331115a9b.jpg" class="card-img-top" alt="...">
+                        <img src="{{ asset('/uploads/images/' . $r->event->image) }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
+                            <p class="card-text">{{ $r->review }}</p>
                             <div class="profile-details">
-                                <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=1780&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                                <img src="{{ asset('/images/Fotokosong.jpeg') }}" alt="" />
                                 <div class="name-job">
-                                    <h3 class="name">Dustin John</h3>
-                                    <h4 class="name-event">Birthday Party</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/11/c7/ac/11c7ac1394a015ed33b58e0a61de689c.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
-                            <div class="profile-details">
-                                <img src="https://i.pinimg.com/564x/17/02/cc/1702cc73b2c0bb271ed473f5783233e9.jpg" alt="" />
-                                <div class="name-job">
-                                    <h3 class="name">Franklin</h3>
-                                    <h4 class="name-event">Engagement</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/2a/cb/88/2acb882e7646978972e1871c8ef9f64f.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
-                            <div class="profile-details">
-                                <img src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?auto=format&fit=crop&q=80&w=1780&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                                <div class="name-job">
-                                    <h3 class="name">Razor</h3>
-                                    <h4 class="name-event">Wedding Ceremony</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/11/c7/ac/11c7ac1394a015ed33b58e0a61de689c.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Saya sangat terkesan dengan kreativitas dan dedikasi Semesta Group dalam menciptakan acara kami. Mereka benar-benar tahu cara membuat setiap momen istimewa.</p>
-                            <div class="profile-details">
-                                <img src="https://i.pinimg.com/564x/17/02/cc/1702cc73b2c0bb271ed473f5783233e9.jpg" alt="" />
-                                <div class="name-job">
-                                    <h3 class="name">Franklin</h3>
-                                    <h4 class="name-event">Engagement</h4>
+                                    <h3 class="name">{{ $r->user->username }}</h3>
+                                    <h4 class="name-event">{{ $r->event->nama }}</h4>
                                 </div>
                             </div>
                         </div>

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->nullable();
             $table->string('nama');
             $table->string('deskripsi');
+            $table->string('deskripsi2');
             $table->string('image');
             $table->double('harga');
             $table->timestamps();

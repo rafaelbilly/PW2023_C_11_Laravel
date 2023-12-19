@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number', 20)->nullable();
             $table->string('verify_key')->nullable();
+            $table->string('phoneNumber');
+            $table->string('invoiceNumber');
             $table->string('active')->nullable();
             $table->integer('role')->default(0);
+            $table->string('role')->default(0);
             $table->timestamps();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

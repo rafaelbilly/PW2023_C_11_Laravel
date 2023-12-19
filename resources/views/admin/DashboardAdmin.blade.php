@@ -148,7 +148,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Income (Monthly)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp 20.000.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ $data['income'] }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -165,7 +165,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             User Total</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['user'] }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-user fa-2x text-gray-300"></i>
@@ -182,7 +182,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Booking Total</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['booking'] }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -199,7 +199,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             New Order Booking</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['new_booking'] }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-cart-plus fa-2x text-gray-300"></i>
@@ -236,7 +236,7 @@
                     </tr>
                     @forelse ($admin as $item)
                     <tr>
-                        <td>{{ $item['no'] }} </td>
+                        <td>{{ $loop->iteration }} </td>
                         <td>{{ $item['invoice'] }}</td>
                         <td>{{ $item['nama'] }}</td>
                         <td>IDR {{ $item['price'] }}</td>
@@ -251,7 +251,7 @@
                     </tr>
                     @empty
                     <div class="alert alert-danger">
-                        Data Kelas masih kosong
+                        Data Pemesanan masih kosong
                     </div>
                     @endforelse
                 </table>

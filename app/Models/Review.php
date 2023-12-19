@@ -13,6 +13,7 @@ class Review extends Model
 
     protected $fillable = [
         'id_user',
+        'id_event',
         'review',
         'event',
         'image',
@@ -21,5 +22,10 @@ class Review extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'id_event');
     }
 }
