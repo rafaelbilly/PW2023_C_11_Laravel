@@ -216,7 +216,7 @@
 
                             <div class="tab-pane fade active show" id="account-general">
                                 <div class="card-body media align-items-center">
-                                    <img src="https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg" alt class="d-block photo-profile">
+                                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" alt class="d-block photo-profile">
                                     <div class="media-body ml-4">
                                         <label class="btn btn-outline-primary" id="uploadPhoto">
                                             Upload new photo
@@ -271,7 +271,7 @@
         </div>
     </footer>
 
-    <script>
+    <!-- <script>
         @if (Session::has('success'))
             alert("{{ session('success') }}");
         @elseif (Session::has('error'))
@@ -279,7 +279,7 @@
         @elseif (Session::has('info'))
             alert("{{ session('info') }}");
         @endif;
-    </script>
+    </script> -->
     <!-- /footer -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

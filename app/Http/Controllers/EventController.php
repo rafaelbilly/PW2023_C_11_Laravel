@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Pemesanan;
 use App\Models\User;
-use App\Models\Event;
-use App\Models\Pemesanan;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -15,26 +12,26 @@ class EventController extends Controller
 {
     public function dashboardAdmin()
     {
-        $acara2Data = Event::latest()->get(); 
+        $acara2Data = Event::latest()->get(); // mengambil semua data dari tabel events
 
-        $acara2 = $acara2Data->map(function ($e) { 
+        $acara2 = $acara2Data->map(function ($e) { // mengubah data yang diambil menjadi array
             return [
-                'nama' => $e->nama, 
-                'gambar' => asset('uploads/images/' . $e->image), 
+                'nama' => $e->nama, // mengambil nama dari tabel events
+                'gambar' => asset('uploads/images/' . $e->image), // mengambil gambar dari folder uploads/images
             ];
-        })->take(4)->toArray(); 
+        })->take(4)->toArray(); // mengubah data yang diambil menjadi array
 
-        $pemesananData = Pemesanan::latest()->get(); 
+        $pemesananData = Pemesanan::latest()->get(); // mengambil semua data dari tabel pemesanans
 
-        $admin = $pemesananData->map(function ($p) { 
+        $admin = $pemesananData->map(function ($p) { // mengubah data yang diambil menjadi array
             return [
-                'invoice' => $p->invoice, 
-                'nama' => $p->user->username, 
-                'price' => $p->total_biaya, 
-                'status' => ucfirst($p->status), 
-                'keterangan' => $p->status, 
+                'invoice' => $p->invoice, // mengambil invoice dari tabel pemesanans
+                'nama' => $p->user->username, // mengambil nama dari tabel pemesanans
+                'price' => $p->total_biaya, // mengambil total_biaya dari tabel pemesanans
+                'status' => ucfirst($p->status), // mengambil status dari tabel pemesanans
+                'keterangan' => $p->status, // mengambil keterangan dari tabel pemesanans
             ];
-        })->toArray(); 
+        })->toArray(); // mengubah data yang diambil menjadi array
 
         $data = [
             'income' => Pemesanan::where('status', 'lunas')->sum('total_biaya'),
@@ -52,24 +49,24 @@ class EventController extends Controller
 
     public function index(Request $request)
     {
-        $eventData = Event::latest()->get(); 
+        $eventData = Event::latest()->get(); // mengambil semua data dari tabel events
 
-        if ($request->filled('keyword')) { 
-            $eventData = Event::where('nama', 'like', "%{$request->keyword}%") 
-                ->orWhere('deskripsi', 'like', "%{$request->keyword}%") 
-                ->orWhere('deskripsi2', 'like', "%{$request->keyword}%")
-                ->latest()->get(); 
+        if ($request->filled('keyword')) { // mengecek apakah ada parameter keyword
+            $eventData = Event::where('nama', 'like', "%{$request->keyword}%") // mengambil data berdasarkan nama
+                ->orWhere('deskripsi', 'like', "%{$request->keyword}%") // mengambil data berdasarkan deskripsi
+                ->orWhere('deskripsi2', 'like', "%{$request->keyword}%") // mengambil data berdasarkan deskripsi2
+                ->latest()->get(); // mengambil semua data dari tabel events
         }
 
-        $event = $eventData->map(function ($e) { 
+        $event = $eventData->map(function ($e) { // mengubah data yang diambil menjadi array
             return [
-                'id' => $e->id,
-                'gambarEvent' => asset('uploads/images/' . $e->image), 
-                'judul' => $e->nama, 
-                'deskripsi' => $e->deskripsi, 
-                'deskripsi2' => $e->deskripsi2, 
+                'id' => $e->id, // mengambil id dari tabel events
+                'gambarEvent' => asset('uploads/images/' . $e->image), // mengambil gambar dari folder uploads/images
+                'judul' => $e->nama, // mengambil nama dari tabel events
+                'deskripsi' => $e->deskripsi, // mengambil deskripsi dari tabel events
+                'deskripsi2' => $e->deskripsi2, // mengambil deskripsi2 dari tabel events
             ];
-        })->toArray(); 
+        })->toArray(); // mengubah data yang diambil menjadi array
 
         return view('admin/managementEventAdmin', compact('event'));
     }
@@ -77,13 +74,13 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $validated = $request->all() + [
-            'id_user' => auth()->id(), 
+            'id_user' => auth()->id(), // mengambil id user yang sedang login
             'created_at' => now(),
-        ]; 
+        ]; // mengambil semua data dari form
 
-        if($request->hasFile('image')){
-            $fileName = time() . '.' . $request->image->extension();
-            $validated['image'] = $fileName; 
+        if ($request->hasFile('image')) {
+            $fileName = time() . '.' . $request->image->extension(); // membuat nama file unik
+            $validated['image'] = $fileName; // menambahkan data image ke dalam array $validated
 
             // move file
             $request->image->move(public_path('uploads/images'), $fileName); 
@@ -91,7 +88,7 @@ class EventController extends Controller
 
         $event = Event::create($validated); 
 
-        return redirect('/managementEventAdmin')->with('success', 'Event berhasil ditambahkan'); 
+        return redirect('/managementEventAdmin')->with('success', 'Event berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -111,7 +108,7 @@ class EventController extends Controller
 
         $validated['image'] = $event->image; 
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $fileName = time() . '.' . $request->image->extension(); 
             $validated['image'] = $fileName; 
 
@@ -119,8 +116,8 @@ class EventController extends Controller
             $request->image->move(public_path('uploads/images'), $fileName); 
 
             // delete old file
-            $oldPath = public_path('/uploads/images/'.$event->image); 
-            if(file_exists($oldPath) && $event->image != 'image.png'){ 
+            $oldPath = public_path('/uploads/images/' . $event->image); 
+            if (file_exists($oldPath) && $event->image != 'image.png') { 
                 unlink($oldPath);
             }
         }
@@ -133,12 +130,12 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id); 
-        $oldPath = public_path('/uploads/images/'.$event->image); 
-        if(file_exists($oldPath) && $event->image != 'image.png'){ 
+        $oldPath = public_path('/uploads/images/' . $event->image); 
+        if (file_exists($oldPath) && $event->image != 'image.png') { 
             unlink($oldPath); 
         }
         $event->delete(); 
 
-        return redirect('/managementEventAdmin')->with('success', 'Event berhasil dihapus'); 
+        return redirect('/managementEventAdmin')->with('success', 'Event berhasil dihapus');
     }
 }

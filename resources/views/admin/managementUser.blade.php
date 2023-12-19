@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
 
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         body {
             font-family: "Inter", sans-serif;
@@ -72,13 +70,18 @@
         }
 
         footer {
-            margin-top: 100px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
             background-color: #303030;
             min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 400;
         }
 
         footer p {
@@ -106,8 +109,7 @@
     <div class="wrapper">
         <nav class="navbar bg-dark fixed-top">
             <div class="container-fluid">
-                <button class="navbar-toggler" data-bs-theme="dark" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" data-bs-theme="dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -116,8 +118,7 @@
         </nav>
 
         <!-- Sidebar -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <div class="d-grid gap-2">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Semesta Group</h5>
@@ -172,8 +173,7 @@
                         <table class="table mb-5">
                             <tr class="table-secondary">
                                 <th>
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 </th>
                                 <th>Name</th>
                                 <th>Invoice Number</th>
@@ -184,130 +184,96 @@
                             </tr>
 
                             @foreach ($users as $key => $user)
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault"></td>
-                                    <td>
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img src="{{ asset('images/Fotokosong.jpeg') }}"
-                                                    class="img-fluid rounded-circle"
-                                                    style="width: 50px; height: 50px;" alt="Profile Picture">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h5 class="card-title">{{ $user['name'] }}</h5>
-                                                <p class="card-text">{{ $user['work'] }}</p>
-                                            </div>
+                            <tr>
+                                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+                                <td>
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('images/Fotokosong.jpeg') }}" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" alt="Profile Picture">
                                         </div>
-                                    </td>
-                                    <td>{{ $user['invoiceNumber'] }}</td>
-                                    <td>{{ $user['phoneNumber'] }}</td>
-                                    <td>{{ $user['email'] }}</td>
-                                    <td>{{ $user['status'] }}</td>
-                                    <td>
-                                        <div class="button-group">
-                                            <span class="badge rounded-pill text-bg-light">
-                                                <a href="#" class="btn" data-bs-toggle="modal"
-                                                    data-bs-target="#modal{{ $key }}">
-                                                    <i class="fas fa-pencil-alt pencil-icon"></i>
-                                                </a>
-                                                <form action="{{ route('managementUser.update', $user['id']) }}" method="POST" style="display: inline">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div class="modal fade" id="modal{{ $key }}" tabindex="-1"
-                                                        aria-labelledby="modalTitle{{ $key }}"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5"
-                                                                        id="modalTitle{{ $key }}">Details
-                                                                        User</h1>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body" style="text-align: left;">
-                                                                    <div class="row g-0">
-                                                                        <div class="col-md-4">
-                                                                            <img src="{{ asset('images/Fotokosong.jpeg') }}"
-                                                                                class="img-fluid rounded-circle"
-                                                                                style="width: 60px; height: 60px;"
-                                                                                alt="Profile Picture">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">{{ $user['name'] }}</h5>
+                                            <p class="card-text">{{ $user['work'] }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ $user['invoiceNumber'] }}</td>
+                                <td>{{ $user['phoneNumber'] }}</td>
+                                <td>{{ $user['email'] }}</td>
+                                <td>{{ $user['status'] }}</td>
+                                <td>
+                                    <div class="button-group">
+                                        <span class="badge rounded-pill text-bg-light">
+                                            <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal{{ $key }}">
+                                                <i class="fas fa-pencil-alt pencil-icon"></i>
+                                            </a>
+                                            <form action="{{ route('managementUser.update', $user['id']) }}" method="POST" style="display: inline">
+                                                @csrf
+                                                @method('put')
+                                                <div class="modal fade" id="modal{{ $key }}" tabindex="-1" aria-labelledby="modalTitle{{ $key }}" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="modalTitle{{ $key }}">Details
+                                                                    User</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body" style="text-align: left;">
+                                                                <div class="row g-0">
+                                                                    <div class="col-md-4">
+                                                                        <img src="{{ asset('images/Fotokosong.jpeg') }}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Profile Picture">
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="mb-3">
+                                                                            <label for="nameInput" class="form-label">Name</label>
+                                                                            <input type="text" class="form-control" id="nameInput" name="username" value="{{ $user['name'] }}">
                                                                         </div>
-                                                                        <div class="col-md-8">
-                                                                                <div class="mb-3">
-                                                                                    <label for="nameInput"
-                                                                                        class="form-label">Name</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="nameInput"
-                                                                                        name="username"
-                                                                                        value="{{ $user['name'] }}">
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="invoiceInput"
-                                                                                        class="form-label">Invoice
-                                                                                        Number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="invoiceInput"
-                                                                                        name="invoiceNumber"
-                                                                                        value="{{ $user['invoiceNumber'] }}">
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="phoneInput"
-                                                                                        class="form-label">Phone
-                                                                                        Number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="phoneInput"
-                                                                                        name="phoneNumber"
-                                                                                        value="{{ $user['phoneNumber'] }}">
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="emailInput"
-                                                                                        class="form-label">Email</label>
-                                                                                    <input type="email"
-                                                                                        class="form-control"
-                                                                                        id="emailInput"
-                                                                                        name="email"
-                                                                                        value="{{ $user['email'] }}">
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="statusInput" class="form-label">Status</label>
-                                                                                    <select class="form-select" id="statusInput" name="status">
-                                                                                        @foreach (['active' => 'Active', 'inactive' => 'Inactive'] as $value => $label)
-                                                                                            <option value="{{ $value }}" {{ $user['status'] == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="invoiceInput" class="form-label">Invoice
+                                                                                Number</label>
+                                                                            <input type="text" class="form-control" id="invoiceInput" name="invoiceNumber" value="{{ $user['invoiceNumber'] }}">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="phoneInput" class="form-label">Phone
+                                                                                Number</label>
+                                                                            <input type="text" class="form-control" id="phoneInput" name="phoneNumber" value="{{ $user['phoneNumber'] }}">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="emailInput" class="form-label">Email</label>
+                                                                            <input type="email" class="form-control" id="emailInput" name="email" value="{{ $user['email'] }}">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="statusInput" class="form-label">Status</label>
+                                                                            <select class="form-select" id="statusInput" name="status">
+                                                                                @foreach (['active' => 'Active', 'inactive' => 'Inactive'] as $value => $label)
+                                                                                <option value="{{ $value }}" {{ $user['status'] == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Save
-                                                                        Changes</button>
-                                                                </div>
                                                             </div>
-
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                    Changes</button>
+                                                            </div>
                                                         </div>
+
                                                     </div>
-                                                </form>
-                                                <form action="{{ route('managementUser.destroy', $user['id']) }}" method="post" style="display: inline;">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn">
-                                                        <i class="fas fa-trash-alt trash-can"></i>
-                                                    </button>
-                                                </form>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                </div>
+                                            </form>
+                                            <form action="{{ route('managementUser.destroy', $user['id']) }}" method="post" style="display: inline;">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn">
+                                                    <i class="fas fa-trash-alt trash-can"></i>
+                                                </button>
+                                            </form>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
                             @endforeach
                         </table>
                     </div>
@@ -334,19 +300,18 @@
     <!-- /footer -->
 
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <script src="{{ asset('js/adminlte.min.js') }}"></script>
-    <script>
-        @if (Session::has('success'))
-            alert("{{ session('success') }}");
-        @elseif (Session::has('error'))
-            alert("{{ session('error') }}");
-        @elseif (Session::has('info'))
-            alert("{{ session('info') }}");
+    <!-- <script>
+        @if(Session::has('success'))
+        alert("{{ session('success') }}");
+        @elseif(Session::has('error'))
+        alert("{{ session('error') }}");
+        @elseif(Session::has('info'))
+        alert("{{ session('info') }}");
         @endif;
-    </script>
+    </script> -->
 </body>
 
 </html>

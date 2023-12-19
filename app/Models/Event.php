@@ -14,6 +14,7 @@ class Event extends Model
     protected $fillable = [
         'nama',
         'id_user',
+        'id_event',
         'deskripsi',
         'deskripsi2',
         'image',
@@ -23,5 +24,10 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'id_event');
     }
 }

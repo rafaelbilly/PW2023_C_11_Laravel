@@ -27,6 +27,7 @@ class RegisterController extends Controller
             'phone_number' => $request->phone_number,
             'verify_key' => $str,
             'role' => 0,
+            'image' => null,
         ]);
         
         $details = [

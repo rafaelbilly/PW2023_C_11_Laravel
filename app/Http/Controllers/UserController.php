@@ -13,28 +13,27 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::latest() // Query untuk mengambil data user
+        $users = User::latest()
             ->select(
                 'id',
                 'username as name',
                 'role as work',
                 'invoiceNumber',
-                'phoneNumber',
+                'phone_number',
                 'email',
                 DB::raw('CASE WHEN active = 1 THEN "active" ELSE "inactive" END as status')
             );
 
-        if ($request->filled('keyword')) { // Jika terdapat keyword pencarian pada request
+        if ($request->filled('keyword')) { 
             $keyword = $request->keyword;
 
-            $users = $users->where(function ($query) use ($keyword) { // Query untuk melakukan filter data berdasarkan keyword
+            $users = $users->where(function ($query) use ($keyword) { 
                 $query->where('username', 'like', "%$keyword%")
                     ->orWhere('email', 'like', "%$keyword%")
-                    ->orWhere('phoneNumber', 'like', "%$keyword%")
+                    ->orWhere('phone_number', 'like', "%$keyword%")
                     ->orWhere('invoiceNumber', 'like', "%$keyword%")
                     ->orWhere('role', 'like', "%$keyword%")
                     ->orWhere(function ($query) use ($keyword) {
-                        // Format keyword yang sesuai dengan kondisi status
                         $statusKeyword = in_array(strtolower($keyword), ['active', 'Active']) ? 1 : (in_array(strtolower($keyword), ['inactive', 'Inactive']) ? 0 : null);
                         if ($statusKeyword !== null) {
                             $query->where('active', $statusKeyword);
@@ -43,43 +42,42 @@ class UserController extends Controller
             });
         }
 
-        $users = $users->paginate(10); // Pagination data
+        $users = $users->paginate(10);
 
-        return view('admin/managementUser', ['users' => $users]); // Mengirim data user ke view
+        return view('admin/managementUser', ['users' => $users]); 
     }
 
     public function create()
     {
-        return view('admin/addNewUser'); // Menampilkan halaman tambah user
+        return view('admin/addNewUser'); 
     }
 
     public function store(Request $request)
     {
-        // check if username already exists
         $username = User::where('username', $request->username)->first();
 
-        if ($username) return redirect('/managementUser')->with('error', 'Username already exists!'); // Redirect ke halaman management user
+        if ($username) return redirect('/managementUser')->with('error', 'Username already exists!');
 
         $request->validate([
             'username' => 'required',
             'password' => 'required',
             'email' => 'required',
             'role' => 'required',
-            'phoneNumber' => 'required',
+            'phone_number' => 'required',
             'invoiceNumber' => 'required',
-        ]); // Validasi data
+        ]); 
 
         User::create([
             'username' => $request->username,
-            'password' => Hash::make($request->password), // Enkripsi password
+            'password' => Hash::make($request->password), 
             'email' => $request->email,
             'role' => $request->role,
-            'phoneNumber' => $request->phoneNumber,
+            'phone_number' => $request->phoneNumber,
             'invoiceNumber' => $request->invoiceNumber,
             'active' => 0,
-        ]); // Query untuk menambahkan data user
+        ]); 
 
-        return redirect('/managementUser')->with('success', 'New user has been added!'); // Redirect ke halaman management user
+        return redirect('/managementUser')->with('success', 'New user has been added!'); 
     }
 
     public function update(Request $request, $id)
@@ -87,19 +85,19 @@ class UserController extends Controller
         $user = User::find($id);
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->phoneNumber = $request->phoneNumber;
+        $user->phone_number = $request->phoneNumber;
         $user->invoiceNumber = $request->invoiceNumber;
-        $user->active = $request->status == 'active' ? 1 : 0; // Jika status active maka active = 1, jika inactive maka active = 0
-        $user->save(); // Query untuk mengupdate data user
+        $user->active = $request->status == 'active' ? 1 : 0;
+        $user->save(); 
 
-        return redirect('/managementUser')->with('success', 'User has been updated!'); // Redirect ke halaman management user
+        return redirect('/managementUser')->with('success', 'User has been updated!'); 
     }
 
     public function destroy($id)
     {
-        $user = User::find($id); // Query untuk mengambil data user
-        $user->delete(); // Query untuk menghapus data user
+        $user = User::find($id); 
+        $user->delete(); 
 
-        return redirect('/managementUser')->with('success', 'User has been deleted!'); // Redirect ke halaman management user
+        return redirect('/managementUser')->with('success', 'User has been deleted!'); 
     }
 }

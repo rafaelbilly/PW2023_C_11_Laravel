@@ -32,8 +32,6 @@
       background-color: #F0F0F0;
     }
 
-
-
     .navbar {
       position: fixed;
       width: 100%;
@@ -74,7 +72,9 @@
     }
 
     footer {
-      margin-top: 70px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       background-color: #303030;
       min-height: 100px;
       display: flex;

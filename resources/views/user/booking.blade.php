@@ -75,14 +75,19 @@
       margin-top: 10px;
     }
 
-    footer {
-      margin-top: 100px;
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       background-color: #303030;
       min-height: 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 400;
     }
 
     footer p {

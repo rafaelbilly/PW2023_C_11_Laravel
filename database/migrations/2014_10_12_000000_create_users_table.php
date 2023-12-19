@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone_number', 20)->nullable();
             $table->string('verify_key')->nullable();
             $table->string('invoiceNumber')->nullable();
+            $table->string('image')->nullable();
             $table->string('active')->nullable();
             $table->string('role')->default(0);
             $table->timestamps();

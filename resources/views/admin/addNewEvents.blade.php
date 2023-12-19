@@ -147,16 +147,25 @@
                                             <input type="number" class="form-control" id="price" required name="harga">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mb-4 row">
-                                    <label for="description" class="col-sm-2 col-form-label">Description</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                                    <div class="mb-4 row">
+                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="button-add">
-                                    <a href="{{ url('addNewEvents') }}" class="btn btn-primary" onclick="showAlert()">Save</a>
-                                </div>
+
+                                    <div class="mb-4 row">
+                                        <label for="description" class="col-sm-2 col-form-label">Item Detail (description 2)</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi2" placeholder="separate with a new line"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-add">
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -174,7 +183,7 @@
         </div>
     </footer>
     <!-- /footer -->
-    <script>
+    <!-- <script>
         function showAlert() {
             var message = 'Success Add New Event to Dashboard!';
             var type = 'success';
@@ -188,7 +197,7 @@
         @elseif (Session::has('info'))
             alert("{{ session('info') }}");
         @endif;
-    </script>
+    </script> -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>

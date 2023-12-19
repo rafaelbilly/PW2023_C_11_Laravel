@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $review = Review::latest()->get(); // mengambil semua data dari tabel reviews
+        $review = Review::latest()->get(); 
 
         return view('user.homepage', [
             'review' => $review
@@ -24,7 +24,7 @@ class HomeController extends Controller
             'username' => auth()->user()->username,
             'email' => auth()->user()->email,
             'password' => auth()->user()->password,
-            'phone' => auth()->user()->phoneNumber,
+            'phone' => auth()->user()->phone_number,
         ];
 
         return view('user.userProfile', [
@@ -42,16 +42,14 @@ class HomeController extends Controller
 
         $validated['image'] = $user->image;
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $fileName = time() . '.' . $request->image->extension();
             $validated['image'] = $fileName;
 
-            // move file
             $request->image->move(public_path('uploads/images'), $fileName);
 
-            // delete old file
-            $oldPath = public_path('/uploads/images/'.$user->image);
-            if(file_exists($oldPath) && $user->image != 'image.png'){
+            $oldPath = public_path('/uploads/images/' . $user->image);
+            if (file_exists($oldPath) && is_file($oldPath) && $user->image != 'image.png') {
                 unlink($oldPath);
             }
         }

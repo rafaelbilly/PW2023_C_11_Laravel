@@ -24,35 +24,33 @@ class UserEventController extends Controller
 
     public function index()
     {
-        $eventData = Event::latest()->get(); // mengambil semua data dari tabel events
-
-        $acara = $eventData->map(function ($e) { // mengubah data yang diambil menjadi array
+        $eventData = Event::latest()->get(); 
+        $acara = $eventData->map(function ($e) { 
             return [
-                'id' => $e->id, // mengambil id dari tabel events
-                'gambar' => asset('uploads/images/' . $e->image), // mengambil gambar dari folder uploads/images
-                'nama' => $e->nama, // mengambil nama dari tabel events
-                'deskripsi' => $e->deskripsi, // mengambil deskripsi dari tabel events
-                'deskripsi2' => $e->deskripsi2, // mengambil deskripsi2 dari tabel events
+                'id' => $e->id, 
+                'gambar' => asset('uploads/images/' . $e->image), 
+                'nama' => $e->nama, 
+                'deskripsi' => $e->deskripsi, 
+                'deskripsi2' => $e->deskripsi2, 
             ];
-        })->toArray(); // mengubah data yang diambil menjadi array
+        })->toArray(); 
 
         return view('user/service', compact('acara'));
     }
 
     public function booking()
     {
-        $eventData = Event::latest()->get(); // mengambil semua data dari tabel events
-
-        $booking = $eventData->map(function ($e) { // mengubah data yang diambil menjadi array
+        $eventData = Event::latest()->get(); 
+        $booking = $eventData->map(function ($e) { 
             return [
-                'id' => $e->id, // mengambil id dari tabel events
-                'gambar' => asset('uploads/images/' . $e->image), // mengambil gambar dari folder uploads/images
-                'nama' => $e->nama, // mengambil nama dari tabel events
-                'harga' => $e->harga, // mengambil harga dari tabel events
-                'deskripsi' => $e->deskripsi, // mengambil deskripsi dari tabel events
-                'deskripsi2' => $e->deskripsi2, // mengambil deskripsi2 dari tabel events
+                'id' => $e->id, 
+                'gambar' => asset('uploads/images/' . $e->image), 
+                'nama' => $e->nama, 
+                'harga' => $e->harga, 
+                'deskripsi' => $e->deskripsi, 
+                'deskripsi2' => $e->deskripsi2, 
             ];
-        })->toArray(); // mengubah data yang diambil menjadi array
+        })->toArray(); 
 
         return view('user/booking', [
             'booking' => $booking
@@ -75,7 +73,6 @@ class UserEventController extends Controller
 
     public function checkoutStore(Request $request)
     {
-        // check if user have invoice number
         if (auth()->user()->invoiceNumber) return redirect('/myBooking')->with('error', 'Anda sudah melakukan pemesanan.');
 
         $event = Event::find($request->event_id);
