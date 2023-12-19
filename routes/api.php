@@ -23,4 +23,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Route::get('/pemesanans', [App\Http\Controllers\Api\PemesananController::class, 'show']);
     // Route::put('/pemesanans/{id}', [App\Http\Controllers\Api\PemesananController::class, 'update']);
     // Route::delete('/pemesanans/{id}', [App\Http\Controllers\Api\PemesananController::class, 'destroy']);
+
+    Route::get('/reviews', [App\Http\Controllers\Api\ReviewController::class, 'index']);
+    Route::post('/reviews', [App\Http\Controllers\Api\ReviewController::class, 'store']);
+    Route::get('/reviews/{id}', [App\Http\Controllers\Api\ReviewController::class, 'show']);
+    Route::put('/reviews/{id}', [App\Http\Controllers\Api\ReviewController::class, 'update']);
+    Route::delete('/reviews/{id}', [App\Http\Controllers\Api\ReviewController::class, 'destroy']);
 });

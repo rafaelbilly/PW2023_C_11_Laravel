@@ -71,6 +71,24 @@ class PemesananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pemesanans = Pemesanan::find($id);
+
+        if (is_null($pemesanans)) {
+            return response([
+                'message' => 'Pemesanan Not Found',
+                'data' => null
+            ], 404);
+        }
+
+        if ($pemesanans->delete()) {
+            return response([
+                'message' => 'Delete Content Success',
+                'data' => $pemesanans
+            ], 200);
+        }
+        return response([
+            'message' => 'Delete Pemesanan Failed',
+            'data' => null
+        ], 400);
     }
 }

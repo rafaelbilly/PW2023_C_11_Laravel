@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ReviewController extends Controller
 {
@@ -12,7 +16,19 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::all();
+
+        if (count($reviews) > 0) {
+            return response([
+                'message' => 'Retrieve All Review',
+                'data' => $reviews
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Review Empty',
+            'data' => null,
+        ], 400);
     }
 
     /**
@@ -20,15 +36,56 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeData = $request->all();
+
+        $validate = Validator::make($storeData, [
+            'id_user' => 'required|exists:users,id',
+            'review' => 'required',
+            'event' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($validate->fails()) {
+            return response(['message' => $validate->errors()], 400);
+        }
+
+        $user = User::find($storeData['id_user']);
+        if (!$user) {
+            return response(['message' => 'User not found'], 400);
+        }
+
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+
+        $image->move(public_path('images'), $imageName);
+        $storeData['image'] = $imageName;
+        $review = Review::create($storeData);
+
+        return response([
+            'message' => 'Add Review Success',
+            'data' => $review,
+        ], 200);
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $reviews = Review::find($id);
+
+        if (!is_null($reviews)) {
+            return response([
+                'message' => 'Review found',
+                'data' => $reviews
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Review Not Found',
+            'data' => null
+        ], 404);
     }
 
     /**
@@ -44,6 +101,24 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $reviews = Review::find($id);
+
+        if (is_null($reviews)) {
+            return response([
+                'message' => 'Review Not Found',
+                'data' => null
+            ], 404);
+        }
+
+        if ($reviews->delete()) {
+            return response([
+                'message' => 'Delete Review Success',
+                'data' => $reviews
+            ], 200);
+        }
+        return response([
+            'message' => 'Delete Review Failed',
+            'data' => null
+        ], 400);
     }
 }
