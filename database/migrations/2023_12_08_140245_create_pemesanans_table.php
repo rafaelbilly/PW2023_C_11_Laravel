@@ -18,6 +18,12 @@ return new class extends Migration
             $table->integer('jmlOrder');
             $table->dateTime('tanggalPemesanan');
             $table->double('total_biaya');
+            $table->string('invoice');
+            $table->string('payment_type');
+            $table->string('cardholder_name');
+            $table->string('card_number');
+            $table->string('card_cvc');
+            $table->string('card_exp');
             $table->string('status');
             $table->timestamps();
         });
