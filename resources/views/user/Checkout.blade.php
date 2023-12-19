@@ -30,6 +30,35 @@
             height: 80px;
             background-color: #F0F0F0;
         }
+
+        footer {
+            margin-top: 100px;
+            background-color: #303030;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        footer p {
+            text-align: left;
+            line-height: 100px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        footer p a {
+            color: #fff;
+            transition: all .3s;
+            position: relative;
+            z-index: 3;
+        }
+
+        footer p a:hover {
+            opacity: 0.75;
+        }
     </style>
 </head>
 
@@ -73,7 +102,7 @@
                                 <div class="dropdown-divider"></div>
                                 <div>
                                     <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
-                                    <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                                    <a class="dropdown-item" href="{{ route('actionLogout') }}" style="color: #ff0000;"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i> Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -84,7 +113,7 @@
     </nav>
 
     <!-- Checkout -->
-    <div class="container">
+    <div class="container" style="flex: 1;">
         <h1 style="margin-top: 100px"><strong>Checkout</strong></h1>
 
         <form class="row" style="margin-top: 30px;" method="POST" action="{{ route('checkout.store') }}">
@@ -203,38 +232,48 @@
                 </div>
             </div>
         </form>
+    </div>
 
-        <script>
-            function showAlert() {
-                var message = 'Your Order Success Submit!';
-                var type = 'success';
-                alert(message, type);
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="col-lg-8">
+                <p>SemestaGroup @ 2023. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showAlert() {
+            var message = 'Your Order Success Submit!';
+            var type = 'success';
+            alert(message, type);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var cashOnDeliveryRadio = document.getElementById('flexRadioDefault1');
+            var creditOrDebitRadio = document.getElementById('flexRadioDefault2');
+            var detailPayment = document.getElementById('detail-payment');
+
+            function toggleDetailPayment() {
+                detailPayment.style.display = creditOrDebitRadio.checked ? 'block' : 'none';
+
+                // Setiap kali terjadi perubahan, atur properti required untuk input Card
+                var cardInputs = detailPayment.querySelectorAll('[name^="card"]');
+                cardInputs.forEach(function(input) {
+                    input.required = creditOrDebitRadio.checked;
+                });
             }
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var cashOnDeliveryRadio = document.getElementById('flexRadioDefault1');
-                var creditOrDebitRadio = document.getElementById('flexRadioDefault2');
-                var detailPayment = document.getElementById('detail-payment');
 
-                function toggleDetailPayment() {
-                    detailPayment.style.display = creditOrDebitRadio.checked ? 'block' : 'none';
+            cashOnDeliveryRadio.addEventListener('change', toggleDetailPayment);
+            creditOrDebitRadio.addEventListener('change', toggleDetailPayment);
 
-                    // Setiap kali terjadi perubahan, atur properti required untuk input Card
-                    var cardInputs = detailPayment.querySelectorAll('[name^="card"]');
-                    cardInputs.forEach(function (input) {
-                        input.required = creditOrDebitRadio.checked;
-                    });
-                }
+            toggleDetailPayment();
+        });
+    </script>
 
-                cashOnDeliveryRadio.addEventListener('change', toggleDetailPayment);
-                creditOrDebitRadio.addEventListener('change', toggleDetailPayment);
-
-                toggleDetailPayment(); // Saat halaman dimuat, sesuaikan tampilan detail pembayaran
-            });
-        </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

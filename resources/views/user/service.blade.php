@@ -72,9 +72,7 @@
     }
 
     footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      margin-top: 100px;
       background-color: #303030;
       min-height: 100px;
       display: flex;
@@ -168,8 +166,8 @@
               </div>
               <div class="dropdown-divider"></div>
               <div>
-                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
+                <a class="dropdown-item" href="{{ route('actionLogout') }}" style="color: #ff0000;"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i> Logout</a>
               </div>
             </div>
           </li>

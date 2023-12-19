@@ -19,7 +19,7 @@ class AuthController extends Controller
         $validate = Validator::make($registrationData, [
             'username' => 'required|max:60',
             'email' => 'required|email:rfc,dns|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|min:5',
             // 'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
         if ($validate->fails()) {

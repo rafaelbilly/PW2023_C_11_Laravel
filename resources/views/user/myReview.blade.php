@@ -158,7 +158,7 @@
                             <div class="dropdown-divider"></div>
                             <div>
                                 <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
-                                <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                                <a class="dropdown-item" href="{{ route('actionLogout') }}" style="color: #ff0000;"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i> Logout</a>
                             </div>
                         </div>
                     </li>
@@ -186,71 +186,71 @@
                                 <div class="card-body media align-items-center">
                                     <div class="media-body ml-4 d-flex flex-wrap">
                                         @forelse ($myReview as $r)
-                                            <div class="card mb-4" style="width: 18rem; margin-right: 0.5rem;">
-                                                <img src="{{ $r['gambar'] }}" class="card-img-top" alt="...">
-                                                <div class="card-body media align-items-center">
-                                                    <h5 class="card-title text-center">{{ $r['namaAcara'] }}</h5>
-                                                    <p class="card-text text-center">{{ $r['review'] }}</p>
-                                                    <div class="text-center mt-4">
-                                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editReviewModal{{ $r['id'] }}">Edit</button>
+                                        <div class="card mb-4" style="width: 18rem; margin-right: 0.5rem;">
+                                            <img src="{{ $r['gambar'] }}" class="card-img-top" alt="...">
+                                            <div class="card-body media align-items-center">
+                                                <h5 class="card-title text-center">{{ $r['namaAcara'] }}</h5>
+                                                <p class="card-text text-center">{{ $r['review'] }}</p>
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editReviewModal{{ $r['id'] }}">Edit</button>
 
-                                                        <form action="{{ route('reviews.destroy', $r['id']) }}" method="post" style="display: inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('hapus review ini?')">Delete</button>
-                                                        </form>
+                                                    <form action="{{ route('reviews.destroy', $r['id']) }}" method="post" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('hapus review ini?')">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Edit Review Modal -->
+                                        <form class="modal fade" id="editReviewModal{{ $r['id'] }}" tabindex="-1" role="dialog" aria-bs-labelledby="editReviewModalLabel" aria-bs-hidden="true" action="{{ route('review.update', $r['id']) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editReviewModalLabel">Edit Review</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-bs-label="Close">
+                                                            <span aria-bs-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-3 row">
+                                                            <label for="inputReview" class="col-sm-2 col-form-label">Review</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3">{{ $r['review'] }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <label for="inputEvent" class="col-sm-2 col-form-label">Event</label>
+                                                            <div class="col-sm-10">
+                                                                <select id="inputEvent" class="form-select" name="id_event">
+                                                                    <option value="">Pilih Event</option>
+                                                                    @foreach ($event as $e)
+                                                                    <option value="{{ $e->id }}" @if ($r['namaAcara']==$e->nama)
+                                                                        selected
+                                                                        @endif>{{ $e->nama }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <!-- Edit Review Modal -->
-                                            <form class="modal fade" id="editReviewModal{{ $r['id'] }}" tabindex="-1" role="dialog" aria-bs-labelledby="editReviewModalLabel" aria-bs-hidden="true" action="{{ route('review.update', $r['id']) }}" method="post">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="editReviewModalLabel">Edit Review</h5>
-                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-bs-label="Close">
-                                                                <span aria-bs-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="mb-3 row">
-                                                                <label for="inputReview" class="col-sm-2 col-form-label">Review</label>
-                                                                <div class="col-sm-10">
-                                                                    <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3">{{ $r['review'] }}</textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 row">
-                                                                <label for="inputEvent" class="col-sm-2 col-form-label">Event</label>
-                                                                <div class="col-sm-10">
-                                                                    <select id="inputEvent" class="form-select" name="id_event">
-                                                                        <option value="">Pilih Event</option>
-                                                                        @foreach ($event as $e)
-                                                                            <option value="{{ $e->id }}" @if ($r['namaAcara'] == $e->nama)
-                                                                                selected
-                                                                            @endif>{{ $e->nama }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                        </form>
                                         @empty
-                                            <div class="card text-center w-100">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">No Review For Now</h5>
-                                                    <p class="card-text">Would you like to leave a review?</p>
-                                                    <a href="{{ url('/addReview', []) }}" class="btn btn-primary">Add Review</a>
-                                                </div>
+                                        <div class="card text-center w-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">No Review For Now</h5>
+                                                <p class="card-text">Would you like to leave a review?</p>
+                                                <a href="{{ url('/addReview', []) }}" class="btn btn-primary">Add Review</a>
                                             </div>
+                                        </div>
                                         @endforelse
                                     </div>
                                 </div>
@@ -277,13 +277,13 @@
         }
     </script>
     <script>
-        @if (Session::has('success'))
-            alert("{{ session('success') }}");
-        @elseif (Session::has('error'))
-            alert("{{ session('error') }}");
-        @elseif (Session::has('info'))
-            alert("{{ session('info') }}");
-        @endif;
+        // @if (Session::has('success'))
+        //     alert("{{ session('success') }}");
+        // @elseif (Session::has('error'))
+        //     alert("{{ session('error') }}");
+        // @elseif (Session::has('info'))
+        //     alert("{{ session('info') }}");
+        // @endif;
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

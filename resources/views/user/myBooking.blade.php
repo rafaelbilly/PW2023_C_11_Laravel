@@ -114,14 +114,13 @@
     }
 
     footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+      margin-top: 100px;
       background-color: #303030;
       min-height: 100px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 400;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     footer p {
@@ -184,7 +183,7 @@
               <div class="dropdown-divider"></div>
               <div>
                 <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
-                <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                <a class="dropdown-item" href="{{ route('actionLogout') }}" style="color: #ff0000;"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i> Logout</a>
               </div>
             </div>
           </li>
@@ -197,55 +196,55 @@
   <!-- User Profile -->
   <div class="profile-container">
     <div class="container light-style flex-grow-1 container-p-y">
-        <div class="card overflow-hidden">
-            <div class="row no-gutters row-bordered row-border-light">
-                <div class="col-md-3 pt-0">
-                    <div class="list-group list-group-flush account-settings-links">
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
-                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="tab-content">
-                        <div class="tab-pane fade active show" id="account-general">
-                            <div class="card-body media align-items-center">
-                                <div class="media-body ml-4 d-flex flex-wrap">
-                                    @foreach ($myBooking as $listBooking)
-                                    <div class="card mb-4" style="width: 18rem; margin-right: 0.5rem;">
-                                        <img src="{{ $listBooking['gambar'] }}" class="card-img-top" alt="...">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">{{ $listBooking['namaAcara'] }}</h5>
-                                            <p class="card-text">{{ $listBooking['tanggal'] }}</p>
-                                            <br>
-                                            <form class="d-grid gap-2 d-flex justify-content-center" method="post" action="{{ route('myBooking.destroy', $listBooking['id']) }}">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button class="btn btn-danger" type="submit">Delete</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+          <div class="col-md-3 pt-0">
+            <div class="list-group list-group-flush account-settings-links">
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
+              <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
+          <div class="col-md-9">
+            <div class="tab-content">
+              <div class="tab-pane fade active show" id="account-general">
+                <div class="card-body media align-items-center">
+                  <div class="media-body ml-4 d-flex flex-wrap">
+                    @foreach ($myBooking as $listBooking)
+                    <div class="card mb-4" style="width: 18rem; margin-right: 0.5rem;">
+                      <img src="{{ $listBooking['gambar'] }}" class="card-img-top" alt="...">
+                      <div class="card-body text-center">
+                        <h5 class="card-title">{{ $listBooking['namaAcara'] }}</h5>
+                        <p class="card-text">{{ $listBooking['tanggal'] }}</p>
+                        <br>
+                        <form class="d-grid gap-2 d-flex justify-content-center" method="post" action="{{ route('myBooking.destroy', $listBooking['id']) }}">
+                          @csrf
+                          @method('DELETE')
 
-<script>
-    @if (Session::has('success'))
-        alert("{{ session('success') }}");
-    @elseif (Session::has('error'))
-        alert("{{ session('error') }}");
-    @elseif (Session::has('info'))
-        alert("{{ session('info') }}");
-    @endif;
-</script>
+                          <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                      </div>
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // @if (Session::has('success'))
+    //     alert("{{ session('success') }}");
+    // @elseif (Session::has('error'))
+    //     alert("{{ session('error') }}");
+    // @elseif (Session::has('info'))
+    //     alert("{{ session('info') }}");
+    // @endif;
+  </script>
 
   <!-- footer -->
   <footer>

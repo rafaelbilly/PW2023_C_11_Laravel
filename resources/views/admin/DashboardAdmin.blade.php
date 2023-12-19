@@ -239,7 +239,7 @@
                         <td>{{ $loop->iteration }} </td>
                         <td>{{ $item['invoice'] }}</td>
                         <td>{{ $item['nama'] }}</td>
-                        <td>IDR {{ $item['price'] }}</td>
+                        <td>IDR {{ number_format($item['price'], 0, ',', '.') }}</td>
                         <td>{{ $item['status'] }}</td>
                         <td>
                             @if ($item['keterangan'] === 'lunas')

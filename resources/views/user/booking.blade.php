@@ -177,8 +177,8 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <div>
-                  <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                  <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                  <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
+                  <a class="dropdown-item" href="{{ route('actionLogout') }}" style="color: #ff0000;"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i> Logout</a>
                 </div>
               </div>
             </li>
@@ -196,7 +196,7 @@
       <div class="card">
         <div class="card-body text-center">
           <h5 class="card-title"><strong>{{ $isi['nama'] }}</strong></h5>
-          <h1 class="card-title"><strong>{{ $isi['harga'] }}</strong></h1>
+          <h1 class="card-title"><strong>{{ 'IDR ' . number_format($isi['harga'], 0, ',', '.') }}</strong></h1>
           <a href="{{ route('checkout', ['event_id' => $isi['id']]) }}" class="btn btn-primary">Booking</a>
           <h6 class="card-title" style="margin-top: 30px;">Includes:</h6>
           <ul class="checklist">

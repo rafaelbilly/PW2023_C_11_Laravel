@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -40,9 +41,8 @@ class ReviewController extends Controller
 
         $validate = Validator::make($storeData, [
             'id_user' => 'required|exists:users,id',
+            'id_event' => 'required|exists:events,id',
             'review' => 'required',
-            'event' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         if ($validate->fails()) {
@@ -54,11 +54,11 @@ class ReviewController extends Controller
             return response(['message' => 'User not found'], 400);
         }
 
-        $image = $request->file('image');
-        $imageName = $image->getClientOriginalName();
+        $event = Event::find($storeData['id_event']);
+        if (!$event) {
+            return response(['message' => 'Event not found'], 400);
+        }
 
-        $image->move(public_path('images'), $imageName);
-        $storeData['image'] = $imageName;
         $review = Review::create($storeData);
 
         return response([
@@ -93,7 +93,7 @@ class ReviewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
