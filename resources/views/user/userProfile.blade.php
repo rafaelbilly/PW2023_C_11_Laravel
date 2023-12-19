@@ -77,7 +77,7 @@
             background-clip: padding-box;
             box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
         }
-
+        
         .row-bordered {
             overflow: hidden;
         }
@@ -210,7 +210,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST">
+                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 

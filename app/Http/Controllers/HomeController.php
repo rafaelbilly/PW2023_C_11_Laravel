@@ -33,37 +33,37 @@ class HomeController extends Controller
     }
 
     public function updateProfile(Request $request)
-    {
-        $validated = $request->all() + [
-            'updated_at' => now(),
-        ];
+{
+    $validated = $request->all() + [
+        'updated_at' => now(),
+    ];
 
-        $user = User::findOrFail(auth()->id());
+    $user = User::findOrFail(auth()->id());
 
-        $validated['image'] = $user->image;
+    $validated['image'] = $user->image;
 
-        if($request->hasFile('image')){
-            $fileName = time() . '.' . $request->image->extension();
-            $validated['image'] = $fileName;
+    if ($request->hasFile('image')) {
+        $fileName = time() . '.' . $request->image->extension();
+        $validated['image'] = $fileName;
 
-            // move file
-            $request->image->move(public_path('uploads/images'), $fileName);
+        // Move file
+        $request->image->move(public_path('uploads/images'), $fileName);
 
-            // delete old file
-            $oldPath = public_path('/uploads/images/'.$user->image);
-            if(file_exists($oldPath) && $user->image != 'image.png'){
-                unlink($oldPath);
-            }
+        // Delete old file
+        $oldPath = public_path('/uploads/images/' . $user->image);
+        if (file_exists($oldPath) && is_file($oldPath) && $user->image != 'image.png') {
+            unlink($oldPath);
         }
-
-        if ($request->filled('password')) {
-            $validated['password'] = Hash::make($request->password);
-        } else {
-            $validated['password'] = $user->password;
-        }
-
-        $user->update($validated);
-
-        return redirect(route('userProfile'))->with('success', 'User profile updated successfully');
     }
+
+    if ($request->filled('password')) {
+        $validated['password'] = Hash::make($request->password);
+    } else {
+        $validated['password'] = $user->password;
+    }
+
+    $user->update($validated);
+
+    return redirect(route('userProfile'))->with('success', 'User profile updated successfully');
+}
 }

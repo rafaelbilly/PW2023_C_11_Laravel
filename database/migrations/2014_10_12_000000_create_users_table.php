@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('verify_key');
             $table->string('phoneNumber');
             $table->string('invoiceNumber');
+            $table->string('image');
             $table->string('active')->nullable();
             $table->string('role')->default(0);
             $table->timestamps();
