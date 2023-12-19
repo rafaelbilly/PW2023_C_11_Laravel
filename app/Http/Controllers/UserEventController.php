@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Pemesanan;
+use App\Models\Review;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class PemesananController extends Controller
+class UserEventController extends Controller
 {
     protected function generateRandomString($prefix = 'smgr-', $length = 9) {
         $characters = '0123456789';
@@ -132,5 +133,62 @@ class PemesananController extends Controller
         $pemesanan->delete();
 
         return redirect('/myBooking')->with('success', 'Pemesanan berhasil dihapus.');
+    }
+
+    public function addReview()
+    {
+        $event = Event::latest()->get(['id', 'nama']);
+
+        $review = Review::where('id_user', auth()->id())->latest()->get();
+
+        $review = $review->map(function ($r) {
+            return [
+                'id' => $r->id,
+                'gambar' => asset('uploads/images/' . $r->event->image),
+                'namaAcara' => $r->event->nama,
+                'review' => $r->review,
+            ];
+        })->toArray();
+
+        return view('user/addReview', [
+            'event' => $event,
+            'review' => $review
+        ]);
+    }
+
+    public function addReviewStore(Request $request)
+    {
+        $request->validate([
+            'id_event' => 'required',
+            'review' => 'required',
+        ]);
+
+        $payload = [
+            'id_user' => auth()->id(),
+            'id_event' => $request->id_event,
+            'review' => $request->review,
+        ];
+
+        Review::create($payload);
+
+        return redirect('/myReview')->with('success', 'Review berhasil ditambahkan.');
+    }
+
+    public function myReview()
+    {
+        $review = Review::where('id_user', auth()->id())->latest()->get();
+
+        $review = $review->map(function ($r) {
+            return [
+                'id' => $r->id,
+                'gambar' => asset('uploads/images/' . $r->event->image),
+                'namaAcara' => $r->event->nama,
+                'review' => $r->review,
+            ];
+        })->toArray();
+
+        return view('user/myReview', [
+            'myReview' => $review
+        ]);
     }
 }

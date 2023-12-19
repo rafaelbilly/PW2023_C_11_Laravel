@@ -25,8 +25,9 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->input('password')),
             'verify_key' => $str,
+            'role' => 0,
         ]);
-
+        
         $details = [
             'username' => $request->username,
             'website' => 'Semesta Group',

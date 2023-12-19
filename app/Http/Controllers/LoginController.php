@@ -28,7 +28,7 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->active) {
-                return redirect('homepage');
+                return $this->redirectToRole($user->role);
             } else {
                 Auth::logout();
                 Session::flash('error', 'Akun Anda Belum Diverifikasi. Silahkan cek email anda.');
@@ -45,4 +45,16 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    private function redirectToRole($role)
+    {
+        if ($role == 0) {
+            return redirect('homepage');
+        } elseif ($role == 1) {
+            return redirect('DashboardAdmin');
+        } else {
+            return redirect('homepage');
+        }
+    }
+
 }
