@@ -23,7 +23,7 @@ class HomeController extends Controller
         $userProfile = [
             'username' => auth()->user()->username,
             'email' => auth()->user()->email,
-            'password' => auth()->user()->password,
+            'password' => auth()->user()->getAuthPassword(),
             'phone' => auth()->user()->phone_number,
         ];
 
