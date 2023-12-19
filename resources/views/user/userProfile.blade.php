@@ -215,17 +215,22 @@
                             @method('PUT')
 
                             <div class="tab-pane fade active show" id="account-general">
-                                <div class="card-body media align-items-center">
-                                    <img src="https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg" alt class="d-block photo-profile">
-                                    <div class="media-body ml-4">
-                                        <label class="btn btn-outline-primary" id="uploadPhoto">
-                                            Upload new photo
-                                            <input type="file" class="account-settings-fileinput" name="image">
-                                        </label> &nbsp;
-                                        <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-                                        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                    </div>
+                            <div class="card-body media align-items-center">
+                                <img src="https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg" alt="Default Photo" class="d-block photo-profile" id="currentPhoto">
+                                <div class="media-body ml-4">
+                                    <label class="btn btn-outline-primary" id="uploadPhoto">
+                                        Upload new photo
+                                        <input type="file" class="account-settings-fileinput" name="image" onchange="previewImage(this)">
+                                    </label> &nbsp;
+                                    <button type="button" class="btn btn-default md-btn-flat" onclick="resetImage()">Reset</button>
+                                    <div class="text-light small mt-1">Allowed JPG, GIF, or PNG. Max size of 800K</div>
+                                    <br>
+                                    <img src="#" alt="Preview" class="photo-profile-preview d-none" style="max-width: 200px; max-height: 200px;" id="imagePreview">
                                 </div>
+                            </div>
+
+
+
                                 <hr class="border-light m-0">
                                 <div class="card-body">
                                     <div class="form-group">
@@ -279,6 +284,66 @@
         @elseif (Session::has('info'))
             alert("{{ session('info') }}");
         @endif;
+    </script>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const currentPhoto = document.getElementById('currentPhoto');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                    currentPhoto.classList.add('d-none');
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function resetImage() {
+            const preview = document.getElementById('imagePreview');
+            const currentPhoto = document.getElementById('currentPhoto');
+
+            preview.src = '#';
+            preview.classList.add('d-none');
+            currentPhoto.classList.remove('d-none');
+
+            const input = document.querySelector('.account-settings-fileinput');
+            input.value = '';
+        }
+
+        // Function to check if an image has been uploaded or not
+        window.onload = function() {
+            const input = document.querySelector('.account-settings-fileinput');
+            const currentPhoto = document.getElementById('currentPhoto');
+            const preview = document.getElementById('imagePreview');
+
+            input.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.classList.remove('d-none');
+                        currentPhoto.classList.add('d-none');
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    preview.src = 'https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg';
+                    preview.classList.add('d-none');
+                    currentPhoto.classList.remove('d-none');
+                }
+            });
+        };
+
+
+
+
     </script>
     <!-- /footer -->
 

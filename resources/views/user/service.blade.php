@@ -54,8 +54,43 @@
     .card {
       flex: 1;
       width: 10rem;
+      height: 300px; /* Tentukan tinggi kartu di sini */
       margin: 10px;
       transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card .card-img-top {
+      width: 100%;
+      height: 200px; /* Atur tinggi gambar sesuai kebutuhan */
+      object-fit: cover;
+    }
+
+    .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .card p {
+      margin-top: 10px;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Atur jumlah baris yang ingin ditampilkan */
+      -webkit-box-orient: vertical;
+    }
+
+    .more {
+      display: none;
     }
 
     .center-button {
