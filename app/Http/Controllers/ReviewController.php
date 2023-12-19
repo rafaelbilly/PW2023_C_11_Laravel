@@ -4,101 +4,99 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\Event;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-    public function index()
+    public function addReview()
     {
-        $review = Review::where('id_user', Auth::id())->oldest()->paginate(5);
+        $event = Event::latest()->get(['id', 'nama']);
 
-        return view('review.index', compact('review'));
+        $review = Review::where('id_user', auth()->id())->latest()->get();
+
+        $review = $review->map(function ($r) {
+            return [
+                'id' => $r->id,
+                'gambar' => asset('uploads/images/' . $r->event->image),
+                'namaAcara' => $r->event->nama,
+                'review' => $r->review,
+            ];
+        })->toArray();
+
+        return view('user/addReview', [
+            'event' => $event,
+            'review' => $review
+        ]);
     }
 
-    /**
-     * create
-     *
-     * @return void
-     */
-    public function create()
+    public function addReviewStore(Request $request)
     {
-        return view('review.create');
-    }
-
-    /**
-     * store
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function store(Request $request)
-    {
-        // Validasi Formulir
-        $this->validate($request, [
-            'id_user' => 'required',
+        $request->validate([
+            'id_event' => 'required',
             'review' => 'required',
         ]);
 
-        Event::create([
-            'id_user' => $request->judul,
-            'review' => $request->penulis,
+        $payload = [
+            'id_user' => auth()->id(),
+            'id_event' => $request->id_event,
+            'review' => $request->review,
+        ];
+
+        Review::create($payload);
+
+        return redirect('/myReview')->with('success', 'Review berhasil ditambahkan.');
+    }
+
+    public function myReview()
+    {
+        $review = Review::where('id_user', auth()->id())->latest()->get();
+
+        $review = $review->map(function ($r) {
+            return [
+                'id' => $r->id,
+                'gambar' => asset('uploads/images/' . $r->event->image),
+                'namaAcara' => $r->event->nama,
+                'review' => $r->review,
+            ];
+        })->toArray();
+
+        $event = Event::latest()->get(['id', 'nama']);
+
+        return view('user/myReview', [
+            'myReview' => $review,
+            'event' => $event
         ]);
-
-        try {
-            return redirect()->route('event.index');
-        } catch (Exception $e) {
-            return redirect()->route('event.index');
-        }
     }
 
-    /**
-     * edit
-     *
-     * @param int $id
-     * @return void
-     */
-    public function edit($id)
+    public function destroyReview($id)
     {
-        $event = Event::find($id);
-        return view('event.edit', compact('event'));
+        $review = Review::find($id);
+
+        if (!$review) return redirect('/myReview')->with('error', 'Review tidak ditemukan.');
+
+        $review->delete();
+
+        return redirect('/myReview')->with('success', 'Review berhasil dihapus.');
     }
 
-    /**
-     * update
-     *
-     * @param Request $request
-     * @param int $id
-     * @return void
-     */
-    public function update(Request $request, $id)
+    public function updateReview(Request $request)
     {
-        $event = Event::find($id);
-
-        // Validate form
-        $this->validate($request, [
-            'id_user' => 'required',
+        $request->validate([
+            'id_event' => 'required',
             'review' => 'required',
         ]);
 
-        $event->update([
-            'id_user' => $request->judul,
-            'review' => $request->penulis,
+        $review = Review::find($request->id);
+
+        if (!$review) return redirect('/myReview')->with('error', 'Review tidak ditemukan.');
+
+        $review->update([
+            'id_event' => $request->id_event,
+            'review' => $request->review,
         ]);
 
-        return redirect()->route('event.index')->with(['success' => 'Data Berhasil Diubah!']);
-    }
-
-    /**
-     * destroy
-     *
-     * @param int $id
-     * @return void
-     */
-    public function destroy($id)
-    {
-        $event = Event::find($id);
-        $event->delete();
-        return redirect()->route('event.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect('/myReview')->with('success', 'Review berhasil diubah.');
     }
 }

@@ -22,7 +22,7 @@
 
         .container-form {
             width: 1000px;
-            height: 450px;
+            height: 550px;
             border-radius: 5px;
             box-shadow: 2px 1px 10px rgba(128, 128, 128, 0.5);
             margin: 0 auto;
@@ -38,14 +38,13 @@
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+            margin-top: 100px;
             background-color: #303030;
             min-height: 100px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
         }
 
         footer p {
@@ -78,7 +77,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a href="{{ url('landing') }}" class="btn btn-danger me-3">Logout</a>
+                <a href="{{ route('actionLogout') }}" class="btn btn-danger me-3">Logout</a>
             </div>
         </nav>
 
@@ -125,33 +124,48 @@
                         <div class="container-form">
                             <div class="container-isi">
                                 <h5 class="mb-4">New Event Details</h5>
-                                <div class="mb-4 row">
-                                    <label for="formFile" class="col-sm-2 col-form-label">Add Image</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="formFile">
+                                <form action="{{ route('addNewEvents.store') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <div class="mb-4 row">
+                                        <label for="formFile" class="col-sm-2 col-form-label">Add Image</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="file" id="formFile" required name="image">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-4 row">
-                                    <label for="eventName" class="col-sm-2 col-form-label">Event Name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="eventName">
+
+                                    <div class="mb-4 row">
+                                        <label for="eventName" class="col-sm-2 col-form-label">Event Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="eventName" required name="nama">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-4 row">
-                                    <label for="price" class="col-sm-2 col-form-label">Price</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="price">
+
+                                    <div class="mb-4 row">
+                                        <label for="price" class="col-sm-2 col-form-label">Price</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="price" required name="harga">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-4 row">
-                                    <label for="description" class="col-sm-2 col-form-label">Description</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                                    <div class="mb-4 row">
+                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="button-add">
-                                    <a href="{{ url('addNewEvents') }}" class="btn btn-primary" onclick="showAlert()">Save</a>
-                                </div>
+
+                                    <div class="mb-4 row">
+                                        <label for="description" class="col-sm-2 col-form-label">Item Detail</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi2" placeholder="separate with a new line"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-add">
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -169,13 +183,20 @@
         </div>
     </footer>
     <!-- /footer -->
-
     <script>
         function showAlert() {
             var message = 'Success Add New Event to Dashboard!';
             var type = 'success';
             alert(message, type);
         }
+
+        @if (Session::has('success'))
+            alert("{{ session('success') }}");
+        @elseif (Session::has('error'))
+            alert("{{ session('error') }}");
+        @elseif (Session::has('info'))
+            alert("{{ session('info') }}");
+        @endif;
     </script>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">

@@ -372,7 +372,7 @@
                             </div>
                             <div class="dropdown-divider"></div>
                             <div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
                                 <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
                             </div>
                         </div>
@@ -577,14 +577,23 @@
             <hr class="midline">
             <br>
             <div class="row row-cols-1 row-cols-md-4 g-4">
-
+                @foreach ($review as $r)
                 <div class="col">
                     <div class="card h-100">
-
-
+                        <img src="{{ asset('/uploads/images/' . $r->event->image) }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">{{ $r->review }}</p>
+                            <div class="profile-details">
+                                <img src="{{ asset('/images/Fotokosong.jpeg') }}" alt="" />
+                                <div class="name-job">
+                                    <h3 class="name">{{ $r->user->username }}</h3>
+                                    <h4 class="name-event">{{ $r->event->nama }}</h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                @endforeach
             </div>
         </div>
     </section>

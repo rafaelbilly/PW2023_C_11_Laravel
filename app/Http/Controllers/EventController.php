@@ -2,98 +2,140 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
-use Exception;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Pemesanan;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class EventController extends Controller
 {
-    public function index()
+    public function dashboardAdmin()
     {
-        $events = Event::latest()->paginate(5); // Corrected 'pagenate' to 'paginate'
-        return view('event.index', compact('events')); // Changed variable name to plural 'events'
+        $acara2Data = Event::latest()->get(); 
+
+        $acara2 = $acara2Data->map(function ($e) { 
+            return [
+                'nama' => $e->nama, 
+                'gambar' => asset('uploads/images/' . $e->image), 
+            ];
+        })->take(4)->toArray(); 
+
+        $pemesananData = Pemesanan::latest()->get(); 
+
+        $admin = $pemesananData->map(function ($p) { 
+            return [
+                'invoice' => $p->invoice, 
+                'nama' => $p->user->username, 
+                'price' => $p->total_biaya, 
+                'status' => ucfirst($p->status), 
+                'keterangan' => $p->status, 
+            ];
+        })->toArray(); 
+
+        $data = [
+            'income' => Pemesanan::where('status', 'lunas')->sum('total_biaya'),
+            'user' => User::count(),
+            'booking' => Pemesanan::count(),
+            'new_booking' => Pemesanan::where('status', 'belum lunas')->count(),
+        ];
+
+        return view('admin/dashboardAdmin', [
+            'admin' => $admin,
+            'acara2' => $acara2,
+            'data' => $data
+        ]);
     }
 
-    public function create()
+    public function index(Request $request)
     {
-        return view('event.create');
+        $eventData = Event::latest()->get(); 
+
+        if ($request->filled('keyword')) { 
+            $eventData = Event::where('nama', 'like', "%{$request->keyword}%") 
+                ->orWhere('deskripsi', 'like', "%{$request->keyword}%") 
+                ->orWhere('deskripsi2', 'like', "%{$request->keyword}%")
+                ->latest()->get(); 
+        }
+
+        $event = $eventData->map(function ($e) { 
+            return [
+                'id' => $e->id,
+                'gambarEvent' => asset('uploads/images/' . $e->image), 
+                'judul' => $e->nama, 
+                'deskripsi' => $e->deskripsi, 
+                'deskripsi2' => $e->deskripsi2, 
+            ];
+        })->toArray(); 
+
+        return view('admin/managementEventAdmin', compact('event'));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'id_user' => 'required',
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'harga' => 'required',
-        ]);
+        $validated = $request->all() + [
+            'id_user' => auth()->id(), 
+            'created_at' => now(),
+        ]; 
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
+        if($request->hasFile('image')){
+            $fileName = time() . '.' . $request->image->extension();
+            $validated['image'] = $fileName; 
 
-            Event::create([
-                'id_user' => $request->id_user,
-                'nama' => $request->nama,
-                'deskripsi' => $request->deskripsi,
-                'image' => $imageName,
-                'harga' => $request->harga,
-            ]);
-
-            try {
-                return redirect()->route('event.index');
-            } catch (Exception $e) {
-                return redirect()->route('event.index');
-            }
+            // move file
+            $request->image->move(public_path('uploads/images'), $fileName); 
         }
+
+        $event = Event::create($validated); 
+
+        return redirect('/managementEventAdmin')->with('success', 'Event berhasil ditambahkan'); 
     }
 
     public function edit($id)
     {
-        $event = Event::find($id);
-        return view('event.edit', compact('events'));
+        $event = Event::findOrFail($id); 
+
+        return view('admin/editEvent', compact('event')); 
     }
 
     public function update(Request $request, $id)
     {
-        $event = Event::find($id);
+        $validated = $request->all() + [ 
+            'updated_at' => now(),
+        ];
 
-        $this->validate($request, [
-            'id_user' => 'required',
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'harga' => 'required',
-        ]);
+        $event = Event::findOrFail($id); 
 
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+        $validated['image'] = $event->image; 
 
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $event->image = $imageName;
+        if($request->hasFile('image')){
+            $fileName = time() . '.' . $request->image->extension(); 
+            $validated['image'] = $fileName; 
+
+            // move file
+            $request->image->move(public_path('uploads/images'), $fileName); 
+
+            // delete old file
+            $oldPath = public_path('/uploads/images/'.$event->image); 
+            if(file_exists($oldPath) && $event->image != 'image.png'){ 
+                unlink($oldPath);
+            }
         }
 
-        $event->update([
-            'id_user' => $request->id_user,
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-            'image' => $imageName,
-            'harga' => $request->harga,
-        ]);
+        $event->update($validated); 
 
-        return redirect()->route('event.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect('/managementEventAdmin')->with('success', 'Event berhasil diubah'); 
     }
 
     public function destroy($id)
     {
-        $event = Event::find($id);
-        $event->delete();
-        return redirect()->route('event.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        $event = Event::findOrFail($id); 
+        $oldPath = public_path('/uploads/images/'.$event->image); 
+        if(file_exists($oldPath) && $event->image != 'image.png'){ 
+            unlink($oldPath); 
+        }
+        $event->delete(); 
+
+        return redirect('/managementEventAdmin')->with('success', 'Event berhasil dihapus'); 
     }
 }

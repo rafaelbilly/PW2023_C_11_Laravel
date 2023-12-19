@@ -15,6 +15,7 @@ class Event extends Model
         'nama',
         'id_user',
         'deskripsi',
+        'deskripsi2',
         'image',
         'harga',
     ];

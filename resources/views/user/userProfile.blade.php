@@ -152,7 +152,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('dashboard') }}"><strong>SemestaGroup</strong></a>
+            <a class="navbar-brand" href="{{ url('homepage') }}"><strong>SemestaGroup</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -161,7 +161,7 @@
                 <div class="mx-auto"></div>
                 <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url('dashboard') }}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ url('homepage') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('service') }}">Services</a>
@@ -177,12 +177,19 @@
                 <ul class="navbar-nav fs-5 ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user"></i> User
+                            <i class="fas fa-user"></i> {{ Auth::user()->username }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ url('landing') }}">Logout</a></li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
+                            <div class="text-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                                <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div>
+                                <a class="dropdown-item" href="{{ url('userProfile') }}"><i class="fa fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="{{ route('actionLogout') }}"><i class="fa fa-user"></i> Logout</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -203,14 +210,17 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="tab-content">
+                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+
                             <div class="tab-pane fade active show" id="account-general">
                                 <div class="card-body media align-items-center">
                                     <img src="https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg" alt class="d-block photo-profile">
                                     <div class="media-body ml-4">
                                         <label class="btn btn-outline-primary" id="uploadPhoto">
                                             Upload new photo
-                                            <input type="file" class="account-settings-fileinput">
+                                            <input type="file" class="account-settings-fileinput" name="image">
                                         </label> &nbsp;
                                         <button type="button" class="btn btn-default md-btn-flat">Reset</button>
                                         <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
@@ -218,35 +228,34 @@
                                 </div>
                                 <hr class="border-light m-0">
                                 <div class="card-body">
-                                    @foreach ($userProfile as $user)
                                     <div class="form-group">
                                         <label class="form-label">Username</label>
-                                        <input type="text" class="form-control mb-1" value="{{ $user['username'] }}">
+                                        <input type="text" class="form-control mb-1" value="{{ $userProfile['username'] }}" name="username">
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Email</label>
-                                        <input type="text" class="form-control" value="{{ $user['email'] }}">
+                                        <input type="text" class="form-control" value="{{ $userProfile['email'] }}" name="email">
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" value="{{ $user['password'] }}">
+                                        <input type="password" class="form-control" id="password" value="" name="password">
+                                        <div class="text-small text-danger">dont fill password if wont change password</div>
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Phone Number</label>
-                                        <input type="number" class="form-control" value="{{ $user['phone'] }}">
+                                        <input type="number" class="form-control" value="{{ $userProfile['phone'] }}" name="phoneNumber">
                                     </div>
                                     <br>
                                     <div class="d-grid gap-2 mt-3 d-md-flex justify-content-md-end">
                                         <button type="button" class="btn btn-default">Cancel</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -261,6 +270,16 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        @if (Session::has('success'))
+            alert("{{ session('success') }}");
+        @elseif (Session::has('error'))
+            alert("{{ session('error') }}");
+        @elseif (Session::has('info'))
+            alert("{{ session('info') }}");
+        @endif;
+    </script>
     <!-- /footer -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
