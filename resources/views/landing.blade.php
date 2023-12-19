@@ -509,7 +509,8 @@
             <h1 style="text-align: center;"><strong>OUR HAPPY CLIENTS</strong></h1>
             <hr class="midline">
             <br>
-            <!-- <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                @foreach ($review as $r)
                 <div class="col">
                     <div class="card h-100">
                         <img src="{{ asset('/uploads/images/' . $r->event->image) }}" class="card-img-top" alt="...">
@@ -525,7 +526,8 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+                @endforeach
+            </div>
         </div>
     </section>
     <!-- /Client -->
