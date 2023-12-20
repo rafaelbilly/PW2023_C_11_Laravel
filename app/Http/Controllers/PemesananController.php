@@ -77,9 +77,6 @@ class PemesananController extends Controller
 
     public function checkoutStore(Request $request)
     {
-        // check if user have invoice number
-        if (auth()->user()->invoiceNumber) return redirect('/myBooking')->with('error', 'Anda sudah melakukan pemesanan.');
-
         $event = Event::find($request->event_id);
         $payload = [
             'id_user' => auth()->id(),

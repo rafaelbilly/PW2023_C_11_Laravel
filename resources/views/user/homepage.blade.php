@@ -189,7 +189,7 @@
 
         .clients {
             margin-top: 120px;
-            height: 600px;
+            height: 550px;
         }
 
         .clients .card-img-top {
@@ -291,44 +291,82 @@
             background-color: #081828;
         }
 
+        @media (min-width: 992px) {
+            .about img {
+                width: 80%;
+            }
+
+            .hero-content h1 {
+                font-size: 35px;
+            }
+        }
+
         @media (max-width: 991px) {
+            .about img {
+                width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
             .navbar {
-                padding: 10px;
+                padding: 10px 0;
             }
 
             .hero-area {
                 padding: 100px 0;
             }
 
-            .hero-area .carousel-inner img {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .navbar {
-                padding: 10px;
-            }
-
-            .hero-area {
-                padding: 80px 0;
-            }
-
             .hero-area .hero-content h1 {
-                font-size: 30px;
-                line-height: 35px;
+                font-size: 20px;
+                line-height: 30px;
             }
 
-            .what-we-do-item {
-                text-align: left;
+            .about {
+                padding: 30px 0;
             }
 
-            .team .card-group {
-                flex-direction: column;
+            .about img {
+                width: 100%;
             }
 
-            .team .card-img-top {
-                height: auto;
+            .what-we-do {
+                padding: 20px 0;
+            }
+
+            .what-we-do-item i {
+                font-size: 2.5em;
+            }
+
+            .what-we-do-item h3 {
+                font-size: 1.8em;
+            }
+
+            .what-we-do-item p {
+                font-size: 1.2em;
+            }
+
+            .partnership img {
+                max-width: 100%;
+            }
+
+            .team {
+                padding: 20px 0;
+            }
+
+            .team .card {
+                flex-basis: calc(100% - 20px);
+            }
+
+            .clients {
+                padding: 20px 0;
+            }
+
+            .clients .card {
+                flex-basis: calc(100% - 20px);
             }
         }
     </style>

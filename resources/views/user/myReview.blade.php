@@ -22,6 +22,7 @@
             font-family: "Inter", sans-serif;
             font-size: 15px;
             background-color: #F0F0F0;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -88,8 +89,6 @@
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
             width: 100%;
             background-color: #303030;
             min-height: 100px;
@@ -170,7 +169,7 @@
 
     <!-- My Review -->
     <div class="profile-container">
-        <div class="container light-style flex-grow-1 container-p-y">
+        <div class="container light-style flex-grow-1 container-p-y" style="padding-bottom: 100px;">
             <div class="card overflow-hidden">
                 <div class="row no-gutters row-bordered row-border-light">
                     <div class="col-md-3 pt-0">
@@ -202,6 +201,56 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Add Review Modal -->
+                                        <form method="POST" action="{{ route('addReview.store', []) }}">
+                                            @csrf
+                                            <div class="modal fade" id="reviewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-primary text-light">
+                                                            <h5 class="modal-title">Add Review Here</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {{-- <div class="mb-3 row">
+                                                                    <label for="email" class="col-sm-2 col-form-label">Name</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" id="inputName">
+                                                                    </div>
+                                                                </div> --}}
+                                                            <div class="mb-3 row">
+                                                                <label for="inputReview" class="col-sm-2 col-form-label">Review</label>
+                                                                <div class="col-sm-10">
+                                                                    <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                <label for="inputEvent" class="col-sm-2 col-form-label">Event</label>
+                                                                <div class="col-sm-10">
+                                                                    <select id="inputEvent" class="form-select" name="id_event">
+                                                                        <option value="">Pilih Event</option>
+                                                                        @foreach ($event as $e)
+                                                                        <option value="{{ $e->id }}">{{ $e->nama }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            {{-- <div class="mb-3 row">
+                                                                    <label for="inputPhoto" class="col-sm-2 col-form-label">Photo</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input class="form-control" type="file" id="formFile">
+                                                                    </div>
+                                                                </div> --}}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- /Add Review Modal -->
 
                                         <!-- Edit Review Modal -->
                                         <form class="modal fade" id="editReviewModal{{ $r['id'] }}" tabindex="-1" role="dialog" aria-bs-labelledby="editReviewModalLabel" aria-bs-hidden="true" action="{{ route('review.update', $r['id']) }}" method="post">
@@ -252,6 +301,11 @@
                                             </div>
                                         </div>
                                         @endforelse
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        @unless(empty($myReview))
+                                        <button class="btn btn-primary" onclick="addReviewModal()">Add Review</button>
+                                        @endunless
                                     </div>
                                 </div>
                             </div>

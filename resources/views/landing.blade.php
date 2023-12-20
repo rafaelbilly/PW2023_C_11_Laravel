@@ -191,7 +191,7 @@
 
         .clients {
             margin-top: 120px;
-            height: 600px;
+            height: 550px;
         }
 
         .clients .card-img-top {

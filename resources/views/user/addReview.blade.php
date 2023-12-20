@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="x-ixon" href="{{ asset('images/logo-1.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Review</title>
+    <title>My Review</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -21,6 +21,7 @@
             font-family: "Inter", sans-serif;
             font-size: 15px;
             background-color: #F0F0F0;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -87,8 +88,6 @@
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
             width: 100%;
             background-color: #303030;
             min-height: 100px;
@@ -169,7 +168,7 @@
 
     <!-- Add Review -->
     <div class="profile-container">
-        <div class="container light-style flex-grow-1 container-p-y">
+        <div class="container light-style flex-grow-1 container-p-y" style="padding-bottom: 100px;">
             <div class="card overflow-hidden">
                 <div class="row no-gutters row-bordered row-border-light">
                     <div class="col-md-3 pt-0">
@@ -201,6 +200,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
 
                                         <!-- Edit Review Modal -->
                                         <form class="modal fade" id="editReviewModal{{ $r['id'] }}" tabindex="-1" role="dialog" aria-bs-labelledby="editReviewModalLabel" aria-bs-hidden="true" action="{{ route('review.update', $r['id']) }}" method="post">
@@ -251,6 +251,7 @@
                                             </div>
                                         </div>
                                         @endforelse
+
                                     </div>
                                 </div>
                             </div>

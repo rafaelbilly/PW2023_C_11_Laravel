@@ -52,8 +52,43 @@
     .card {
       flex: 1;
       width: 10rem;
+      height: 300px;
       margin: 10px;
       transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .card p {
+      margin-top: 10px;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .more {
+      display: none;
     }
 
     .center-button {
@@ -72,7 +107,7 @@
     }
 
     footer {
-      margin-top: 100px;
+      margin-top: 70px;
       background-color: #303030;
       min-height: 100px;
       display: flex;

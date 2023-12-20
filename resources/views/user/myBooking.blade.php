@@ -22,6 +22,7 @@
       font-family: "Inter", sans-serif;
       font-size: 15px;
       background-color: #F0F0F0;
+      min-height: 100vh;
     }
 
     .navbar {
@@ -114,13 +115,12 @@
     }
 
     footer {
-      margin-top: 100px;
+      width: 100%;
       background-color: #303030;
       min-height: 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 400;
     }
 
     footer p {
@@ -202,7 +202,7 @@
             <div class="list-group list-group-flush account-settings-links">
               <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
               <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('myReview') }}">My Review</a>
             </div>
           </div>
           <div class="col-md-9">
