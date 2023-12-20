@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pemesanan;
 use App\Models\Event;
-use App\Models\User;
+use App\Models\User; 
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class PemesananController extends Controller
 {
-    protected function generateRandomString($prefix = 'smgr-', $length = 9)
-    {
+    protected function generateRandomString($prefix = 'smgr-', $length = 9) {
         $characters = '0123456789';
         $randomString = $prefix;
 
@@ -26,33 +25,33 @@ class PemesananController extends Controller
 
     public function index()
     {
-        $eventData = Event::latest()->get();
+        $eventData = Event::latest()->get(); 
 
-        $acara = $eventData->map(function ($e) {
+        $acara = $eventData->map(function ($e) { 
             return [
                 'id' => $e->id,
-                'gambar' => asset('uploads/images/' . $e->image),
-                'nama' => $e->nama,
+                'gambar' => asset('uploads/images/' . $e->image), 
+                'nama' => $e->nama, 
                 'deskripsi' => $e->deskripsi,
-                'deskripsi2' => $e->deskripsi2,
+                'deskripsi2' => $e->deskripsi2, 
             ];
-        })->toArray();
+        })->toArray(); 
 
         return view('user/service', compact('acara'));
     }
 
     public function booking()
     {
-        $eventData = Event::latest()->get();
+        $eventData = Event::latest()->get(); 
 
-        $booking = $eventData->map(function ($e) {
+        $booking = $eventData->map(function ($e) { 
             return [
-                'id' => $e->id,
+                'id' => $e->id, 
                 'gambar' => asset('uploads/images/' . $e->image),
-                'nama' => $e->nama,
-                'harga' => $e->harga,
-                'deskripsi' => $e->deskripsi,
-                'deskripsi2' => $e->deskripsi2,
+                'nama' => $e->nama, 
+                'harga' => $e->harga, 
+                'deskripsi' => $e->deskripsi, 
+                'deskripsi2' => $e->deskripsi2, 
             ];
         })->toArray();
 
@@ -77,8 +76,7 @@ class PemesananController extends Controller
 
     public function checkoutStore(Request $request)
     {
-        // check if user have invoice number
-        if (auth()->user()->invoiceNumber) return redirect('/myBooking')->with('error', 'Anda sudah melakukan pemesanan.');
+       
 
         $event = Event::find($request->event_id);
         $payload = [
@@ -88,7 +86,7 @@ class PemesananController extends Controller
             'jmlOrder' => 1,
             'tanggalPemesanan' => now(),
             'total_biaya' => $event->harga,
-            'status' => 'belum lunas',
+            'status' => 'lunas',
             'invoice' => $request->invoice,
         ];
 

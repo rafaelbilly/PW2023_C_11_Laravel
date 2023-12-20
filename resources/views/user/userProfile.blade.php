@@ -210,7 +210,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST">
+                        <form class="tab-content" action="{{ route('userProfile.update') }}" method="POST">
                             @csrf
                             @method('PUT')
 

@@ -82,14 +82,14 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $id = User::Auth()->id;
         $user = User::find($id);
         $user->username = $request->username;
         $user->email = $request->email;
         $user->phone_number = $request->phoneNumber;
         $user->invoiceNumber = $request->invoiceNumber;
         $user->active = $request->status == 'active' ? 1 : 0;
-        $user->save(); 
-
+    
         return redirect('/managementUser')->with('success', 'User has been updated!'); 
     }
 

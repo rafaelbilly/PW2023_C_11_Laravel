@@ -25,6 +25,7 @@ class UserEventController extends Controller
     public function index()
     {
         $eventData = Event::latest()->get(); 
+
         $acara = $eventData->map(function ($e) { 
             return [
                 'id' => $e->id, 
@@ -41,6 +42,7 @@ class UserEventController extends Controller
     public function booking()
     {
         $eventData = Event::latest()->get(); 
+
         $booking = $eventData->map(function ($e) { 
             return [
                 'id' => $e->id, 
@@ -73,8 +75,6 @@ class UserEventController extends Controller
 
     public function checkoutStore(Request $request)
     {
-        if (auth()->user()->invoiceNumber) return redirect('/myBooking')->with('error', 'Anda sudah melakukan pemesanan.');
-
         $event = Event::find($request->event_id);
         $payload = [
             'id_user' => auth()->id(),
@@ -83,7 +83,7 @@ class UserEventController extends Controller
             'jmlOrder' => 1,
             'tanggalPemesanan' => now(),
             'total_biaya' => $event->harga,
-            'status' => 'belum lunas',
+            'status' => 'lunas',
             'invoice' => $request->invoice,
         ];
 
@@ -128,6 +128,13 @@ class UserEventController extends Controller
         if (!$pemesanan) return redirect('/myBooking')->with('error', 'Pemesanan tidak ditemukan.');
 
         $pemesanan->delete();
+
+        if (auth()->user()->invoiceNumber) {
+            $user = User::find(auth()->id());
+            $user->update([
+                'invoiceNumber' => null,
+            ]);
+        }
 
         return redirect('/myBooking')->with('success', 'Pemesanan berhasil dihapus.');
     }
@@ -184,8 +191,41 @@ class UserEventController extends Controller
             ];
         })->toArray();
 
+        $event = Event::latest()->get(['id', 'nama']);
+
         return view('user/myReview', [
-            'myReview' => $review
+            'myReview' => $review,
+            'event' => $event
         ]);
+    }
+
+    public function destroyReview($id)
+    {
+        $review = Review::find($id);
+
+        if (!$review) return redirect('/myReview')->with('error', 'Review tidak ditemukan.');
+
+        $review->delete();
+
+        return redirect('/myReview')->with('success', 'Review berhasil dihapus.');
+    }
+
+    public function updateReview(Request $request)
+    {
+        $request->validate([
+            'id_event' => 'required',
+            'review' => 'required',
+        ]);
+
+        $review = Review::find($request->id);
+
+        if (!$review) return redirect('/myReview')->with('error', 'Review tidak ditemukan.');
+
+        $review->update([
+            'id_event' => $request->id_event,
+            'review' => $request->review,
+        ]);
+
+        return redirect('/myReview')->with('success', 'Review berhasil diubah.');
     }
 }

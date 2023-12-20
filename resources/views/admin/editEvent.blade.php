@@ -18,6 +18,7 @@
             overflow-x: hidden;
             font-size: 15px;
             background-color: #F0F0F0;
+            padding-top: 100px;
         }
 
         .container-form {
