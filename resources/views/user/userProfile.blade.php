@@ -210,22 +210,20 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST">
+                        <form class="tab-content" action="{{ route('userProfile.update') }}" method="POST">
                             @csrf
                             @method('PUT')
 
                             <div class="tab-pane fade active show" id="account-general">
                                 <div class="card-body media align-items-center">
                                     <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" alt class="d-block photo-profile">
-                                    <div class="card-body media align-items-center">
-                                    <img src="{{ asset('path/to/default_image.jpg') }}" alt="Profile Picture" class="d-block photo-profile" id="previewImage">
                                     <div class="media-body ml-4">
-                                        <label class="btn btn-outline-primary">
+                                        <label class="btn btn-outline-primary" id="uploadPhoto">
                                             Upload new photo
-                                            <input type="file" class="account-settings-fileinput" name="image" id="uploadImage">
+                                            <input type="file" class="account-settings-fileinput" name="image">
                                         </label> &nbsp;
-                                        <button type="button" class="btn btn-default md-btn-flat" id="resetImage">Reset</button>
-                                        <div class="text-light small mt-1">Allowed JPG, GIF, or PNG. Max size of 800K</div>
+                                        <button type="button" class="btn btn-default md-btn-flat">Reset</button>
+                                        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                     </div>
                                 </div>
                                 <hr class="border-light m-0">
@@ -239,17 +237,6 @@
                                         <label class="form-label">Email</label>
                                         <input type="text" class="form-control" value="{{ $userProfile['email'] }}" name="email">
                                     </div>
-                                    <br>
-                                    <!-- <div class="form-group">
-                                        <label class="form-label">Password</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="password" value="{{ $userProfile['password'] }}" name="password" readonly>
-                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                                <i class="far fa-eye" id="toggleIcon"></i>
-                                            </button>
-                                        </div>
-
-                                    </div> -->
                                     <br>
                                     <div class="form-group">
                                         <label class="form-label">Phone Number</label>
@@ -278,7 +265,7 @@
         </div>
     </footer>
 
-    <script>
+    <!-- <script>
         @if (Session::has('success'))
             alert("{{ session('success') }}");
         @elseif (Session::has('error'))
@@ -286,44 +273,8 @@
         @elseif (Session::has('info'))
             alert("{{ session('info') }}");
         @endif;
-    </script>
+    </script> -->
     <!-- /footer -->
-
-    <script>
-    // Mengambil elemen input password dan ikon mata
-    const passwordField = document.getElementById('password');
-    const toggleIcon = document.getElementById('toggleIcon');
-
-    // Menambahkan event listener untuk mengubah tipe input
-    toggleIcon.addEventListener('click', function () {
-        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordField.setAttribute('type', type);
-
-        // Mengubah ikon mata berdasarkan tipe input
-        toggleIcon.classList.toggle('fa-eye-slash');
-    });
-</script>
-
-<script>
-    // Pratinjau gambar saat dipilih
-    document.getElementById('uploadImage').addEventListener('change', function(e) {
-        const image = e.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            document.getElementById('previewImage').src = e.target.result;
-        };
-
-        reader.readAsDataURL(image);
-    });
-
-    // Mengatur reset gambar
-    document.getElementById('resetImage').addEventListener('click', function() {
-        document.getElementById('previewImage').src = "{{ asset('path/to/default_image.jpg') }}";
-        document.getElementById('uploadImage').value = null;
-    });
-</script>
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

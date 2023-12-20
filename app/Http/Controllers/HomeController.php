@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $review = Review::latest()->get(); 
+        $review = Review::latest()->get(); // mengambil semua data dari tabel reviews
 
         return view('user.homepage', [
             'review' => $review
@@ -23,8 +23,9 @@ class HomeController extends Controller
         $userProfile = [
             'username' => auth()->user()->username,
             'email' => auth()->user()->email,
-            'password' => auth()->user()->getAuthPassword(),
-            'phone' => auth()->user()->phone_number,
+            'password' => auth()->user()->password,
+            'phone' => auth()->user()->phoneNumber,
+            'image' => auth()->user()->image // tambahkan field image jika dibutuhkan
         ];
 
         return view('user.userProfile', [
@@ -32,11 +33,16 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function updateProfile(Request $request)
     {
-        $validated = $request->all() + [
-            'updated_at' => now(),
-        ];
+        $validated = $request->validate([
+            'username' => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable|min:6',
+            'phoneNumber' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // validasi untuk file gambar
+        ]);
 
         $user = User::findOrFail(auth()->id());
 

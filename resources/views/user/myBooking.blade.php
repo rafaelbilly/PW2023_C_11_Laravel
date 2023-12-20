@@ -218,12 +218,21 @@
                                             <h5 class="card-title">{{ $listBooking['namaAcara'] }}</h5>
                                             <p class="card-text">{{ $listBooking['tanggal'] }}</p>
                                             <br>
-                                            <form class="d-grid gap-2 d-flex justify-content-center" method="post" action="{{ route('myBooking.destroy', $listBooking['id']) }}">
-                                                @csrf
-                                                @method('DELETE')
 
-                                                <button class="btn btn-danger" type="submit">Delete</button>
-                                            </form>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                @if ($listBooking['status'] == 'belum lunas' || $listBooking['status'] == 'lunas')
+                                                    <form class="d-grid gap-2 d-flex justify-content-center" method="post" action="{{ route('myBooking.destroy', $listBooking['id']) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                                    </form>
+
+                                                    @if ($listBooking['status'] == 'belum lunas')
+                                                        <a href="{{ route('checkout', ['event_id' => $listBooking['event_id'], 'booking_id' => $listBooking['id']]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <a href="{{ route('checkout', ['event_id' => $listBooking['event_id'], 'booking_id' => $listBooking['id']]) }}" class="btn btn-sm btn-primary">Pay</a>
+                                                    @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     @endforeach

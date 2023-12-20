@@ -75,19 +75,14 @@
       margin-top: 10px;
     }
 
-    .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+    footer {
+      margin-top: 100px;
       background-color: #303030;
       min-height: 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 400;
     }
 
     footer p {
@@ -197,7 +192,11 @@
         <div class="card-body text-center">
           <h5 class="card-title"><strong>{{ $isi['nama'] }}</strong></h5>
           <h1 class="card-title"><strong>{{ $isi['harga'] }}</strong></h1>
-          <a href="{{ route('checkout', ['event_id' => $isi['id']]) }}" class="btn btn-primary">Booking</a>
+          <form action="{{ route('booking.store', ['event_id' => $isi['id']]) }}" method="post">
+            @csrf
+
+            <button type="submit" class="btn btn-primary">Booking</button>
+          </form>
           <h6 class="card-title" style="margin-top: 30px;">Includes:</h6>
           <ul class="checklist">
             @foreach (explode("\r\n", $isi['deskripsi']) as $point)
