@@ -50,10 +50,11 @@ class LoginController extends Controller
     {
         if ($role == 0) {
             return redirect('homepage');
+            
         } elseif ($role == 1) {
             return redirect('DashboardAdmin');
         } else {
-            return redirect('homepage');
+            return redirect('login');
         }
     }
 

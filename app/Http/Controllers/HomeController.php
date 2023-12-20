@@ -24,7 +24,8 @@ class HomeController extends Controller
             'username' => auth()->user()->username,
             'email' => auth()->user()->email,
             'password' => auth()->user()->password,
-            'phone' => auth()->user()->phone_number,
+            'phone_number' => auth()->user()->phone_number,
+            'image' => auth()->user()->image,
         ];
 
         return view('user.userProfile', [
@@ -52,12 +53,6 @@ class HomeController extends Controller
             if (file_exists($oldPath) && is_file($oldPath) && $user->image != 'image.png') {
                 unlink($oldPath);
             }
-        }
-
-        if ($request->filled('password')) {
-            $validated['password'] = Hash::make($request->password);
-        } else {
-            $validated['password'] = $user->password;
         }
 
         $user->update($validated);

@@ -149,16 +149,16 @@
                                     </div>
 
                                     <div class="mb-4 row">
-                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                        <label for="description" class="col-sm-2 col-form-label">Includes</label>
                                         <div class="col-sm-10">
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="mb-4 row">
-                                        <label for="description" class="col-sm-2 col-form-label">Item Detail (description 2)</label>
+                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi2" placeholder="separate with a new line"></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi2"></textarea>
                                         </div>
                                     </div>
 

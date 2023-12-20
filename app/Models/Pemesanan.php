@@ -21,7 +21,8 @@ class Pemesanan extends Model
         'card_exp',
         'card_cvc',
         'jmlOrder',
-        'tanggalPemesanan',
+        'tanggal_event',
+        'tempat_event',
         'total_biaya',
         'status',
     ];

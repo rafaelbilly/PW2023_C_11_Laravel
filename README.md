@@ -7,14 +7,34 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## TUBES PEMROGRAMAN WEB
-- Kelompok 11
-- Kelas C
+## UAS Pemrograman Web Gasal 2023/2024
+# Kelas C Kelompok 11
 
-## Tema
-- Event Organizer
+## Anggota Kelompok 
+- Rafael Billy (210711297) - Front end, mengintegrasikan FE dan BE, create API
+- Juneta Julia (210711382) - Backend CRUD
+- Nikken Carmelia (210711318) - Backend Admin
 
-## Anggota
-- Rafael Billy - 210711297
-- Juneta Julia - 210711382
-- Nikken Carmelia - 210711318
+## Username & Password Login
+- Login User
+    - email : rafaelbilly6@gmail.com
+    - password : 12345
+- Login Admin
+    - email : admin@gmail.com
+    - password : admin
+
+## Bonus Yang Diambil
+- Routes API
+    - POST /api/register - Create new account
+    - POST /api/login - Login into website
+
+    - GET /api/pemesanans - Get All Pemesanan
+    - POST /api/pemesanans - Create Pemesanan
+    - GET /api/pemesanans/id - Find Pemesanan by Id
+    - DELETE /api/pemesanans/id - Delete Pemesanan by Id
+
+    - GET /api/reviews - Get All Reviews
+    - POST /api/reviews - Create Reviews
+    - GET /api/reviews/id - Find Reviews by Id
+    - PUT /api/reviews/id - Update Reviews by Id
+    - DELETE /api/reviews/id - Delete Reviews by Id

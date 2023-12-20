@@ -213,10 +213,9 @@
                         <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-
                             <div class="tab-pane fade active show" id="account-general">
                                 <div class="card-body media align-items-center">
-                                    <img src="https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg" alt="Default Photo" class="d-block photo-profile" id="currentPhoto">
+                                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" alt="Default Photo" class="d-block photo-profile" id="currentPhoto">
                                     <div class="media-body ml-4">
                                         <label class="btn btn-outline-primary" id="uploadPhoto">
                                             Upload new photo
@@ -242,18 +241,11 @@
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" value="" name="password">
-                                        <div class="text-small text-danger">dont fill password if wont change password</div>
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
                                         <label class="form-label">Phone Number</label>
-                                        <input type="number" class="form-control" value="{{ $userProfile['phone'] }}" name="phoneNumber">
+                                        <input type="number" class="form-control" value="{{ $userProfile['phone_number'] }}" name="phone_number">
                                     </div>
                                     <br>
                                     <div class="d-grid gap-2 mt-3 d-md-flex justify-content-md-end">
-                                        <button type="button" class="btn btn-default">Cancel</button>
                                         <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
@@ -285,36 +277,10 @@
     </script>
 
     <script>
-        function previewImage(input) {
-            const preview = document.getElementById('imagePreview');
-            const currentPhoto = document.getElementById('currentPhoto');
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.classList.remove('d-none');
-                    currentPhoto.classList.add('d-none');
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
+        function showConfirmation() {
+            return confirm("Apakah Yakin Ingin Mengubah Profile?");
         }
 
-        function resetImage() {
-            const preview = document.getElementById('imagePreview');
-            const currentPhoto = document.getElementById('currentPhoto');
-
-            preview.src = '#';
-            preview.classList.add('d-none');
-            currentPhoto.classList.remove('d-none');
-
-            const input = document.querySelector('.account-settings-fileinput');
-            input.value = '';
-        }
-
-        // Function to check if an image has been uploaded or not
         window.onload = function() {
             const input = document.querySelector('.account-settings-fileinput');
             const currentPhoto = document.getElementById('currentPhoto');
@@ -332,9 +298,18 @@
 
                     reader.readAsDataURL(this.files[0]);
                 } else {
-                    preview.src = 'https://i.pinimg.com/564x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg';
+                    preview.src = 'https://mdbcdn.b-cdn.net/img/new/avatars/8.webp';
                     preview.classList.add('d-none');
                     currentPhoto.classList.remove('d-none');
+                } 
+            });
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                if (!showConfirmation()) {
+                    event.preventDefault();
+                } else {
+                    form.submit();
                 }
             });
         };

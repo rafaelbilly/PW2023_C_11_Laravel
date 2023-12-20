@@ -7,7 +7,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Event;
@@ -43,16 +42,16 @@ Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogo
 Route::get('homepage', [HomeController::class, 'index'])->name('homepage')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/service', [UserEventController::class, 'index'])->name('service.index');
+    Route::get('/service', [PemesananController::class, 'index'])->name('service.index');
 
-    Route::get('/booking', [UserEventController::class, 'booking'])->name('booking');
+    Route::get('/booking', [PemesananController::class, 'booking'])->name('booking');
 
     Route::get('/contact', function () {
         return view('user/contact');
     });
 
-    Route::get('/myBooking', [UserEventController::class, 'myBooking'])->name('myBooking');
-    Route::delete('/myBooking/{id}', [UserEventController::class, 'destroyBooking'])->name('myBooking.destroy');
+    Route::get('/myBooking', [PemesananController::class, 'myBooking'])->name('myBooking');
+    Route::delete('/myBooking/{id}', [PemesananController::class, 'destroyBooking'])->name('myBooking.destroy');
 
     Route::get('/userProfile', [HomeController::class, 'userProfile'])->name('userProfile');
     Route::put('/userProfile', [HomeController::class, 'updateProfile'])->name('userProfile.update');

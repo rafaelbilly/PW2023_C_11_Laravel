@@ -198,7 +198,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $user['invoiceNumber'] }}</td>
-                                <td>{{ $user['phoneNumber'] }}</td>
+                                <td>{{ $user['phone_number'] }}</td>
                                 <td>{{ $user['email'] }}</td>
                                 <td>{{ $user['status'] }}</td>
                                 <td>
@@ -236,7 +236,7 @@
                                                                         <div class="mb-3">
                                                                             <label for="phoneInput" class="form-label">Phone
                                                                                 Number</label>
-                                                                            <input type="text" class="form-control" id="phoneInput" name="phoneNumber" value="{{ $user['phoneNumber'] }}">
+                                                                            <input type="text" class="form-control" id="phoneInput" name="phone_number" value="{{ $user['phone_number'] }}">
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="emailInput" class="form-label">Email</label>

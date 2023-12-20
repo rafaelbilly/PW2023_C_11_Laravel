@@ -7,14 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Dashboard</title>
-
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
 
     <style>
         body {
@@ -31,13 +28,16 @@
             margin-top: 30px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
         }
 
         .card {
-            flex: 1;
-            width: 18rem;
+            flex: 0 1 calc(33.33% - 20px);
             margin: 10px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 400px;
         }
 
         .card-border-left {
@@ -147,8 +147,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Income (Monthly)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ $data['income'] }}</div>
+                                            Income Total</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ number_format($data['income'], 0, ',', '.') }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -231,7 +231,6 @@
                         <th>Invoice Number</th>
                         <th>Nama</th>
                         <th>Price</th>
-                        <th>Status</th>
                         <th>Keterangan</th>
                     </tr>
                     @forelse ($admin as $item)
@@ -240,13 +239,8 @@
                         <td>{{ $item['invoice'] }}</td>
                         <td>{{ $item['nama'] }}</td>
                         <td>IDR {{ number_format($item['price'], 0, ',', '.') }}</td>
-                        <td>{{ $item['status'] }}</td>
                         <td>
-                            @if ($item['keterangan'] === 'lunas')
                             <i class="fas fa-check-circle text-success"></i>
-                            @else
-                            <i class="fas fa-times-circle text-danger"></i>
-                            @endif
                         </td>
                     </tr>
                     @empty

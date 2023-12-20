@@ -72,7 +72,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password), 
             'email' => $request->email,
             'role' => $request->role,
-            'phone_number' => $request->phoneNumber,
+            'phone_number' => $request->phone_number,
             'invoiceNumber' => $request->invoiceNumber,
             'active' => 0,
         ]); 

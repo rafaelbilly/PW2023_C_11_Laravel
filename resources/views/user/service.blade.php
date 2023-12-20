@@ -46,17 +46,15 @@
       margin-top: 120px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
 
     .card {
-      flex: 1;
-      width: 10rem;
-      height: 300px;
+      width: calc(30% - 20px);
       margin: 10px;
       transition: transform 0.3s;
       display: flex;
       flex-direction: column;
+      margin-bottom: 1rem;
     }
 
     .card .card-img-top {
@@ -219,11 +217,11 @@
         <img src="{{ $isi['gambar'] }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{ $isi['nama'] }}</h5>
-          <p>{{ $isi['deskripsi'] }}<span class="dots">...</span></p>
+          <p>{{ $isi['deskripsi2'] }}<span class="dots">...</span></p>
           <h6>What will you get?</h6>
           <ul class="more">
-            @foreach (explode("\n", $isi['deskripsi2']) as $point)
-            <li>{{ $point }}</li>
+            @foreach (explode("\n", $isi['deskripsi']) as $point)
+              <li>{{ $point }}</li>
             @endforeach
           </ul>
           <button onclick="myFunction(this)" class="btn btn-link">Read more</button>

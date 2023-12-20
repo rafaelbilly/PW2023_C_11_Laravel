@@ -82,8 +82,8 @@ class PemesananController extends Controller
             'id_user' => auth()->id(),
             'id_event' => $request->event_id,
             'payment_type' => $request->payment_type,
-            'jmlOrder' => 1,
-            'tanggalPemesanan' => now(),
+            'tanggal_event' => $request->tanggal_event,
+            'tempat_event' => $request->tempat_event,
             'total_biaya' => $event->harga,
             'status' => 'belum lunas',
             'invoice' => $request->invoice,
@@ -98,8 +98,14 @@ class PemesananController extends Controller
 
         $booking = Pemesanan::create($payload);
         $user = User::find(auth()->id());
+        $invoiceNumbers = json_decode($user->invoiceNumber, true) ?? [];
+
+        if (!in_array($booking->invoice, $invoiceNumbers)) {
+            $invoiceNumbers[] = $booking->invoice;
+        }
+
         $user->update([
-            'invoiceNumber' => $booking->invoice,
+            'invoiceNumber' => json_encode($invoiceNumbers),
         ]);
 
         return redirect('/myBooking')->with('success', 'Pemesanan berhasil ditambahkan.');
@@ -127,11 +133,15 @@ class PemesananController extends Controller
     {
         $pemesanan = Pemesanan::find($id);
 
-        if (!$pemesanan) return redirect('/myBooking')->with('error', 'Pemesanan tidak ditemukan.');
+        if (!$pemesanan) {
+            return redirect('/myBooking')->with('error', 'Pemesanan tidak ditemukan.');
+        }
+
+        $invoiceNumber = auth()->user()->invoiceNumber;
 
         $pemesanan->delete();
 
-        if (auth()->user()->invoiceNumber) {
+        if (auth()->user()->invoiceNumber && $invoiceNumber == $pemesanan->id_event) {
             $user = User::find(auth()->id());
             $user->update([
                 'invoiceNumber' => null,

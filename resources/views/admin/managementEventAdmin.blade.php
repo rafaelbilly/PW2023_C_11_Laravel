@@ -67,11 +67,20 @@
             background: transparent;
         }
 
-        .card-event {
-            transition: transform 0.3s;
-            transform-origin: center top;
-            width: 12rem;
-            height: 60%;
+        .card-container {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 0 1 calc(33.33% - 20px);
+            margin: 10px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 400px;
         }
 
         a.read-more {
@@ -182,8 +191,6 @@
                             @endif
                         </div>
                     </div>
-
-
                     <div class="card text-bg-dark" style="height: 200px;">
                         <img src="{{ asset('images/comingsoonPic.jpg') }}" class="card-img" alt="Coming Soon" style="object-fit: cover; width: 100%; height: 200px; opacity: 0.6;">
                         <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
@@ -191,8 +198,6 @@
                             <p class="card-text text-center">There will be something special in the near future</p>
                         </div>
                     </div>
-
-
                     <div class="container-fluid">
                         <h1 class="mt-5 mb-3 section-title">Events</h1>
                         <div class="scroll-horizontal" style="overflow-x: auto; white-space: nowrap;">
@@ -205,16 +210,16 @@
                                             <h5 class="card-title"><strong>{{ $eventData['judul'] }}</strong></h5>
                                             <div class="card-description">
                                                 <p class="card-text" style="text-align: justify;">
-                                                    <small>{{ $eventData['deskripsi'] }}</small>
+                                                    <small>{{ $eventData['deskripsi2'] }}</small>
                                                 </p>
                                                 <p>
                                                 <h6><strong>What will you get?</strong></h6>
                                                 </p>
                                                 <ul class="list-group deskripsi2-item" style="display: none;">
                                                     @php
-                                                    $deskripsi2Items = explode("\r\n", $eventData['deskripsi2']);
+                                                    $deskripsi = explode("\r\n", $eventData['deskripsi']);
                                                     @endphp
-                                                    @foreach($deskripsi2Items as $item)
+                                                    @foreach($deskripsi as $item)
                                                     <small>
                                                         <li>{{ $item }}</li>
                                                     </small>

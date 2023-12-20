@@ -150,16 +150,16 @@
                                     </div>
 
                                     <div class="mb-4 row">
-                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                        <label for="description" class="col-sm-2 col-form-label">Includes</label>
                                         <div class="col-sm-10">
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi">{{old('deskripsi', $event->deskripsi)}}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="mb-4 row">
-                                        <label for="description" class="col-sm-2 col-form-label">Item Detail (description 2)</label>
+                                        <label for="description" class="col-sm-2 col-form-label">Descriptions</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi2" placeholder="separate with a new line">{{old('deskripsi', $event->deskripsi)}}</textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="deskripsi2">{{old('deskripsi2', $event->deskripsi2)}}</textarea>
                                         </div>
                                     </div>
 

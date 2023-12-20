@@ -32,12 +32,10 @@
       margin-top: 150px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
 
     .card {
-      flex: 1;
-      width: 18rem;
+      flex-basis: calc(33.33% - 20px);
       margin: 10px;
       transition: transform 0.3s;
     }
@@ -76,18 +74,13 @@
     }
 
     .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      margin-top: 70px;
       background-color: #303030;
       min-height: 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 400;
     }
 
     footer p {

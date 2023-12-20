@@ -22,7 +22,6 @@
       font-family: "Inter", sans-serif;
       font-size: 15px;
       background-color: #F0F0F0;
-      min-height: 100vh;
     }
 
     .navbar {
@@ -81,6 +80,10 @@
       box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
     }
 
+    .card-img-top {
+      height: 300px;
+    }
+
     .row-bordered {
       overflow: hidden;
     }
@@ -115,12 +118,13 @@
     }
 
     footer {
-      width: 100%;
+      margin-top: 100px;
       background-color: #303030;
       min-height: 100px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 400;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     footer p {
@@ -202,7 +206,7 @@
             <div class="list-group list-group-flush account-settings-links">
               <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
               <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('myReview') }}">My Review</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
             </div>
           </div>
           <div class="col-md-9">
@@ -215,12 +219,13 @@
                       <img src="{{ $listBooking['gambar'] }}" class="card-img-top" alt="...">
                       <div class="card-body text-center">
                         <h5 class="card-title">{{ $listBooking['namaAcara'] }}</h5>
-                        <p class="card-text">{{ $listBooking['tanggal'] }}</p>
+                        <h6 class="card-text">Date Added:</h6>
+                        <h7 class="card-text">{{ $listBooking['tanggal'] }}</h7>
+                        <br>
                         <br>
                         <form class="d-grid gap-2 d-flex justify-content-center" method="post" action="{{ route('myBooking.destroy', $listBooking['id']) }}">
                           @csrf
                           @method('DELETE')
-
                           <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                       </div>
@@ -237,12 +242,12 @@
   </div>
 
   <script>
-    // @if (Session::has('success'))
-    //     alert("{{ session('success') }}");
-    // @elseif (Session::has('error'))
-    //     alert("{{ session('error') }}");
-    // @elseif (Session::has('info'))
-    //     alert("{{ session('info') }}");
+    // @if(Session::has('success'))
+    // alert("{{ session('success') }}");
+    // @elseif(Session::has('error'))
+    // alert("{{ session('error') }}");
+    // @elseif(Session::has('info'))
+    // alert("{{ session('info') }}");
     // @endif;
   </script>
 

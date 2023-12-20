@@ -130,16 +130,35 @@
                     <div class="card-body">
                         <div class="row g-3">
                             <div class="col-12">
-                                <label for="inputname" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="inputname" value="{{auth()->user()->username}}" name="nama">
+                                <label for="inputname" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="inputname" value="{{auth()->user()->username}}" name="nama" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputNotel" class="form-label">Nomor Telepon</label>
-                                <input type="number" class="form-control" id="inputNotel" value="{{auth()->user()->phoneNumber}}" name="phoneNumber">
+                                <input type="number" class="form-control" id="inputNotel" value="{{auth()->user()->phone_number}}" name="phoneNumber" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="inputEmail" value="{{auth()->user()->email}}" name="email">
+                                <input type="email" class="form-control" id="inputEmail" value="{{auth()->user()->email}}" name="email" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Detail Event Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <h6>2. Detail Event Information</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="tanggal_event">Tanggal Event:</label>
+                                <input type="date" class="form-control" id="tanggal_event" value="" name="tanggal_event" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="tempat_event">Tempat Event:</label>
+                                <input type="text" class="form-control" id="tempat_event" value="" name="tempat_event" required>
                             </div>
                         </div>
                     </div>
@@ -148,8 +167,9 @@
                 <!-- Detail Pesanan Form -->
                 <div class="card mt-3">
                     <div class="card-header">
-                        <h6>2. Payment Method</h6>
+                        <h6>3. Payment Method</h6>
                     </div>
+                    <br>
                     <div class="card-body">
                         <div class="row g-3">
                             <div class="row">
@@ -175,10 +195,12 @@
                                     <label for="inputcardname" class="form-label">Cardholder Name</label>
                                     <input type="text" class="form-control" id="inputcardname" name="cardholder_name">
                                 </div>
+                                <br>
                                 <div class="col-md-12">
                                     <label for="inputcardNumber" class="form-label">Card Number</label>
                                     <input type="number" class="form-control" id="inputcardNumber" name="card_number">
                                 </div>
+                                <br>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="inputexp" class="form-label">Exp date</label>
@@ -194,12 +216,12 @@
                     </div>
                 </div>
             </div>
-
+            <br>
             <!-- Card on the Right -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h6>3. Your Order</h6>
+                        <h6>4. Your Order</h6>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Order Summary</h5>
@@ -215,12 +237,12 @@
                             <tbody>
                                 <tr>
                                     <td>{{$event->nama}}</td>
-                                    <td>IDR {{$event->harga}}</td>
+                                    <td>{{'IDR ' . number_format($event['harga'], 0, ',', '.')}}</td>
                                 </tr>
 
                                 <tr>
                                     <td><strong>Total<strong></td>
-                                    <td><strong>IDR {{$event->harga}}<strong></td>
+                                    <td><strong>{{'IDR ' . number_format($event['harga'], 0, ',', '.')}}<strong></td>
                                 </tr>
 
                             </tbody>
@@ -244,11 +266,21 @@
     </footer>
 
     <script>
-        function showAlert() {
-            var message = 'Your Order Success Submit!';
-            var type = 'success';
-            alert(message, type);
+        function liveAlertBtn(message) {
+            return confirm(message);
         }
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            const today = new Date();
+            const message = `Apakah Anda Yakin Dengan Pesanan Ini?\n\n! Pesanan yang sudah dibayar tidak dapat diubah !`;
+
+            if (!liveAlertBtn(message)) {
+                event.preventDefault();
+            } else {
+                form.submit();
+            }
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -259,7 +291,6 @@
             function toggleDetailPayment() {
                 detailPayment.style.display = creditOrDebitRadio.checked ? 'block' : 'none';
 
-                // Setiap kali terjadi perubahan, atur properti required untuk input Card
                 var cardInputs = detailPayment.querySelectorAll('[name^="card"]');
                 cardInputs.forEach(function(input) {
                     input.required = creditOrDebitRadio.checked;
