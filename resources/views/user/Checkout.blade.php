@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <style>
         body {
@@ -119,6 +120,7 @@
         <form class="row" style="margin-top: 30px;" method="POST" action="{{ route('checkout.store') }}">
             @csrf
             <input type="hidden" name="event_id" value="{{$event->id}}">
+            <input type="hidden" name="booking_id" value="{{request()->booking_id}}">
             <input type="hidden" name="invoice" value="{{ $newInvoice }}">
 
             <div class="col-md-6">
@@ -140,6 +142,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputEmail" value="{{auth()->user()->email}}" name="email">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tanggal_pemesanan" class="form-label">Tanggal</label>
+                                <input type="date" class="form-control" id="tanggal_pemesanan" value="" name="tanggalPemesanan">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="venue" class="form-label">Venue</label>
+                                <input type="text" class="form-control" id="venue" value="" name="venue">
                             </div>
                         </div>
                     </div>

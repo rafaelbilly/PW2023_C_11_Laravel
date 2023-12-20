@@ -196,13 +196,49 @@
   <!-- User Profile -->
   <div class="profile-container">
     <div class="container light-style flex-grow-1 container-p-y">
-      <div class="card overflow-hidden">
-        <div class="row no-gutters row-bordered row-border-light">
-          <div class="col-md-3 pt-0">
-            <div class="list-group list-group-flush account-settings-links">
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
-              <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('myReview') }}">My Review</a>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body media align-items-center">
+                                <div class="media-body ml-4 d-flex flex-wrap">
+                                    @foreach ($myBooking as $listBooking)
+                                    <div class="card mb-4" style="width: 18rem; margin-right: 0.5rem;">
+                                        <img src="{{ $listBooking['gambar'] }}" class="card-img-top" alt="...">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">{{ $listBooking['namaAcara'] }}</h5>
+                                            <p class="card-text">{{ $listBooking['tanggal'] }}</p>
+                                            <br>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                @if ($listBooking['status'] == 'belum lunas' || $listBooking['status'] == 'lunas')
+                                                    <form class="d-grid gap-2 d-flex justify-content-center" method="post" action="{{ route('myBooking.destroy', $listBooking['id']) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                                    </form>
+
+                                                    @if ($listBooking['status'] == 'belum lunas')
+                                                        <a href="{{ route('checkout', ['event_id' => $listBooking['event_id'], 'booking_id' => $listBooking['id']]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <a href="{{ route('checkout', ['event_id' => $listBooking['event_id'], 'booking_id' => $listBooking['id']]) }}" class="btn btn-sm btn-primary">Pay</a>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
           <div class="col-md-9">

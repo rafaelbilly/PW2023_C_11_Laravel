@@ -24,6 +24,8 @@ class Pemesanan extends Model
         'tanggalPemesanan',
         'total_biaya',
         'status',
+        'phone_number',
+        'image',
     ];
 
     public function user()

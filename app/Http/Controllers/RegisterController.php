@@ -24,7 +24,7 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->input('password')),
-            'phone_number' => $request->phone_number,
+            // 'phone_number' => $request->phone_number,
             'verify_key' => $str,
             'role' => 0,
             'image' => null,
@@ -44,9 +44,7 @@ class RegisterController extends Controller
     }
 
     public function verify($verify_key){
-        $keyCheck = User::select('verify_key')
-            ->where('verify_key', $verify_key)
-            ->exists();
+        $keyCheck = User::where('verify_key', $verify_key)->exists();
 
         if ($keyCheck) {
             $user = User::where('verify_key', $verify_key)
