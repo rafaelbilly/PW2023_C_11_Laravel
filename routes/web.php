@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserEventController;
+use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\ReviewController;
 use App\Models\Event;
 use App\Models\Review;
 
@@ -23,7 +25,7 @@ use App\Models\Review;
 */
 
 Route::get('/', function () {
-    $review = Review::latest()->get(); // mengambil semua data dari tabel reviews
+    $review = Review::latest()->get();
 
     return view('landing', [
         'review' => $review
@@ -40,21 +42,20 @@ Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify']
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
 Route::get('homepage', [HomeController::class, 'index'])->name('homepage')->middleware('auth');
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::get('/service', [UserEventController::class, 'index'])->name('service.index');
 
-Route::get('/booking', [UserEventController::class, 'booking'])->name('booking');
-Route::post('/booking', [UserEventController::class, 'bookingStore'])->name('booking.store');
+    Route::get('/booking', [UserEventController::class, 'booking'])->name('booking');
 
-Route::get('/contact', function () {
-    return view('user/contact');
-});
+    Route::get('/contact', function () {
+        return view('user/contact');
+    });
 
-Route::get('/myBooking', [UserEventController::class, 'myBooking'])->name('myBooking');
-Route::delete('/myBooking/{id}', [UserEventController::class, 'destroyBooking'])->name('myBooking.destroy');
+    Route::get('/myBooking', [UserEventController::class, 'myBooking'])->name('myBooking');
+    Route::delete('/myBooking/{id}', [UserEventController::class, 'destroyBooking'])->name('myBooking.destroy');
 
-Route::get('/userProfile', [HomeController::class, 'userProfile'])->name('userProfile');
-Route::put('/userProfile', [HomeController::class, 'updateProfile'])->name('userProfile.update');
+    Route::get('/userProfile', [HomeController::class, 'userProfile'])->name('userProfile');
+    Route::put('/userProfile', [HomeController::class, 'updateProfile'])->name('userProfile.update');
 });
 
 Route::get('/DashboardAdmin', [EventController::class, 'dashboardAdmin'])->name('dashboardAdmin');
@@ -75,14 +76,13 @@ Route::get('/managementEventAdmin/{id}/edit', [EventController::class, 'edit'])-
 Route::put('/managementEventAdmin/{id}', [EventController::class, 'update'])->name('managementEventAdmin.update');
 Route::delete('/managementEventAdmin/{id}', [EventController::class, 'destroy'])->name('managementEventAdmin.destroy');
 
-Route::get('/Checkout', [UserEventController::class, 'checkout'])->name('checkout');
-Route::post('/Checkout', [UserEventController::class, 'checkoutStore'])->name('checkout.store');
+Route::get('/Checkout', [PemesananController::class, 'checkout'])->name('checkout');
+Route::post('/Checkout', [PemesananController::class, 'checkoutStore'])->name('checkout.store');
 
+Route::get('/addReview', [ReviewController::class, 'addReview'])->name('addReview');
+Route::post('/addReview', [ReviewController::class, 'addReviewStore'])->name('addReview.store');
 
-Route::get('/addReview', [UserEventController::class, 'addReview'])->name('addReview');
-Route::post('/addReview', [UserEventController::class, 'addReviewStore'])->name('addReview.store');
+Route::get('/myReview', [ReviewController::class, 'myReview'])->name('myReview');
 
-Route::get('/myReview', [UserEventController::class, 'myReview'])->name('myReview');
-
-Route::delete('/myReview/{id}', [UserEventController::class, 'destroyReview'])->name('reviews.destroy');
-Route::put('/myReview/{id}', [UserEventController::class, 'updateReview'])->name('review.update');
+Route::delete('/myReview/{id}', [ReviewController::class, 'destroyReview'])->name('reviews.destroy');
+Route::put('/myReview/{id}', [ReviewController::class, 'updateReview'])->name('review.update');

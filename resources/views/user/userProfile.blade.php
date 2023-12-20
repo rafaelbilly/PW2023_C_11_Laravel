@@ -210,7 +210,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form class="tab-content" action="{{ route('userProfile.update') }}" method="POST" enctype="multipart/form-data">
+                        <form class="tab-content" action="{{ route('userProfile.update', []) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -239,6 +239,12 @@
                                     <div class="form-group">
                                         <label class="form-label">Email</label>
                                         <input type="text" class="form-control" value="{{ $userProfile['email'] }}" name="email">
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" value="" name="password">
+                                        <div class="text-small text-danger">dont fill password if wont change password</div>
                                     </div>
                                     <br>
                                     <div class="form-group">
