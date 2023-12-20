@@ -93,7 +93,33 @@ class ReviewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $updateData = $request->all();
+
+        $validate = Validator::make($updateData, [
+            'review' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return response(['message' => $validate->errors()], 400);
+        }
+
+        $review = Review::find($id);
+
+        if (is_null($review)) {
+            return response([
+                'message' => 'Review Not Found',
+                'data' => null
+            ], 404);
+        }
+
+        $review->update([
+            'review' => $updateData['review'],
+        ]);
+
+        return response([
+            'message' => 'Update Review Success',
+            'data' => $review,
+        ], 200);
     }
 
     /**
