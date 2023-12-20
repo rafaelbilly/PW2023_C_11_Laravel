@@ -38,3 +38,6 @@
     - GET /api/reviews/id - Find Reviews by Id
     - PUT /api/reviews/id - Update Reviews by Id
     - DELETE /api/reviews/id - Delete Reviews by Id
+
+# Notes
+- Jika mau run khusus untuk testing API menggunakan postman, silahkan untuk pindah branch ke "api" baru dijalankan laravelnya :)
