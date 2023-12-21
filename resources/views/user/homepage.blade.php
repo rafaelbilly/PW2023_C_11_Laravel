@@ -622,7 +622,7 @@
                         <div class="card-body">
                             <p class="card-text">{{ $r->review }}</p>
                             <div class="profile-details">
-                                <img src="{{ asset('uploads/images/' . Auth::user()->image) }}" alt="" />
+                                <img src="{{ asset('uploads/images/' . $r->user->image) }}" alt="" />
                                 <div class="name-job">
                                     <h3 class="name">{{ $r->user->username }}</h3>
                                     <h4 class="name-event">{{ $r->event->nama }}</h4>
