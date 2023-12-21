@@ -85,7 +85,7 @@ class PemesananController extends Controller
             'tanggal_event' => $request->tanggal_event,
             'tempat_event' => $request->tempat_event,
             'total_biaya' => $event->harga,
-            'status' => 'belum lunas',
+            'status' => 'Lunas',
             'invoice' => $request->invoice,
         ];
 

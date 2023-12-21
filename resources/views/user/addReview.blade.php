@@ -251,7 +251,11 @@
                                             </div>
                                         </div>
                                         @endforelse
-
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        @unless(empty($myReview))
+                                            <button class="btn btn-primary" onclick="addReviewModal()">Add Review</button>
+                                        @endunless
                                     </div>
                                 </div>
                             </div>
