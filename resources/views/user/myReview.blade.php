@@ -44,6 +44,7 @@
             align-items: center;
             margin-top: 90px;
             padding-bottom: 3px;
+            flex: 1;
         }
 
         .btn {
@@ -57,6 +58,11 @@
         .card {
             background-clip: padding-box;
             box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+        }
+
+        .event-image {
+            height: 200px;
+            object-fit: cover;
         }
 
         .row-bordered {
@@ -89,12 +95,14 @@
         }
 
         footer {
-            width: 100%;
+            margin-top: 100px;
             background-color: #303030;
             min-height: 100px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            flex-shrink: 0;
         }
 
         footer p {
@@ -186,7 +194,7 @@
                                     <div class="media-body ml-4 d-flex flex-wrap">
                                         @forelse ($myReview as $r)
                                         <div class="card mb-4" style="width: 18rem; margin-right: 0.5rem;">
-                                            <img src="{{ $r['gambar'] }}" class="card-img-top" alt="...">
+                                            <img src="{{ $r['gambar'] }}" class="card-img-top event-image" alt="...">
                                             <div class="card-body media align-items-center">
                                                 <h5 class="card-title text-center">{{ $r['namaAcara'] }}</h5>
                                                 <p class="card-text text-center">{{ $r['review'] }}</p>
@@ -329,6 +337,24 @@
         function addReviewModal() {
             $('#reviewModal').modal('show');
         }
+
+        function adjustFooterPosition() {
+            var contentHeight = document.querySelector('.profile-container').offsetHeight;
+            var viewportHeight = window.innerHeight;
+
+            if (contentHeight < viewportHeight) {
+                document.body.style.overflowY = 'hidden';
+                document.querySelector('footer').style.position = 'fixed';
+                document.querySelector('footer').style.bottom = '0';
+                document.querySelector('footer').style.width = '100%';
+            } else {
+                document.body.style.overflowY = 'auto';
+                document.querySelector('footer').style.position = 'static';
+            }
+        }
+
+        window.addEventListener('resize', adjustFooterPosition);
+        window.addEventListener('DOMContentLoaded', adjustFooterPosition);
     </script>
     <script>
         // @if (Session::has('success'))

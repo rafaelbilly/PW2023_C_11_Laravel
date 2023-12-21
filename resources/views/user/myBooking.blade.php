@@ -22,6 +22,7 @@
       font-family: "Inter", sans-serif;
       font-size: 15px;
       background-color: #F0F0F0;
+      min-height: 100vh;
     }
 
     .navbar {
@@ -43,6 +44,7 @@
       align-items: center;
       margin-top: 90px;
       padding-bottom: 3px;
+      flex: 1;
     }
 
     .photo-profile {
@@ -125,6 +127,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+      flex-shrink: 0;
     }
 
     footer p {
@@ -206,7 +209,7 @@
             <div class="list-group list-group-flush account-settings-links">
               <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('userProfile') }}">User Profile</a>
               <a class="list-group-item list-group-item-action active" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('myReview') }}">My Review</a>
             </div>
           </div>
           <div class="col-md-9">
@@ -260,7 +263,25 @@
     </div>
   </footer>
   <!-- /footer -->
+  <script>
+    function adjustFooterPosition() {
+      var contentHeight = document.querySelector('.profile-container').offsetHeight;
+      var viewportHeight = window.innerHeight;
 
+      if (contentHeight < viewportHeight) {
+        document.body.style.overflowY = 'hidden'; // Prevent scrolling
+        document.querySelector('footer').style.position = 'fixed';
+        document.querySelector('footer').style.bottom = '0';
+        document.querySelector('footer').style.width = '100%';
+      } else {
+        document.body.style.overflowY = 'auto'; // Allow scrolling
+        document.querySelector('footer').style.position = 'static';
+      }
+    }
+
+    window.addEventListener('resize', adjustFooterPosition);
+    window.addEventListener('DOMContentLoaded', adjustFooterPosition);
+  </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

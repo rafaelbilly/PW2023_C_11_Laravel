@@ -571,9 +571,9 @@
                         <p class="card-text text-center">UI UX Designer & Developer</p>
                         <div class="social-media">
                             <a href="https://www.linkedin.com/in/rafaelbilly/"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a>
                             <a href="https://www.instagram.com/rafaelbilly_/"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
                 </div>
@@ -583,10 +583,10 @@
                         <h5 class="card-title text-center">Juneta Julia</h5>
                         <p class="card-text text-center">UI UX Designer & Developer</p>
                         <div class="social-media">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/junetajulia__?igsh=YzVkODRmOTdmMw=="><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
                 </div>
@@ -596,10 +596,10 @@
                         <h5 class="card-title text-center">Nikken Carmelia</h5>
                         <p class="card-text text-center">UI UX Designer & Developer</p>
                         <div class="social-media">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/nikkennnnnnc?igsh=YzVkODRmOTdmMw=="><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
                         </div>
                     </div>
                 </div>

@@ -212,7 +212,7 @@
                         <div class="list-group list-group-flush account-settings-links">
                             <a class="list-group-item list-group-item-action active" data-toggle="list" href="#">User Profile</a>
                             <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('myBooking') }}">My Booking</a>
-                            <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('addReview') }}">My Review</a>
+                            <a class="list-group-item list-group-item-action" data-toggle="list" href="{{ url('myReview') }}">My Review</a>
                         </div>
                     </div>
                     <div class="col-md-9">

@@ -43,6 +43,7 @@
             align-items: center;
             margin-top: 90px;
             padding-bottom: 3px;
+            flex: 1;
         }
 
         .btn {
@@ -88,12 +89,14 @@
         }
 
         footer {
-            width: 100%;
+            margin-top: 100px;
             background-color: #303030;
             min-height: 100px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            flex-shrink: 0;
         }
 
         footer p {
@@ -254,7 +257,7 @@
                                     </div>
                                     <div class="text-center mt-4">
                                         @unless(empty($myReview))
-                                            <button class="btn btn-primary" onclick="addReviewModal()">Add Review</button>
+                                        <button class="btn btn-primary" onclick="addReviewModal()">Add Review</button>
                                         @endunless
                                     </div>
                                 </div>
@@ -329,6 +332,24 @@
         function addReviewModal() {
             $('#reviewModal').modal('show');
         }
+
+        function adjustFooterPosition() {
+            var contentHeight = document.querySelector('.profile-container').offsetHeight;
+            var viewportHeight = window.innerHeight;
+
+            if (contentHeight < viewportHeight) {
+                document.body.style.overflowY = 'hidden'; // Prevent scrolling
+                document.querySelector('footer').style.position = 'fixed';
+                document.querySelector('footer').style.bottom = '0';
+                document.querySelector('footer').style.width = '100%';
+            } else {
+                document.body.style.overflowY = 'auto'; // Allow scrolling
+                document.querySelector('footer').style.position = 'static';
+            }
+        }
+
+        window.addEventListener('resize', adjustFooterPosition);
+        window.addEventListener('DOMContentLoaded', adjustFooterPosition);
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
