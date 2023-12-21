@@ -12,8 +12,8 @@
 
 # Anggota Kelompok 
 - Rafael Billy (210711297) - Front end, mengintegrasikan FE dan BE, create API
-- Juneta Julia (210711382) - Backend CRUD
-- Nikken Carmelia (210711318) - Backend Admin
+- Juneta Julia (210711382) - Front end, Backend CRUD
+- Nikken Carmelia (210711318) - Front end, Backend Admin
 
 # Username & Password Login
 - Login User
