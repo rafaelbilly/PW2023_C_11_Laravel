@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="x-ixon" href="{{ asset('images/logo-1.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <!-- Font Awesome Icons -->
@@ -45,6 +46,11 @@
         }
 
         .photo-profile {
+            width: 200px !important;
+            border-radius: 50%;
+        }
+
+        .photo-profile-preview {
             width: 200px !important;
             border-radius: 50%;
         }
@@ -181,7 +187,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
                             <div class="text-center">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                                <img src="{{ asset('uploads/images/' . Auth::user()->image) }}" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
                                 <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
                             </div>
                             <div class="dropdown-divider"></div>
@@ -215,16 +221,18 @@
                             @method('PUT')
                             <div class="tab-pane fade active show" id="account-general">
                                 <div class="card-body media align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" alt="Default Photo" class="d-block photo-profile" id="currentPhoto">
+                                    <div class="photo-container">
+                                        <img src="{{ asset('uploads/images/' . $userProfile['image']) }}" alt="Default Photo" class="d-block photo-profile" id="currentPhoto">
+                                        <img src="#" alt="Preview" class="photo-profile-preview d-none" id="imagePreview">
+                                    </div>
                                     <div class="media-body ml-4">
                                         <label class="btn btn-outline-primary" id="uploadPhoto">
                                             Upload new photo
                                             <input type="file" class="account-settings-fileinput" name="image" onchange="previewImage(this)">
                                         </label> &nbsp;
                                         <button type="button" class="btn btn-default md-btn-flat" onclick="resetImage()">Reset</button>
-                                        <div class="text-light small mt-1">Allowed JPG, GIF, or PNG. Max size of 800K</div>
+                                        <div class="text-light small mt-1">Allowed JPG, GIF, or PNG.</div>
                                         <br>
-                                        <img src="#" alt="Preview" class="photo-profile-preview d-none" style="max-width: 200px; max-height: 200px;" id="imagePreview">
                                     </div>
                                 </div>
 
@@ -254,7 +262,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- footer -->
@@ -277,6 +284,17 @@
     </script>
 
     <script>
+        function resetImage() {
+            const input = document.querySelector('.account-settings-fileinput');
+            const currentPhoto = document.getElementById('currentPhoto');
+            const preview = document.getElementById('imagePreview');
+            input.value = '';
+
+            preview.src = '';
+            preview.classList.add('d-none');
+            currentPhoto.classList.remove('d-none');
+        }
+
         function showConfirmation() {
             return confirm("Apakah Yakin Ingin Mengubah Profile?");
         }
@@ -298,22 +316,41 @@
 
                     reader.readAsDataURL(this.files[0]);
                 } else {
-                    preview.src = 'https://mdbcdn.b-cdn.net/img/new/avatars/8.webp';
+                    preview.src = '';
                     preview.classList.add('d-none');
                     currentPhoto.classList.remove('d-none');
-                } 
+                }
             });
 
             const form = document.querySelector('form');
             form.addEventListener('submit', function(event) {
-                if (!showConfirmation()) {
+                if (showConfirmation()) {
+                    const formData = new FormData(form);
+                    formData.append('image', input.files[0]);
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        },
+                    }).then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    }).then(data => {
+                        console.log(data);
+                    }).catch((error) => {
+                        console.error('Error:', error);
+                    });
+
                     event.preventDefault();
-                } else {
-                    form.submit();
                 }
             });
         };
     </script>
+
     <!-- /footer -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

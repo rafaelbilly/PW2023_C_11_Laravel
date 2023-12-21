@@ -96,7 +96,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
                                 <div class="text-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                                    <img src="{{ asset('uploads/images/' . Auth::user()->image) }}" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
                                     <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
                                 </div>
                                 <div class="dropdown-divider"></div>
@@ -256,6 +256,18 @@
         </form>
     </div>
 
+    <!-- Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Payment successful! Thank you for your order.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <!-- footer -->
     <footer>
         <div class="container">
@@ -272,12 +284,19 @@
 
         const form = document.querySelector('form');
         form.addEventListener('submit', function(event) {
-            const today = new Date();
             const message = `Apakah Anda Yakin Dengan Pesanan Ini?\n\n! Pesanan yang sudah dibayar tidak dapat diubah !`;
 
             if (!liveAlertBtn(message)) {
                 event.preventDefault();
             } else {
+                var toast = new bootstrap.Toast(document.getElementById('successToast'), {
+                    delay: 4000
+                });
+                toast.show();
+
+                setTimeout(function() {
+                    form.submit();
+                }, 4000);
                 form.submit();
             }
         });

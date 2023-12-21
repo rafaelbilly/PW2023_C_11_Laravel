@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PemesananController extends Controller
 {
-    protected function generateRandomString($prefix = 'smgr-', $length = 9)
+    protected function generateRandomString($prefix = 'smgr-', $length = 3)
     {
         $characters = '0123456789';
         $randomString = $prefix;

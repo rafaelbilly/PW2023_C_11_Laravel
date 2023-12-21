@@ -20,6 +20,9 @@ class HomeController extends Controller
 
     public function userProfile()
     {
+        $user = auth()->user();
+
+        $image = $user->image ? $user->image : 'https://mdbcdn.b-cdn.net/img/new/avatars/8.webp';
         $userProfile = [
             'username' => auth()->user()->username,
             'email' => auth()->user()->email,
@@ -55,8 +58,14 @@ class HomeController extends Controller
             }
         }
 
-        $user->update($validated);
+        if ($request->filled('password')) {
+            $validated['password'] = Hash::make($request->password);
+        } else {
+            $validated['password'] = $user->password;
+        }
 
+        $user->update($validated);
+        
         return redirect(route('userProfile'))->with('success', 'User profile updated successfully');
     }
 }

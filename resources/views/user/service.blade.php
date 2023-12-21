@@ -194,7 +194,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" arialabelledby="userDropdown">
               <div class="text-center">
-                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
+                <img src="{{ asset('uploads/images/' . Auth::user()->image) }}" class="rounded-circle mb-3" style="width:100px;" alt="Avatar" />
                 <h5 class="mb-2"><strong>{{ Auth::user()->username }}</strong></h5>
               </div>
               <div class="dropdown-divider"></div>
@@ -221,7 +221,7 @@
           <h6>What will you get?</h6>
           <ul class="more">
             @foreach (explode("\n", $isi['deskripsi']) as $point)
-              <li>{{ $point }}</li>
+            <li>{{ $point }}</li>
             @endforeach
           </ul>
           <button onclick="myFunction(this)" class="btn btn-link">Read more</button>
